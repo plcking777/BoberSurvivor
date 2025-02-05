@@ -1,4 +1,5 @@
 import { Player } from "./model/player.js";
+import { Enemy } from "./model/enemy.js";
 
 const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
@@ -15,6 +16,7 @@ const input = {
 
 
 const player = new Player(100, 100, 100)
+const enemy = new Enemy(100, 100, 100)
 
 
 function gameLoop() {
@@ -22,10 +24,12 @@ function gameLoop() {
 
 
     player.update(input);
-
+    enemy.update(player);
 
 
     player.render(ctx);
+    enemy.render(ctx);
+
 
     requestAnimationFrame(gameLoop);
 }
