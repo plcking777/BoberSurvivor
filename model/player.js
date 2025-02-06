@@ -1,12 +1,12 @@
 class Player {
 
     SPEED = 1;
-    WIDTH = 32;
-    HEIGHT = 32;
 
     constructor(x, y, maxHP) {
         this.x = x;
         this.y = y;
+        this.width = 32;
+        this.height = 32;
         this.maxHP = maxHP;
         this.hp = maxHP;
     }
@@ -38,9 +38,10 @@ class Player {
         }
     }
 
-    render(ctx) {
+    render(ctx, camera) {
         ctx.fillStyle = "green";
-        ctx.fillRect(this.x, this.y, this.WIDTH, this.HEIGHT);
+        const relativePosition = camera.getRelativePosition(this);
+        ctx.fillRect(relativePosition.x, relativePosition.y, this.width, this.height);
     }
 }
 

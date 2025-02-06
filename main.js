@@ -1,5 +1,6 @@
 import { Player } from "./model/player.js";
 import { Enemy } from "./model/enemy.js";
+import { Camera } from "./model/camera.js";
 
 const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
@@ -14,8 +15,8 @@ const input = {
 }
 
 
-
 const player = new Player(100, 100, 100)
+const camera = new Camera(player.x, player.y, canvas.width, canvas.height);
 const enemy = new Enemy(100, 100, 100)
 
 
@@ -25,10 +26,11 @@ function gameLoop() {
 
     player.update(input);
     enemy.update(player);
+    camera.follow(player);
 
 
-    player.render(ctx);
-    enemy.render(ctx);
+    player.render(ctx, camera);
+    enemy.render(ctx, camera);
 
 
     requestAnimationFrame(gameLoop);
