@@ -12,27 +12,25 @@ class World {
 
     loadTiles() {
         // TODO: custom world generation ?
-        
-        this.tiles = [
-            [0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0],
-        ]
+        this.tiles = Array.from({ length: 1000 }, () => Array(1000).fill(0));
     }
 
     render(ctx, camera) {
         ctx.fillStyle = "green";
 
-        for (let i = 0; i < this.tiles.length; i++) {
-            const relativeYPosition = camera.getRelativeYPosition(i * this.TILE_HEIGHT);
-            for (let j = 0; j < this.tiles[0].length; j++) {
-                const relativeXPosition = camera.getRelativeXPosition(j * this.TILE_HEIGHT);
-                ctx.fillRect(relativeXPosition, relativeYPosition, this.TILE_HEIGHT, this.TILE_HEIGHT);
+
+        const cameraLeft = camera.x - camera.width / 2;
+        const cameraRight = camera.x + camera.width / 2;
+        const cameraTop = camera.y - camera.height / 2;
+        const cameraBottom = camera.y + camera.height / 2;
+
+
+        for (let i = cameraTop / this.TILE_HEIGHT; i < cameraBottom / this.TILE_HEIGHT; i++) {
+            for (let j = cameraLeft / this.TILE_HEIGHT; j < cameraRight / this.TILE_HEIGHT; j++) {
+                if (i > 0 && i < this.tiles.length && j > 0 && j < this.tiles[0].length) {
+                    const relativePosition = camera.getRelativeXYPosition(j*this.TILE_HEIGHT, i*this.TILE_HEIGHT);
+                    ctx.fillRect(relativePosition.x, relativePosition.y, this.TILE_HEIGHT, this.TILE_HEIGHT);
+                }
             }
         }   
     }
