@@ -39,7 +39,7 @@ class Player {
     }
 
     render(ctx, camera) {
-        ctx.fillStyle = "green";
+        ctx.fillStyle = "blue";
         const relativePosition = camera.getRelativePosition(this);
         ctx.fillRect(relativePosition.x, relativePosition.y, this.width, this.height);
     }

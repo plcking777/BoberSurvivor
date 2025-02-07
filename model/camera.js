@@ -24,7 +24,24 @@ class Camera {
             return {x: diffX + this.width / 2, y: diffY + this.height / 2};
         }
     }
-    
+
+    getRelativeXPosition(x) {
+        const diffX = x - this.x;
+        if (this.following) {
+            return diffX + this.width / 2 - this.following.width / 2;
+        } else {
+            return diffX + this.width / 2;
+        }
+    }
+
+    getRelativeYPosition(y) {
+        const diffY = y - this.y;
+        if (this.following) {
+            return diffY + this.height / 2 - this.following.height / 2;
+        } else {
+            return diffY + this.height / 2;
+        }
+    }
 }
 
 export { Camera };

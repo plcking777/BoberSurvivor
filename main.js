@@ -1,6 +1,7 @@
 import { Player } from "./model/player.js";
 import { Enemy } from "./model/enemy.js";
 import { Camera } from "./model/camera.js";
+import { World } from "./model/world.js";
 
 const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
@@ -14,6 +15,8 @@ const input = {
     down: false,
 }
 
+
+const world = new World();
 
 const player = new Player(100, 100, 100)
 const camera = new Camera(player.x, player.y, canvas.width, canvas.height);
@@ -29,6 +32,7 @@ function gameLoop() {
     camera.follow(player);
 
 
+    world.render(ctx, camera);
     player.render(ctx, camera);
     enemy.render(ctx, camera);
 
