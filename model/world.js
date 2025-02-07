@@ -25,8 +25,8 @@ class World {
         const cameraBottom = camera.y + camera.height / 2;
 
 
-        for (let i = cameraTop / this.TILE_HEIGHT; i < cameraBottom / this.TILE_HEIGHT; i++) {
-            for (let j = cameraLeft / this.TILE_HEIGHT; j < cameraRight / this.TILE_HEIGHT; j++) {
+        for (let i = parseInt(cameraTop / this.TILE_HEIGHT); i < parseInt(cameraBottom / this.TILE_HEIGHT) + 1; i++) {
+            for (let j = parseInt(cameraLeft / this.TILE_HEIGHT); j < parseInt(cameraRight / this.TILE_HEIGHT) + 1; j++) {
                 if (i > 0 && i < this.tiles.length && j > 0 && j < this.tiles[0].length) {
                     const relativePosition = camera.getRelativeXYPosition(j*this.TILE_HEIGHT, i*this.TILE_HEIGHT);
                     ctx.fillRect(relativePosition.x, relativePosition.y, this.TILE_HEIGHT, this.TILE_HEIGHT);
