@@ -1,10 +1,14 @@
-class WeaponEntity {
+import { Entity } from '../../entity.js';
 
-    constructor(x, y, width, height) {
+class WeaponEntity extends Entity {
+
+    constructor(x, y, width, height, entityList) {
+        super();
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
+        this.entityList = entityList;
     }
 
     update() {

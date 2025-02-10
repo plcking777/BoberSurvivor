@@ -16,7 +16,7 @@ class Bomb extends Weapon {
 
     activate(player) {
         super.activate(player);
-        this.entityList.push(new BombEntity(player.x, player.y));
+        this.entityList.push(new BombEntity(player.x, player.y, this.entityList));
     }
 }
 
