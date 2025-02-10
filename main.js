@@ -2,6 +2,7 @@ import { Player } from "./model/player.js";
 import { Enemy } from "./model/enemy.js";
 import { Camera } from "./model/camera.js";
 import { World } from "./model/world.js";
+import { Bomb } from "./model/weapon/bomb.js";
 
 const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
@@ -16,6 +17,16 @@ const input = {
 }
 
 
+
+let entityList = [];
+
+
+
+let inventory = [
+    new Bomb(120, entityList),
+];
+
+
 const world = new World();
 
 const player = new Player(100, 100, 100)
@@ -28,6 +39,12 @@ function gameLoop() {
 
 
     player.update(input);
+
+    inventory.forEach((weapon) => {
+        weapon.update(player);
+    });
+
+
     enemy.update(player);
     camera.follow(player);
 
