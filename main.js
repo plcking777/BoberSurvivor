@@ -44,14 +44,23 @@ function gameLoop() {
         weapon.update(player);
     });
 
+    entityList.forEach((entity) => {
+        entity.update();
+    });
 
     enemy.update(player);
     camera.follow(player);
 
 
+
+
     world.render(ctx, camera);
     player.render(ctx, camera);
     enemy.render(ctx, camera);
+
+    entityList.forEach((entity) => {
+        entity.render(ctx, camera);
+    });
 
 
     requestAnimationFrame(gameLoop);

@@ -1,4 +1,5 @@
 import { Weapon } from './weapon.js';
+import { BombEntity } from './entity/bomb-entity.js';
 
 class Bomb extends Weapon {
     constructor(timeout, entityList) {
@@ -15,7 +16,7 @@ class Bomb extends Weapon {
 
     activate(player) {
         super.activate(player);
-        this.entityList.push(new BombEntity());
+        this.entityList.push(new BombEntity(player.x, player.y));
     }
 }
 
