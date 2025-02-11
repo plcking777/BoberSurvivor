@@ -7,4 +7,13 @@ class Entity {
     }
 }
 
-export { Entity };
+class EntityUtil {
+    static addToEntityList(entity, entityList) {
+        entityList[entity.id] = entity;
+    }
+    static removeFromEntityList(entity, entityList) {
+        delete entityList[entity.id];
+    }
+}
+
+export { Entity, EntityUtil };

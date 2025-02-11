@@ -1,4 +1,5 @@
 import { WeaponEntity } from "./weapon-entity.js";
+import { EntityUtil } from './../../entity.js'
 
 class BombEntity extends WeaponEntity {
     
@@ -12,7 +13,7 @@ class BombEntity extends WeaponEntity {
     update() {
         this.frameCount++;
         if (this.frameCount >= this.EXPLODE_TIMER) {
-            this.entityList.remove(this);
+            EntityUtil.removeFromEntityList(this, this.entityList);
         }
     }
 

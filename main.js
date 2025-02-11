@@ -18,7 +18,7 @@ const input = {
 
 
 
-let entityList = [];
+let entityList = {};
 
 
 
@@ -44,9 +44,10 @@ function gameLoop() {
         weapon.update(player);
     });
 
-    entityList.forEach((entity) => {
+    Object.values(entityList).forEach(entity => {
         entity.update();
     });
+
 
     enemy.update(player);
     camera.follow(player);
@@ -58,7 +59,7 @@ function gameLoop() {
     player.render(ctx, camera);
     enemy.render(ctx, camera);
 
-    entityList.forEach((entity) => {
+    Object.values(entityList).forEach(entity => {
         entity.render(ctx, camera);
     });
 
