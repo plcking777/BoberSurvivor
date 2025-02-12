@@ -3,11 +3,18 @@ import { Enemy } from "./model/enemy.js";
 import { Camera } from "./model/camera.js";
 import { World } from "./model/world.js";
 import { Bomb } from "./model/weapon/bomb.js";
+import { AssetHandler } from './assets.js';
 
 const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
 
 
+const assetHandler = new AssetHandler();
+
+// loading...
+console.log('start loading');
+await assetHandler.loadAllImages();
+console.log('done loading');
 
 const input = {
     left: false,
@@ -23,15 +30,15 @@ let entityList = {};
 
 
 let inventory = [
-    new Bomb(120, entityList),
+    new Bomb(120, entityList, assetHandler),
 ];
 
 
 const world = new World();
 
-const player = new Player(100, 100, 100)
+const player = new Player(100, 100, 100, assetHandler);
 const camera = new Camera(player.x, player.y, canvas.width, canvas.height);
-const enemy = new Enemy(100, 100, 100)
+const enemy = new Enemy(100, 100, 100, assetHandler)
 
 
 function gameLoop() {

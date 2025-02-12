@@ -3,10 +3,11 @@ import { EntityUtil } from './../../entity.js'
 
 class BombEntity extends WeaponEntity {
     
-    EXPLODE_TIMER = 120; 
+    EXPLODE_TIMER = 360;
 
-    constructor(x, y, entityList) {
+    constructor(x, y, entityList, assetHandler) {
         super(x, y, 20, 20, entityList);
+        this.assetHandler = assetHandler;
         this.frameCount = 0;
     }
 
@@ -21,6 +22,8 @@ class BombEntity extends WeaponEntity {
         ctx.fillStyle = "blue";
         const relativePosition = camera.getRelativeXYPosition(this.x, this.y);
         ctx.fillRect(relativePosition.x, relativePosition.y, this.width, this.height);
+
+        ctx.drawImage(this.assetHandler.getImage('bomb'), relativePosition.x, relativePosition.y);
     }
 }
 

@@ -2,13 +2,15 @@ class Enemy {
 
     SPEED = 0.5;
 
-    constructor(x, y, maxHP) {
+    constructor(x, y, maxHP, assetHandler) {
         this.x = x;
         this.y = y;
         this.width = 32;
         this.height = 32;
         this.maxHP = maxHP;
         this.hp = maxHP;
+
+        this.assetHandler = assetHandler;
     }
 
 
