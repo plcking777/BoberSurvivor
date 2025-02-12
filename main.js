@@ -12,9 +12,7 @@ const ctx = canvas.getContext("2d");
 const assetHandler = new AssetHandler();
 
 // loading...
-console.log('start loading');
 await assetHandler.loadAllImages();
-console.log('done loading');
 
 const input = {
     left: false,

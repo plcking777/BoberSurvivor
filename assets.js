@@ -23,7 +23,10 @@ class AssetHandler {
 
     async loadAllImages() {
         this.imageMap = {
-            'bomb': 'assets/bomb.png',
+            'bomb-f1': 'assets/bomb-f1.png',
+            'bomb-f2': 'assets/bomb-f2.png',
+            'bomb-f3': 'assets/bomb-f3.png',
+            'bomb-f4': 'assets/bomb-f4.png',
         }
         // replace the imageMap src with the actual image
         await Promise.all(Object.entries(this.imageMap).map(([key, src]) => this.loadImage(key, src)));

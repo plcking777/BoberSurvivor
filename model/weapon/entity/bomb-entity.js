@@ -2,6 +2,8 @@ import { WeaponEntity } from "./weapon-entity.js";
 import { EntityUtil } from './../../entity.js'
 
 class BombEntity extends WeaponEntity {
+
+    ANIMATION_FRAMES = 4;
     
     EXPLODE_TIMER = 360;
 
@@ -23,7 +25,8 @@ class BombEntity extends WeaponEntity {
         const relativePosition = camera.getRelativeXYPosition(this.x, this.y);
         ctx.fillRect(relativePosition.x, relativePosition.y, this.width, this.height);
 
-        ctx.drawImage(this.assetHandler.getImage('bomb'), relativePosition.x, relativePosition.y);
+        const animationFrame = parseInt(this.frameCount / this.EXPLODE_TIMER * this.ANIMATION_FRAMES) + 1;
+        ctx.drawImage(this.assetHandler.getImage(`bomb-f${animationFrame}`), relativePosition.x, relativePosition.y);
     }
 }
 
