@@ -1,8 +1,11 @@
-class Player {
+import { Entity } from "./entity.js";
+
+class Player extends Entity{
 
     SPEED = 1;
 
     constructor(x, y, maxHP, assetHandler) {
+        super();
         this.x = x;
         this.y = y;
         this.width = 32;
@@ -15,16 +18,8 @@ class Player {
 
 
     update(input, entityList) {
-
-        Object.values(entityList).forEach(entity => {
-            if (this.x < entity.x + entity.width && this.x + this.width > entity.x
-                && this.y < entity.y + entity.height && this.y + this.height > entity.y) {
-                
-                    console.log('hit');
-            }
-        });
-
-
+        let vx = 0;
+        let vy = 0;
 
         let addX = 0.0;
         let addY = 0.0;
@@ -44,9 +39,23 @@ class Player {
         // Normalize the new position
         const totalPositionDiff = Math.sqrt(addX ** 2 + addY ** 2);
         if (totalPositionDiff > 0.0) {
-            this.x += addX * (this.SPEED / totalPositionDiff);
-            this.y += addY * (this.SPEED / totalPositionDiff);
+            vx = addX * (this.SPEED / totalPositionDiff);
+            vy = addY * (this.SPEED / totalPositionDiff);
         }
+
+
+        Object.values(entityList).forEach(entity => {
+            if (this !== entity) {
+                if (this.x + vx < entity.x + entity.width && this.x + this.width + vx > entity.x
+                    && this.y + vy < entity.y + entity.height && this.y + this.height + vy > entity.y) {
+                        vx = 0;
+                        vy = 0;
+                }
+            }
+        });
+
+        this.x += vx;
+        this.y += vy;
     }
 
     render(ctx, camera) {

@@ -17,17 +17,32 @@ class Enemy extends Entity {
     }
 
 
-    update(player) {
+    update(player, entityList) {
     
+        let vx = 0;
+        let vy = 0;
+
         const diffX = player.x - this.x;
         const diffY = player.y - this.y;
         const totDiff = Math.abs(diffX) + Math.abs(diffY);
 
         if (totDiff > 0.0) {
-            this.x += this.SPEED * (diffX / totDiff);
-            this.y += this.SPEED * (diffY / totDiff);
+            vx = this.SPEED * (diffX / totDiff);
+            vy = this.SPEED * (diffY / totDiff);
         }
 
+        Object.values(entityList).forEach(entity => {
+            if (this !== entity) {
+                if (this.x + vx < entity.x + entity.width && this.x + this.width + vx > entity.x
+                    && this.y + vy < entity.y + entity.height && this.y + this.height + vy > entity.y) {
+                        vx = 0;
+                        vy = 0;
+                }
+            }
+        });
+        
+        this.x += vx;
+        this.y += vy;
     }
 
     render(ctx, camera) {

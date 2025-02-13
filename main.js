@@ -35,10 +35,13 @@ let inventory = [
 
 const world = new World();
 
-const player = new Player(100, 100, 100, assetHandler);
+const player = new Player(500, 500, 100, assetHandler);
 const camera = new Camera(player.x, player.y, canvas.width, canvas.height);
 
+EntityUtil.addToEntityList(player, entityList);
 EntityUtil.addToEntityList(new Enemy(100, 100, 100, assetHandler), entityList);
+EntityUtil.addToEntityList(new Enemy(200, 100, 100, assetHandler), entityList);
+EntityUtil.addToEntityList(new Enemy(200, 300, 100, assetHandler), entityList);
 
 
 function gameLoop() {
@@ -52,7 +55,7 @@ function gameLoop() {
     });
 
     Object.values(entityList).forEach(entity => {
-        entity.update(player);
+        entity.update(player, entityList);
     });
 
 
