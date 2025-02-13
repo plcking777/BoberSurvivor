@@ -4,8 +4,9 @@ import { EntityUtil } from './../../entity.js'
 class BombEntity extends WeaponEntity {
 
     ANIMATION_FRAMES = 4;
-    
-    EXPLODE_TIMER = 360;
+    ANIMATION_TIME = 30;
+
+    EXPLODE_TIMER = 200;
 
     constructor(x, y, entityList, assetHandler) {
         super(x, y, 20, 20, entityList);
@@ -21,12 +22,9 @@ class BombEntity extends WeaponEntity {
     }
 
     render(ctx, camera) {
-        ctx.fillStyle = "blue";
         const relativePosition = camera.getRelativeXYPosition(this.x, this.y);
-        ctx.fillRect(relativePosition.x, relativePosition.y, this.width, this.height);
-
-        const animationFrame = parseInt(this.frameCount / this.EXPLODE_TIMER * this.ANIMATION_FRAMES) + 1;
-        ctx.drawImage(this.assetHandler.getImage(`bomb-f${animationFrame}`), relativePosition.x, relativePosition.y);
+        const animationFrame = Math.max(parseInt(((this.frameCount - (this.EXPLODE_TIMER - this.ANIMATION_TIME)) / this.ANIMATION_TIME * this.ANIMATION_FRAMES) + 1), 1);
+        ctx.drawImage(this.assetHandler.getImage(`bomb-f${animationFrame}`), relativePosition.x - 16, relativePosition.y - 16, 32, 32);
     }
 }
 

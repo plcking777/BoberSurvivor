@@ -29,7 +29,7 @@ let entityList = {};
 
 
 let inventory = [
-    //new Bomb(120, entityList, assetHandler),
+    new Bomb(360, entityList, assetHandler),
 ];
 
 
@@ -42,6 +42,14 @@ EntityUtil.addToEntityList(player, entityList);
 EntityUtil.addToEntityList(new Enemy(100, 100, 100, assetHandler), entityList);
 EntityUtil.addToEntityList(new Enemy(200, 100, 100, assetHandler), entityList);
 EntityUtil.addToEntityList(new Enemy(200, 300, 100, assetHandler), entityList);
+EntityUtil.addToEntityList(new Enemy(250, 300, 100, assetHandler), entityList);
+EntityUtil.addToEntityList(new Enemy(350, 300, 100, assetHandler), entityList);
+EntityUtil.addToEntityList(new Enemy(450, 300, 100, assetHandler), entityList);
+EntityUtil.addToEntityList(new Enemy(550, 300, 100, assetHandler), entityList);
+EntityUtil.addToEntityList(new Enemy(650, 300, 100, assetHandler), entityList);
+EntityUtil.addToEntityList(new Enemy(750, 300, 100, assetHandler), entityList);
+EntityUtil.addToEntityList(new Enemy(850, 300, 100, assetHandler), entityList);
+EntityUtil.addToEntityList(new Enemy(950, 300, 100, assetHandler), entityList);
 
 
 function gameLoop() {

@@ -1,3 +1,4 @@
+import { Enemy } from "./enemy.js";
 import { Entity } from "./entity.js";
 
 class Player extends Entity{
@@ -46,10 +47,12 @@ class Player extends Entity{
 
         Object.values(entityList).forEach(entity => {
             if (this !== entity) {
-                if (this.x + vx < entity.x + entity.width && this.x + this.width + vx > entity.x
-                    && this.y + vy < entity.y + entity.height && this.y + this.height + vy > entity.y) {
-                        vx = 0;
-                        vy = 0;
+                if (entity instanceof Enemy) {
+                    if (this.x + vx < entity.x + entity.width && this.x + this.width + vx > entity.x
+                        && this.y + vy < entity.y + entity.height && this.y + this.height + vy > entity.y) {
+                            vx = 0;
+                            vy = 0;
+                    }
                 }
             }
         });
