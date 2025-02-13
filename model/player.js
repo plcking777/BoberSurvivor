@@ -14,7 +14,16 @@ class Player {
     }
 
 
-    update(input) {
+    update(input, entityList) {
+
+        Object.values(entityList).forEach(entity => {
+            if (this.x < entity.x + entity.width && this.x + this.width > entity.x
+                && this.y < entity.y + entity.height && this.y + this.height > entity.y) {
+                
+                    console.log('hit');
+            }
+        });
+
 
 
         let addX = 0.0;

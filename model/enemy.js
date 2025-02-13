@@ -1,8 +1,11 @@
-class Enemy {
+import { Entity } from "./entity.js";
+
+class Enemy extends Entity {
 
     SPEED = 0.5;
 
     constructor(x, y, maxHP, assetHandler) {
+        super();
         this.x = x;
         this.y = y;
         this.width = 32;

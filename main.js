@@ -4,6 +4,7 @@ import { Camera } from "./model/camera.js";
 import { World } from "./model/world.js";
 import { Bomb } from "./model/weapon/bomb.js";
 import { AssetHandler } from './assets.js';
+import { EntityUtil } from "./model/entity.js";
 
 const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
@@ -28,7 +29,7 @@ let entityList = {};
 
 
 let inventory = [
-    new Bomb(120, entityList, assetHandler),
+    //new Bomb(120, entityList, assetHandler),
 ];
 
 
@@ -36,25 +37,25 @@ const world = new World();
 
 const player = new Player(100, 100, 100, assetHandler);
 const camera = new Camera(player.x, player.y, canvas.width, canvas.height);
-const enemy = new Enemy(100, 100, 100, assetHandler)
+
+EntityUtil.addToEntityList(new Enemy(100, 100, 100, assetHandler), entityList);
 
 
 function gameLoop() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
 
-    player.update(input);
+    player.update(input, entityList);
 
     inventory.forEach((weapon) => {
         weapon.update(player);
     });
 
     Object.values(entityList).forEach(entity => {
-        entity.update();
+        entity.update(player);
     });
 
 
-    enemy.update(player);
     camera.follow(player);
 
 
@@ -62,7 +63,6 @@ function gameLoop() {
 
     world.render(ctx, camera);
     player.render(ctx, camera);
-    enemy.render(ctx, camera);
 
     Object.values(entityList).forEach(entity => {
         entity.render(ctx, camera);
