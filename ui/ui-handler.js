@@ -1,4 +1,5 @@
 import { UIPanel } from './elements/ui-panel.js';
+import { UIXPBar } from './elements/game/ui-xpbar.js';
 
 class UIHandler {
 
@@ -11,11 +12,12 @@ class UIHandler {
 
 
     setupInGameUI() {
-        this.uiElements['ingame.panel'] = new UIPanel(50, 50, 100, 100);
+        //this.uiElements['ingame.panel'] = new UIPanel(50, 50, 100, 100);
+        this.uiElements['ingame.xpbar'] = new UIXPBar(50, 10, this.screenWidth - 100, 35);
     }
 
     destroyInGameUI() {
-        delete this.uiElements['ingame.panel'];
+        delete this.uiElements['ingame.xpbar'];
     }
 
     update(mouseX, mouseY, click) {

@@ -11,7 +11,6 @@ class UIPanel extends UIElement {
     update(mouseX, mouseY, click) {}
 
     render(ctx) {
-        console.log('foiidsfkjdsn')
         ctx.fillStyle = "#695637";
         ctx.fillRect(this.x, this.y, this.width, this.height);
     }
