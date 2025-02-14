@@ -1,4 +1,4 @@
-import { Entity } from "./entity.js";
+import { Entity, CollisionBox } from "./entity.js";
 
 class Enemy extends Entity {
 
@@ -27,12 +27,16 @@ class Enemy extends Entity {
             vy = this.SPEED * (diffY / totDiff);
         }
 
+        let futureCollisionX = new CollisionBox(this.x + vx, this.y, this.width, this.height);
+        let futureCollisionY = new CollisionBox(this.x, this.y + vy, this.width, this.height);
+
         Object.values(entityList).forEach(entity => {
             if (this !== entity) {
-                if (this.x + vx < entity.x + entity.width && this.x + this.width + vx > entity.x
-                    && this.y + vy < entity.y + entity.height && this.y + this.height + vy > entity.y) {
-                        vx = 0;
-                        vy = 0;
+                if (futureCollisionX.collides(entity.collisionBox)) {
+                    vx = 0;
+                }
+                if (futureCollisionY.collides(entity.collisionBox)) {
+                    vy = 0;
                 }
             }
         });
