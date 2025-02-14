@@ -5,11 +5,7 @@ class Enemy extends Entity {
     SPEED = 0.5;
 
     constructor(x, y, maxHP, assetHandler) {
-        super();
-        this.x = x;
-        this.y = y;
-        this.width = 32;
-        this.height = 32;
+        super(x, y, 32, 32, true);
         this.maxHP = maxHP;
         this.hp = maxHP;
 
@@ -43,6 +39,7 @@ class Enemy extends Entity {
         
         this.x += vx;
         this.y += vy;
+        super.update();
     }
 
     render(ctx, camera) {

@@ -3,11 +3,7 @@ import { Entity } from '../../entity.js';
 class WeaponEntity extends Entity {
 
     constructor(x, y, width, height, entityList) {
-        super();
-        this.x = x;
-        this.y = y;
-        this.width = width;
-        this.height = height;
+        super(x, y, width, height, true);
         this.entityList = entityList;
     }
 

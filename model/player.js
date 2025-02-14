@@ -1,16 +1,13 @@
 import { Enemy } from "./enemy.js";
 import { Entity } from "./entity.js";
 
-class Player extends Entity{
+class Player extends Entity {
 
     SPEED = 1;
 
     constructor(x, y, maxHP, assetHandler) {
-        super();
-        this.x = x;
-        this.y = y;
-        this.width = 32;
-        this.height = 32;
+        super(x, y, 32, 32, true);
+
         this.maxHP = maxHP;
         this.hp = maxHP;
 
@@ -59,6 +56,7 @@ class Player extends Entity{
 
         this.x += vx;
         this.y += vy;
+        super.update();
     }
 
     render(ctx, camera) {
