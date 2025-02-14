@@ -5,12 +5,16 @@ import { World } from "./model/world.js";
 import { Bomb } from "./model/weapon/bomb.js";
 import { AssetHandler } from './assets.js';
 import { EntityUtil } from "./model/entity.js";
+import { UIHandler } from "./ui/ui-handler.js";
 
 const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
 
 
 const assetHandler = new AssetHandler();
+
+const uiHandler = new UIHandler(canvas.width, canvas.height);
+uiHandler.setupInGameUI();
 
 // loading...
 await assetHandler.loadAllImages();
@@ -55,6 +59,7 @@ EntityUtil.addToEntityList(new Enemy(950, 300, 100, assetHandler), entityList);
 function gameLoop() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
+    uiHandler.update(0, 0, false); // TODO
 
     player.update(input, entityList);
 
@@ -65,7 +70,6 @@ function gameLoop() {
     Object.values(entityList).forEach(entity => {
         entity.update(player, entityList);
     });
-
 
     camera.follow(player);
 
@@ -79,6 +83,7 @@ function gameLoop() {
         entity.render(ctx, camera);
     });
 
+    uiHandler.render(ctx);
 
     requestAnimationFrame(gameLoop);
 }
