@@ -31,23 +31,23 @@ const input = {
 
 let entityList = {};
 
+const particleHandler = new ParticleHandler();
+
 
 
 let inventory = [
-    //new Bomb(360, entityList, assetHandler),
+    new Bomb(360, entityList, assetHandler, particleHandler),
 ];
 
 
 const world = new World();
 
-const particleHandler = new ParticleHandler();
 
 const player = new Player(500, 500, 100, assetHandler, particleHandler);
 const camera = new Camera(player.x, player.y, canvas.width, canvas.height);
 
 EntityUtil.addToEntityList(player, entityList);
 EntityUtil.addToEntityList(new Enemy(100, 100, 100, assetHandler), entityList);
-/*
 EntityUtil.addToEntityList(new Enemy(200, 100, 100, assetHandler), entityList);
 EntityUtil.addToEntityList(new Enemy(200, 300, 100, assetHandler), entityList);
 EntityUtil.addToEntityList(new Enemy(250, 300, 100, assetHandler), entityList);
@@ -58,7 +58,6 @@ EntityUtil.addToEntityList(new Enemy(650, 300, 100, assetHandler), entityList);
 EntityUtil.addToEntityList(new Enemy(750, 300, 100, assetHandler), entityList);
 EntityUtil.addToEntityList(new Enemy(850, 300, 100, assetHandler), entityList);
 EntityUtil.addToEntityList(new Enemy(950, 300, 100, assetHandler), entityList);
-*/
 
 
 function gameLoop() {

@@ -94,13 +94,6 @@ class Player extends Entity {
     }
 
 
-    get centerX() {
-        return this.x + this.width / 2;
-    }
-
-    get centerY() {
-        return this.y + this.height / 2;
-    }
 }
 
 export { Player };

@@ -35,11 +35,6 @@ class Enemy extends Entity {
         Object.values(entityList).forEach(entity => {
             if (this !== entity) {
                 if (futureCollisionX.collidesWith(entity.collisionBox)) {
-                    if (vx > 0) {
-                        this.x = entity.x - this.width;
-                    } else if (vx < 0) {
-                        this.x = entity.x + entity.width;
-                    }
                     vx = 0;
 
                     if (entity instanceof Player) {
@@ -47,11 +42,6 @@ class Enemy extends Entity {
                     }
                 }
                 if (futureCollisionY.collidesWith(entity.collisionBox)) {
-                    if (vy > 0) {
-                        this.y = entity.y - this.height;
-                    } else if (vy < 0) {
-                        this.y = entity.y + entity.height;
-                    }
                     vy = 0;
 
                     if (entity instanceof Player) {
@@ -71,6 +61,10 @@ class Enemy extends Entity {
         const relativePosition = camera.getRelativePosition(this);
         //ctx.fillRect(relativePosition.x, relativePosition.y, this.width, this.height);
         ctx.drawImage(this.assetHandler.getImage('ghost-f1'), relativePosition.x, relativePosition.y, this.width, this.height);
+    }
+
+    damage(value) {
+        console.log('damage');
     }
 }
 

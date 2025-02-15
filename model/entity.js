@@ -15,6 +15,15 @@ class Entity {
     update() {
         this.collisionBox.update(this.x, this.y, this.width, this.height);
     }
+
+
+    get centerX() {
+        return this.x + this.width / 2;
+    }
+
+    get centerY() {
+        return this.y + this.height / 2;
+    }
 }
 
 class EntityUtil {

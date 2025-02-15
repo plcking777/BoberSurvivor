@@ -1,4 +1,5 @@
 import { DamageParticle } from "./damage-particle.js";
+import { ExplosionParticle } from "./explosion-particle.js";
 
 
 const random = (min, max) => {
@@ -11,6 +12,7 @@ const random = (min, max) => {
 class ParticleHandler {
 
     DAMAGE_PARTICLE_COUNT = 1;
+    EXPLOSION_PARTICLE_COUNT = 100;
 
 
 
@@ -51,6 +53,15 @@ class ParticleHandler {
 
             this.particles.push(
                 new DamageParticle(x, y, random(-0.7, 0.7), random(-0.7, 0.7), random(1, 100))
+            );
+        }
+    }
+
+    applyExplosionParticles(x, y) {
+        for (var i = 0; i < this.EXPLOSION_PARTICLE_COUNT; i++) {
+
+            this.particles.push(
+                new ExplosionParticle(x, y, random(-5, 5), random(-5, 5), random(10, 45))
             );
         }
     }

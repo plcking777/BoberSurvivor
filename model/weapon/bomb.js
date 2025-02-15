@@ -3,9 +3,10 @@ import { BombEntity } from './entity/bomb-entity.js';
 import { EntityUtil } from './../entity.js'
 
 class Bomb extends Weapon {
-    constructor(timeout, entityList, assetHandler) {
+    constructor(timeout, entityList, assetHandler, particleHandler) {
         super(timeout, entityList);
         this.assetHandler = assetHandler;
+        this.particleHandler = particleHandler;
     }
 
     update(player) {
@@ -18,7 +19,7 @@ class Bomb extends Weapon {
 
     activate(player) {
         super.activate(player);
-        const bomb = new BombEntity(player.x, player.y, this.entityList, this.assetHandler);
+        const bomb = new BombEntity(player.centerX, player.centerY, this.entityList, this.assetHandler, this.particleHandler);
         EntityUtil.addToEntityList(bomb, this.entityList);
     }
 }
