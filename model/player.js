@@ -5,7 +5,7 @@ class Player extends Entity {
 
     SPEED = 1;
 
-    constructor(x, y, maxHP, assetHandler, particleHandler) {
+    constructor(x, y, maxHP, assetHandler, particleHandler, entityList) {
         super(x, y, 32, 32, true);
 
         this.maxHP = maxHP;
@@ -13,10 +13,11 @@ class Player extends Entity {
 
         this.assetHandler = assetHandler;
         this.particleHandler = particleHandler;
+        this.entityList = entityList;
     }
 
 
-    update(input, entityList) {
+    update(input) {
         let vx = 0;
         let vy = 0;
 
@@ -46,7 +47,7 @@ class Player extends Entity {
         let futureCollisionX = new CollisionBox(this.x + vx, this.y, this.width, this.height);
         let futureCollisionY = new CollisionBox(this.x, this.y + vy, this.width, this.height);
 
-        Object.values(entityList).forEach(entity => {
+        Object.values(this.entityList).forEach(entity => {
             if (this !== entity) {
                 if (entity instanceof Enemy) {
                     

@@ -1,4 +1,4 @@
-import { Entity, CollisionBox } from "./entity.js";
+import { Entity, CollisionBox, EntityUtil } from "./entity.js";
 import { Player } from "./player.js";
 
 class Enemy extends Entity {
@@ -6,13 +6,14 @@ class Enemy extends Entity {
     SPEED = 0.5;
     ATTACK_DAMAGE = 1;
 
-    constructor(x, y, maxHP, assetHandler, particleHandler) {
+    constructor(x, y, maxHP, assetHandler, particleHandler, entityList) {
         super(x, y, 48, 48, true);
         this.maxHP = maxHP;
         this.hp = maxHP;
 
         this.assetHandler = assetHandler;
         this.particleHandler = particleHandler;
+        this.entityList = entityList;
 
         this.vx = 0;
         this.vy = 0;
@@ -21,7 +22,7 @@ class Enemy extends Entity {
     }
 
 
-    update(player, entityList) {
+    update(player) {
     
         this.vx = 0;
         this.vy = 0;
@@ -38,7 +39,7 @@ class Enemy extends Entity {
         let futureCollisionX = new CollisionBox(this.x + this.vx, this.y, this.width, this.height);
         let futureCollisionY = new CollisionBox(this.x, this.y + this.vy, this.width, this.height);
 
-        Object.values(entityList).forEach(entity => {
+        Object.values(this.entityList).forEach(entity => {
             if (this !== entity) {
                 if (futureCollisionX.collidesWith(entity.collisionBox)) {
                     this.vx = 0;
@@ -55,7 +56,7 @@ class Enemy extends Entity {
                     }
                 }
             }
-        });
+        });  
         
         if (this.vx > 0) {
             this.goingLeft = false;
@@ -84,6 +85,15 @@ class Enemy extends Entity {
 
     damage(value) {
         this.particleHandler.applyDamageNumbers(this.centerX, this.centerY, ''+value);
+
+        this.hp -= value;
+        if (this.hp <= 0) {
+            this.die();
+        }
+    }
+
+    die() {
+        EntityUtil.removeFromEntityList(this, this.entityList);
     }
 }
 
