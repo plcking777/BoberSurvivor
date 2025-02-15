@@ -5,7 +5,7 @@ class Enemy extends Entity {
     SPEED = 0.5;
 
     constructor(x, y, maxHP, assetHandler) {
-        super(x, y, 32, 32, true);
+        super(x, y, 48, 48, true);
         this.maxHP = maxHP;
         this.hp = maxHP;
 
@@ -49,7 +49,8 @@ class Enemy extends Entity {
     render(ctx, camera) {
         ctx.fillStyle = "red";
         const relativePosition = camera.getRelativePosition(this);
-        ctx.fillRect(relativePosition.x, relativePosition.y, this.width, this.height);
+        //ctx.fillRect(relativePosition.x, relativePosition.y, this.width, this.height);
+        ctx.drawImage(this.assetHandler.getImage(`ghost-f1`), relativePosition.x, relativePosition.y, this.width, this.height);
     }
 }
 
