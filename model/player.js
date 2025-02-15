@@ -85,11 +85,21 @@ class Player extends Entity {
     }
 
     damage(value) {
+        if (value == null) return;
         this.hp -= value;
         if (this.hp <= 0) {
             // dead
         }
-        this.particleHandler.applyDamageParticles(this.x, this.y);
+        this.particleHandler.applyDamageParticles(this.centerX, this.centerY);
+    }
+
+
+    get centerX() {
+        return this.x + this.width / 2;
+    }
+
+    get centerY() {
+        return this.y + this.height / 2;
     }
 }
 
