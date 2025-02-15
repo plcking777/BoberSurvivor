@@ -8,7 +8,7 @@ class BombEntity extends WeaponEntity {
     ANIMATION_TIME = 30;
 
     EXPLODE_TIMER = 200;
-    EXPLOSION_RANGE = 500;
+    EXPLOSION_RANGE = 100;
     EXPLOSION_DAMAGE = 5;
 
     constructor(x, y, entityList, assetHandler, particleHandler) {

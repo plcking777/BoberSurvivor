@@ -13,37 +13,42 @@ class Enemy extends Entity {
 
         this.assetHandler = assetHandler;
         this.particleHandler = particleHandler;
+
+        this.vx = 0;
+        this.vy = 0;
+        
+        this.goingLeft = true;
     }
 
 
     update(player, entityList) {
     
-        let vx = 0;
-        let vy = 0;
+        this.vx = 0;
+        this.vy = 0;
 
         const diffX = player.x - this.x;
         const diffY = player.y - this.y;
         const totDiff = Math.abs(diffX) + Math.abs(diffY);
 
         if (totDiff > 0.0) {
-            vx = this.SPEED * (diffX / totDiff);
-            vy = this.SPEED * (diffY / totDiff);
+            this.vx = this.SPEED * (diffX / totDiff);
+            this.vy = this.SPEED * (diffY / totDiff);
         }
 
-        let futureCollisionX = new CollisionBox(this.x + vx, this.y, this.width, this.height);
-        let futureCollisionY = new CollisionBox(this.x, this.y + vy, this.width, this.height);
+        let futureCollisionX = new CollisionBox(this.x + this.vx, this.y, this.width, this.height);
+        let futureCollisionY = new CollisionBox(this.x, this.y + this.vy, this.width, this.height);
 
         Object.values(entityList).forEach(entity => {
             if (this !== entity) {
                 if (futureCollisionX.collidesWith(entity.collisionBox)) {
-                    vx = 0;
+                    this.vx = 0;
 
                     if (entity instanceof Player) {
                         entity.damage(this.ATTACK_DAMAGE);
                     }
                 }
                 if (futureCollisionY.collidesWith(entity.collisionBox)) {
-                    vy = 0;
+                    this.vy = 0;
 
                     if (entity instanceof Player) {
                         entity.damage(this.ATTACK_DAMAGE);
@@ -52,16 +57,29 @@ class Enemy extends Entity {
             }
         });
         
-        this.x += vx;
-        this.y += vy;
+        if (this.vx > 0) {
+            this.goingLeft = false;
+        } else if (this.vx < 0) {
+            this.goingLeft = true;
+        }
+
+
+        this.x += this.vx;
+        this.y += this.vy;
         super.update();
     }
 
     render(ctx, camera) {
         ctx.fillStyle = "red";
         const relativePosition = camera.getRelativePosition(this);
-        //ctx.fillRect(relativePosition.x, relativePosition.y, this.width, this.height);
-        ctx.drawImage(this.assetHandler.getImage('ghost-f1'), relativePosition.x, relativePosition.y, this.width, this.height);
+        if (this.goingLeft) {
+            ctx.drawImage(this.assetHandler.getImage('ghost-f1'), relativePosition.x, relativePosition.y, this.width, this.height);
+        } else {
+            ctx.save();
+            ctx.scale(-1, 1);
+            ctx.drawImage(this.assetHandler.getImage('ghost-f1'), -relativePosition.x -this.width, relativePosition.y, this.width, this.height);
+            ctx.restore();
+        }
     }
 
     damage(value) {
