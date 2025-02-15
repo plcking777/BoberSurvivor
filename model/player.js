@@ -50,15 +50,24 @@ class Player extends Entity {
             if (this !== entity) {
                 if (entity instanceof Enemy) {
                     
-                    if (futureCollisionX.collides(entity.collisionBox)) {
+                    if (futureCollisionX.collidesWith(entity.collisionBox)) {
+                        this.damage(entity.ATTACK_DAMAGE);
+                        if (vx > 0) {
+                            this.x = entity.x - this.width;
+                        } else if (vx < 0) {
+                            this.x = entity.x + entity.width;
+                        }
                         vx = 0;
-                        this.particleHandler.applyDamageParticles(this.x, this.y);
-                        console.log('1');
                     }
-                    if (futureCollisionY.collides(entity.collisionBox)) {
+                    
+                    if (futureCollisionY.collidesWith(entity.collisionBox)) {
+                        this.damage(entity.ATTACK_DAMAGE);
+                        if (vy > 0) {
+                            this.y = entity.y - this.height;
+                        } else if (vy < 0) {
+                            this.y = entity.y + entity.height;
+                        }
                         vy = 0;
-                        this.particleHandler.applyDamageParticles(this.x, this.y);
-                        console.log('1');
                     }
                 }
             }
@@ -73,6 +82,14 @@ class Player extends Entity {
         ctx.fillStyle = "blue";
         const relativePosition = camera.getRelativePosition(this);
         ctx.fillRect(relativePosition.x, relativePosition.y, this.width, this.height);
+    }
+
+    damage(value) {
+        this.hp -= value;
+        if (this.hp <= 0) {
+            // dead
+        }
+        this.particleHandler.applyDamageParticles(this.x, this.y);
     }
 }
 

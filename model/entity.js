@@ -41,7 +41,7 @@ class CollisionBox {
         this.height = height;
     }
 
-    collides(collisionBox) {
+    collidesWith(collisionBox) {
         if (this.x < collisionBox.x + collisionBox.width && this.x + this.width > collisionBox.x &&
             this.y < collisionBox.y + collisionBox.height && this.y + this.height > collisionBox.y) {
                 return true;

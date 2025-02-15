@@ -1,8 +1,10 @@
 import { Entity, CollisionBox } from "./entity.js";
+import { Player } from "./player.js";
 
 class Enemy extends Entity {
 
     SPEED = 0.5;
+    ATTACK_DAMAGE = 1;
 
     constructor(x, y, maxHP, assetHandler) {
         super(x, y, 48, 48, true);
@@ -32,11 +34,29 @@ class Enemy extends Entity {
 
         Object.values(entityList).forEach(entity => {
             if (this !== entity) {
-                if (futureCollisionX.collides(entity.collisionBox)) {
+                if (futureCollisionX.collidesWith(entity.collisionBox)) {
+                    if (vx > 0) {
+                        this.x = entity.x - this.width;
+                    } else if (vx < 0) {
+                        this.x = entity.x + entity.width;
+                    }
                     vx = 0;
+
+                    if (entity instanceof Player) {
+                        entity.damage(this.ATTACK_DAMAGE);
+                    }
                 }
-                if (futureCollisionY.collides(entity.collisionBox)) {
+                if (futureCollisionY.collidesWith(entity.collisionBox)) {
+                    if (vy > 0) {
+                        this.y = entity.y - this.height;
+                    } else if (vy < 0) {
+                        this.y = entity.y + entity.height;
+                    }
                     vy = 0;
+
+                    if (entity instanceof Player) {
+                        entity.damage(this.ATTACK_DAMAGE);
+                    }
                 }
             }
         });

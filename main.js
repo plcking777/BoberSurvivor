@@ -34,7 +34,7 @@ let entityList = {};
 
 
 let inventory = [
-    new Bomb(360, entityList, assetHandler),
+    //new Bomb(360, entityList, assetHandler),
 ];
 
 
@@ -47,6 +47,7 @@ const camera = new Camera(player.x, player.y, canvas.width, canvas.height);
 
 EntityUtil.addToEntityList(player, entityList);
 EntityUtil.addToEntityList(new Enemy(100, 100, 100, assetHandler), entityList);
+/*
 EntityUtil.addToEntityList(new Enemy(200, 100, 100, assetHandler), entityList);
 EntityUtil.addToEntityList(new Enemy(200, 300, 100, assetHandler), entityList);
 EntityUtil.addToEntityList(new Enemy(250, 300, 100, assetHandler), entityList);
@@ -57,6 +58,7 @@ EntityUtil.addToEntityList(new Enemy(650, 300, 100, assetHandler), entityList);
 EntityUtil.addToEntityList(new Enemy(750, 300, 100, assetHandler), entityList);
 EntityUtil.addToEntityList(new Enemy(850, 300, 100, assetHandler), entityList);
 EntityUtil.addToEntityList(new Enemy(950, 300, 100, assetHandler), entityList);
+*/
 
 
 function gameLoop() {
