@@ -50,7 +50,7 @@ class Enemy extends Entity {
         ctx.fillStyle = "red";
         const relativePosition = camera.getRelativePosition(this);
         //ctx.fillRect(relativePosition.x, relativePosition.y, this.width, this.height);
-        ctx.drawImage(this.assetHandler.getImage(`ghost-f1`), relativePosition.x, relativePosition.y, this.width, this.height);
+        ctx.drawImage(this.assetHandler.getImage('ghost-f1'), relativePosition.x, relativePosition.y, this.width, this.height);
     }
 }
 

@@ -5,13 +5,14 @@ class Player extends Entity {
 
     SPEED = 1;
 
-    constructor(x, y, maxHP, assetHandler) {
+    constructor(x, y, maxHP, assetHandler, particleHandler) {
         super(x, y, 32, 32, true);
 
         this.maxHP = maxHP;
         this.hp = maxHP;
 
         this.assetHandler = assetHandler;
+        this.particleHandler = particleHandler;
     }
 
 
@@ -51,9 +52,13 @@ class Player extends Entity {
                     
                     if (futureCollisionX.collides(entity.collisionBox)) {
                         vx = 0;
+                        this.particleHandler.applyDamageParticles(this.x, this.y);
+                        console.log('1');
                     }
                     if (futureCollisionY.collides(entity.collisionBox)) {
                         vy = 0;
+                        this.particleHandler.applyDamageParticles(this.x, this.y);
+                        console.log('1');
                     }
                 }
             }

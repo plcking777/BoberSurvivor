@@ -6,6 +6,7 @@ import { Bomb } from "./model/weapon/bomb.js";
 import { AssetHandler } from './assets.js';
 import { EntityUtil } from "./model/entity.js";
 import { UIHandler } from "./ui/ui-handler.js";
+import { ParticleHandler } from "./model/partical/particle-handler.js"
 
 const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
@@ -39,7 +40,9 @@ let inventory = [
 
 const world = new World();
 
-const player = new Player(500, 500, 100, assetHandler);
+const particleHandler = new ParticleHandler();
+
+const player = new Player(500, 500, 100, assetHandler, particleHandler);
 const camera = new Camera(player.x, player.y, canvas.width, canvas.height);
 
 EntityUtil.addToEntityList(player, entityList);
@@ -82,6 +85,8 @@ function gameLoop() {
     Object.values(entityList).forEach(entity => {
         entity.render(ctx, camera);
     });
+
+    particleHandler.update_and_render(ctx, camera)
 
     uiHandler.render(ctx);
 
