@@ -1,9 +1,12 @@
 import { Enemy } from "./enemy.js";
-import { CollisionBox, Entity } from "./entity.js";
+import { CollisionBox, Entity, EntityUtil } from "./entity.js";
+import { Pickup } from "./pickup/pickup.js";
 
 class Player extends Entity {
 
     SPEED = 1;
+
+    xp = 0;
 
     constructor(x, y, maxHP, assetHandler, particleHandler, entityList) {
         super(x, y, 32, 32, true);
@@ -70,6 +73,10 @@ class Player extends Entity {
                         }
                         vy = 0;
                     }
+                } else if (entity instanceof Pickup) {
+                    if (this.collisionBox.collidesWith(entity.collisionBox)) {
+                        this.pickup(entity);
+                    }
                 }
             }
         });
@@ -94,6 +101,10 @@ class Player extends Entity {
         this.particleHandler.applyDamageParticles(this.centerX, this.centerY);
     }
 
+    pickup(entity) {
+        this.xp += entity.value;
+        EntityUtil.removeFromEntityList(entity, this.entityList);
+    }
 
 }
 

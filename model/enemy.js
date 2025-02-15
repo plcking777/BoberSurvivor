@@ -41,7 +41,7 @@ class Enemy extends Entity {
         let futureCollisionY = new CollisionBox(this.x, this.y + this.vy, this.width, this.height);
 
         Object.values(this.entityList).forEach(entity => {
-            if (this !== entity) {
+            if (this !== entity && entity.collisionEnabled) {
                 if (futureCollisionX.collidesWith(entity.collisionBox)) {
                     this.vx = 0;
 
