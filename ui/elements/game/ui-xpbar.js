@@ -5,10 +5,12 @@ class UIXPBar extends UIElement {
 
     BORDER_SIZE = 5;
 
-    constructor(x, y, width, height) {
+    constructor(x, y, width, height, player) {
         super(x, y);
         this.width = width;
         this.height = height;
+
+        this.player = player;
     }
 
     update(mouseX, mouseY, click) { }
@@ -24,7 +26,7 @@ class UIXPBar extends UIElement {
 
         // fill
         ctx.fillStyle = "purple";
-        ctx.fillRect(this.x + this.BORDER_SIZE, this.y + this.BORDER_SIZE, this.width - 2*this.BORDER_SIZE, this.height - 2*this.BORDER_SIZE);
+        ctx.fillRect(this.x + this.BORDER_SIZE, this.y + this.BORDER_SIZE, this.player.xp / this.player.xpNextLevel * (this.width - 2*this.BORDER_SIZE), this.height - 2*this.BORDER_SIZE);
     }
 }
 

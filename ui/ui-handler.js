@@ -5,15 +5,17 @@ class UIHandler {
 
     uiElements = {};
 
-    constructor(screenWidth, screenHeight) {
+    constructor(screenWidth, screenHeight, player) {
         this.screenWidth = screenWidth;
         this.screenHeight = screenHeight;
+
+        this.player = player;
     }
 
 
     setupInGameUI() {
         //this.uiElements['ingame.panel'] = new UIPanel(50, 50, 100, 100);
-        this.uiElements['ingame.xpbar'] = new UIXPBar(50, 10, this.screenWidth - 100, 35);
+        this.uiElements['ingame.xpbar'] = new UIXPBar(50, 10, this.screenWidth - 100, 35, this.player);
     }
 
     destroyInGameUI() {

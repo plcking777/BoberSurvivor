@@ -7,6 +7,7 @@ class Player extends Entity {
     SPEED = 1;
 
     xp = 0;
+    xpNextLevel = 10;
 
     constructor(x, y, maxHP, assetHandler, particleHandler, entityList) {
         super(x, y, 32, 32, true);

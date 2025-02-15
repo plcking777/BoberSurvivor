@@ -14,8 +14,22 @@ const ctx = canvas.getContext("2d");
 
 const assetHandler = new AssetHandler();
 
-const uiHandler = new UIHandler(canvas.width, canvas.height);
+
+let entityList = {};
+
+const particleHandler = new ParticleHandler();
+
+const player = new Player(500, 500, 100, assetHandler, particleHandler, entityList);
+
+const uiHandler = new UIHandler(canvas.width, canvas.height, player);
 uiHandler.setupInGameUI();
+
+
+let inventory = [
+    new Bomb(360, entityList, assetHandler, particleHandler),
+];
+
+
 
 // loading...
 await assetHandler.loadAllImages();
@@ -29,21 +43,7 @@ const input = {
 
 
 
-let entityList = {};
-
-const particleHandler = new ParticleHandler();
-
-
-
-let inventory = [
-    new Bomb(360, entityList, assetHandler, particleHandler),
-];
-
-
 const world = new World();
-
-
-const player = new Player(500, 500, 100, assetHandler, particleHandler, entityList);
 const camera = new Camera(player.x, player.y, canvas.width, canvas.height);
 
 EntityUtil.addToEntityList(player, entityList);
