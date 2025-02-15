@@ -29,6 +29,8 @@ class AssetHandler {
             'bomb-f4': 'assets/bomb-f4.png',
 
             'ghost-f1': 'assets/ghost-f1.png',
+
+            'gem': 'assets/gem.png',
         }
         // replace the imageMap src with the actual image
         await Promise.all(Object.entries(this.imageMap).map(([key, src]) => this.loadImage(key, src)));

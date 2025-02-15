@@ -1,4 +1,5 @@
 import { Entity, CollisionBox, EntityUtil } from "./entity.js";
+import { GemPickup } from "./pickup/gem-pickup.js";
 import { Player } from "./player.js";
 
 class Enemy extends Entity {
@@ -93,6 +94,7 @@ class Enemy extends Entity {
     }
 
     die() {
+        EntityUtil.addToEntityList(new GemPickup(this.centerX, this.centerY, this.assetHandler), this.entityList);
         EntityUtil.removeFromEntityList(this, this.entityList);
     }
 }
