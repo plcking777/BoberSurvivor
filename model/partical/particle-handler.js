@@ -1,6 +1,6 @@
 import { DamageParticle } from "./damage-particle.js";
 import { ExplosionParticle } from "./explosion-particle.js";
-
+import { DamageNumbersParticle } from "./damage-numbers-particle.js";
 
 const random = (min, max) => {
     return Math.random() * (max - min) + min;
@@ -67,7 +67,9 @@ class ParticleHandler {
     }
 
     applyDamageNumbers(x, y, value) {
-        
+        this.particles.push(
+            new DamageNumbersParticle(x, y, random(-0.5, 0.5), random(-1, -3), 60, value)
+        );
     }
 
 

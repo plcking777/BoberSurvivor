@@ -6,12 +6,13 @@ class Enemy extends Entity {
     SPEED = 0.5;
     ATTACK_DAMAGE = 1;
 
-    constructor(x, y, maxHP, assetHandler) {
+    constructor(x, y, maxHP, assetHandler, particleHandler) {
         super(x, y, 48, 48, true);
         this.maxHP = maxHP;
         this.hp = maxHP;
 
         this.assetHandler = assetHandler;
+        this.particleHandler = particleHandler;
     }
 
 
@@ -64,7 +65,7 @@ class Enemy extends Entity {
     }
 
     damage(value) {
-        console.log('damage');
+        this.particleHandler.applyDamageNumbers(this.centerX, this.centerY, ''+value);
     }
 }
 
