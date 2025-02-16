@@ -18,6 +18,8 @@ class UIButton extends UIElement {
 
     update(mouseX, mouseY, click) {
 
+        console.log('mouseX: ', mouseX);
+        console.log('mouseY: ', mouseY);
         if (mouseX > this.x && mouseX < this.x + this.width &&
             mouseY > this.y && mouseY < this.y + this.height
         ) {

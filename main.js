@@ -143,8 +143,12 @@ document.addEventListener('keyup', (event) => {
 
 
 canvas.addEventListener("mousemove", (event) => {
-    mouseX = event.clientX;
-    mouseY = event.clientY;
+    const rect = canvas.getBoundingClientRect();
+    const scaleX = canvas.width / rect.width;
+    const scaleY = canvas.height / rect.height;
+
+    mouseX = (event.clientX - rect.left) * scaleX;
+    mouseY = (event.clientY - rect.top) * scaleY;
 });
 
 canvas.addEventListener("mousedown", (event) => {
