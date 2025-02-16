@@ -11,10 +11,12 @@ class Player extends Entity {
     level = 1;
 
     constructor(x, y, maxHP, assetHandler, particleHandler, entityList, uiHandler) {
-        super(x, y, 32, 32, true);
+        super(x, y, 64, 64, true);
 
         this.maxHP = maxHP;
         this.hp = maxHP;
+
+        this.goingLeft = false;
 
         this.assetHandler = assetHandler;
         this.particleHandler = particleHandler;
@@ -84,15 +86,32 @@ class Player extends Entity {
             }
         });
 
+        if (this.vx > 0) {
+            this.goingLeft = false;
+        } else if (this.vx < 0) {
+            this.goingLeft = true;
+        }
+
         this.x += vx;
         this.y += vy;
         super.update();
     }
 
     render(ctx, camera) {
+        console.log(this.assetHandler);
+        console.log(this.assetHandler.getImage('bober-f1'));
         ctx.fillStyle = "blue";
         const relativePosition = camera.getRelativePosition(this);
         ctx.fillRect(relativePosition.x, relativePosition.y, this.width, this.height);
+
+        if (!this.goingLeft) {
+            ctx.drawImage(this.assetHandler.getImage('bober-f1'), relativePosition.x, relativePosition.y, this.width, this.height);
+        } else {
+            ctx.save();
+            ctx.scale(-1, 1);
+            ctx.drawImage(this.assetHandler.getImage('bober-f1'), -relativePosition.x -this.width, relativePosition.y, this.width, this.height);
+            ctx.restore();
+        }
     }
 
     damage(value) {
