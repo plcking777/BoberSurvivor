@@ -11,6 +11,9 @@ import { ParticleHandler } from "./model/partical/particle-handler.js"
 const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
 
+let mouseX = 0;
+let mouseY = 0;
+let click = false;
 
 const assetHandler = new AssetHandler();
 
@@ -63,7 +66,7 @@ EntityUtil.addToEntityList(new Enemy(950, 300, 100, assetHandler, particleHandle
 function gameLoop() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    uiHandler.update(0, 0, false); // TODO
+    uiHandler.update(mouseX, mouseY, click);
 
     player.update(input, entityList);
 
@@ -135,5 +138,23 @@ document.addEventListener('keyup', (event) => {
         case "ArrowDown":
             input.down = false;
             break;
+    }
+});
+
+
+canvas.addEventListener("mousemove", (event) => {
+    mouseX = event.clientX;
+    mouseY = event.clientY;
+});
+
+canvas.addEventListener("mousedown", (event) => {
+    if (event.button === 0) {
+        click = true;
+    }
+});
+
+canvas.addEventListener("mouseup", (event) => {
+    if (event.button === 0) {
+        click = false;
     }
 });

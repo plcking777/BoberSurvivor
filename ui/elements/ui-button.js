@@ -28,6 +28,9 @@ class UIButton extends UIElement {
                 this.active = false;
                 this.hover = true;
             }
+        } else {
+            this.hover = false;
+            this.active = false;
         }
 
         // on mouse button release
