@@ -7,9 +7,10 @@ class Player extends Entity {
     SPEED = 1;
 
     xp = 0;
-    xpNextLevel = 10;
+    xpNextLevel = 2;
+    level = 1;
 
-    constructor(x, y, maxHP, assetHandler, particleHandler, entityList) {
+    constructor(x, y, maxHP, assetHandler, particleHandler, entityList, uiHandler) {
         super(x, y, 32, 32, true);
 
         this.maxHP = maxHP;
@@ -18,6 +19,7 @@ class Player extends Entity {
         this.assetHandler = assetHandler;
         this.particleHandler = particleHandler;
         this.entityList = entityList;
+        this.uiHandler = uiHandler;
     }
 
 
@@ -104,9 +106,17 @@ class Player extends Entity {
 
     pickup(entity) {
         this.xp += entity.value;
+        if (this.xp >= this.xpNextLevel) {
+           this.xp -= this.xpNextLevel;
+           this.levelup();
+        }
         EntityUtil.removeFromEntityList(entity, this.entityList);
     }
 
+    levelup() {
+        this.xpNextLevel = Math.floor(this.xpNextLevel * 1.5);
+        this.level++;
+    }
 }
 
 export { Player };

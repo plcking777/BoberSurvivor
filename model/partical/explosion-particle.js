@@ -15,7 +15,7 @@ class ExplosionParticle extends Particle {
 
         ctx.fillStyle = "orange";
         const relativePosition = camera.getRelativePosition(this);
-        ctx.fillRect(relativePosition.x, relativePosition.y, 10, 10);
+        ctx.fillRect(relativePosition.x, relativePosition.y, 5, 5);
     }
 
 }
