@@ -147,8 +147,8 @@ canvas.addEventListener("mousemove", (event) => {
     const scaleX = canvas.width / rect.width;
     const scaleY = canvas.height / rect.height;
 
-    mouseX = (event.clientX - rect.left) * scaleX;
-    mouseY = (event.clientY - rect.top) * scaleY;
+    mouseX = Math.floor((event.clientX - rect.left) * scaleX);
+    mouseY = Math.floor((event.clientY - rect.top) * scaleY);
 });
 
 canvas.addEventListener("mousedown", (event) => {
