@@ -31,7 +31,6 @@ class Player extends Entity {
 
 
     update(input) {
-        console.log('inp: ', input)
         let vx = 0;
         let vy = 0;
 
@@ -92,7 +91,6 @@ class Player extends Entity {
             }
         });
 
-        //console.log(input.down)
 
         if (vx > 0) {
             this.goingLeft = false;

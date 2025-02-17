@@ -5,7 +5,7 @@ import { Enemy } from "../../enemy.js";
 class BombEntity extends WeaponEntity {
 
     ANIMATION_FRAMES = 4;
-    ANIMATION_TIME = 30;
+    ANIMATION_TIME = 50;
 
     EXPLODE_TIMER = 200;
     EXPLOSION_RANGE = 100;

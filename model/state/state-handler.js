@@ -10,6 +10,10 @@ class StateHandler {
 
     currentState = this.states.game;
 
+    constructor(game) {
+        this.game = game;
+    }
+
 
     switchState(newState) {
         this.currentState = newState;
@@ -17,6 +21,7 @@ class StateHandler {
             case this.states.game:
                 break;
             case this.states.upgrade:
+                this.toUpgrade();
                 break;
             case this.states.pause:
                 break;
@@ -27,6 +32,10 @@ class StateHandler {
             default:
                 throw new Error('Invalid state: ', newState);
         }
+    }
+
+    toUpgrade() {
+        this.game.uiHandler.setupUpgradeUI();
     }
 }
 

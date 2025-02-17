@@ -17,7 +17,7 @@ class Game {
         this.height = height;
 
         this.assetHandler = new AssetHandler();
-        this.stateHandler = new StateHandler();
+        this.stateHandler = new StateHandler(this);
         
         this.entityList = {};
         
