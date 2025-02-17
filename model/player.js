@@ -21,7 +21,6 @@ class Player extends Entity {
         this.assetHandler = assetHandler;
         this.particleHandler = particleHandler;
         this.entityList = entityList;
-        this.uiHandler = uiHandler;
         this.stateHandler = stateHandler;
     }
 

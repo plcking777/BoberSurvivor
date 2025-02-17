@@ -1,0 +1,93 @@
+import { Player } from "./model/player.js";
+import { Enemy } from "./model/enemy.js";
+import { Camera } from "./model/camera.js";
+import { World } from "./model/world.js";
+import { Bomb } from "./model/weapon/bomb.js";
+import { AssetHandler } from './assets.js';
+import { EntityUtil } from "./model/entity.js";
+import { UIHandler } from "./ui/ui-handler.js";
+import { ParticleHandler } from "./model/partical/particle-handler.js"
+import { StateHandler } from "./model/state/state-handler.js";
+
+class Game {
+
+    constructor(width, height) {
+
+        this.width = width;
+        this.height = height;
+
+        this.assetHandler = new AssetHandler();
+        this.stateHandler = new StateHandler();
+        
+        this.entityList = {};
+        
+        this.particleHandler = new ParticleHandler();
+        
+        this.player = new Player(500, 500, 100, this.assetHandler, this.particleHandler, this.entityList, this.stateHandler);
+        
+        this.uiHandler = new UIHandler(width, height, this.player);
+        this.uiHandler.setupInGameUI();
+
+        
+        this.inventory = [
+            new Bomb(360, this.entityList, this.assetHandler, this.particleHandler),
+        ];
+
+
+        this.world = new World();
+        this.camera = new Camera(this.player.x, this.player.y, width, height);
+
+        EntityUtil.addToEntityList(this.player, this.entityList);
+        EntityUtil.addToEntityList(new Enemy(100, 100, 1, this.assetHandler, this.particleHandler, this.entityList), this.entityList);
+        EntityUtil.addToEntityList(new Enemy(200, 100, 1, this.assetHandler, this.particleHandler, this.entityList), this.entityList);
+        EntityUtil.addToEntityList(new Enemy(200, 300, 1, this.assetHandler, this.particleHandler, this.entityList), this.entityList);
+        EntityUtil.addToEntityList(new Enemy(250, 300, 1, this.assetHandler, this.particleHandler, this.entityList), this.entityList);
+        EntityUtil.addToEntityList(new Enemy(350, 300, 1, this.assetHandler, this.particleHandler, this.entityList), this.entityList);
+        EntityUtil.addToEntityList(new Enemy(450, 300, 1, this.assetHandler, this.particleHandler, this.entityList), this.entityList);
+        EntityUtil.addToEntityList(new Enemy(550, 300, 1, this.assetHandler, this.particleHandler, this.entityList), this.entityList);
+        EntityUtil.addToEntityList(new Enemy(650, 300, 100, this.assetHandler, this.particleHandler, this.entityList), this.entityList);
+        EntityUtil.addToEntityList(new Enemy(750, 300, 100, this.assetHandler, this.particleHandler, this.entityList), this.entityList);
+        EntityUtil.addToEntityList(new Enemy(850, 300, 100, this.assetHandler, this.particleHandler, this.entityList), this.entityList);
+        EntityUtil.addToEntityList(new Enemy(950, 300, 100, this.assetHandler, this.particleHandler, this.entityList), this.entityList);
+
+    }
+
+
+    update(input) {
+        this.uiHandler.update(input.mouseX, input.mouseY, input.click);
+
+        this.player.update(input, this.entityList);
+    
+        this.inventory.forEach((weapon) => {
+            weapon.update(this.player);
+        });
+    
+        Object.values(this.entityList).forEach(entity => {
+            entity.update(this.player, this.entityList);
+        });
+    
+        this.camera.follow(this.player);
+    }
+
+    render(ctx) {
+        ctx.clearRect(0, 0, this.width, this.height);
+
+        this.world.render(ctx, this.camera);
+        this.player.render(ctx, this.camera);
+    
+        Object.values(this.entityList).forEach(entity => {
+            entity.render(ctx, this.camera);
+        });
+    
+        this.particleHandler.update_and_render(ctx, this.camera)
+    
+        this.uiHandler.render(ctx);
+    }
+
+    async load() {
+        // loading...
+        await this.assetHandler.loadAllImages();
+    }
+}
+
+export { Game };

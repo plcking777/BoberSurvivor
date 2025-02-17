@@ -1,99 +1,30 @@
-import { Player } from "./model/player.js";
-import { Enemy } from "./model/enemy.js";
-import { Camera } from "./model/camera.js";
-import { World } from "./model/world.js";
-import { Bomb } from "./model/weapon/bomb.js";
-import { AssetHandler } from './assets.js';
-import { EntityUtil } from "./model/entity.js";
-import { UIHandler } from "./ui/ui-handler.js";
-import { ParticleHandler } from "./model/partical/particle-handler.js"
-import { StateHandler } from "./model/state/state-handler.js";
+import { Game } from "./game.js";
+
+
 
 const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
 
-let mouseX = 0;
-let mouseY = 0;
-let click = false;
-
-const assetHandler = new AssetHandler();
-const stateHandler = new StateHandler();
-
-let entityList = {};
-
-const particleHandler = new ParticleHandler();
-
-const player = new Player(500, 500, 100, assetHandler, particleHandler, entityList, stateHandler);
-
-const uiHandler = new UIHandler(canvas.width, canvas.height, player);
-uiHandler.setupInGameUI();
-
-
-let inventory = [
-    new Bomb(360, entityList, assetHandler, particleHandler),
-];
-
-
-
-// loading...
-await assetHandler.loadAllImages();
 
 const input = {
     left: false,
     right: false,
     up: false,
     down: false,
+
+    mouseX: 0,
+    mouseY: 0,
+    click: false,
 }
 
-
-
-const world = new World();
-const camera = new Camera(player.x, player.y, canvas.width, canvas.height);
-
-EntityUtil.addToEntityList(player, entityList);
-EntityUtil.addToEntityList(new Enemy(100, 100, 1, assetHandler, particleHandler, entityList), entityList);
-EntityUtil.addToEntityList(new Enemy(200, 100, 1, assetHandler, particleHandler, entityList), entityList);
-EntityUtil.addToEntityList(new Enemy(200, 300, 1, assetHandler, particleHandler, entityList), entityList);
-EntityUtil.addToEntityList(new Enemy(250, 300, 1, assetHandler, particleHandler, entityList), entityList);
-EntityUtil.addToEntityList(new Enemy(350, 300, 1, assetHandler, particleHandler, entityList), entityList);
-EntityUtil.addToEntityList(new Enemy(450, 300, 1, assetHandler, particleHandler, entityList), entityList);
-EntityUtil.addToEntityList(new Enemy(550, 300, 1, assetHandler, particleHandler, entityList), entityList);
-EntityUtil.addToEntityList(new Enemy(650, 300, 100, assetHandler, particleHandler, entityList), entityList);
-EntityUtil.addToEntityList(new Enemy(750, 300, 100, assetHandler, particleHandler, entityList), entityList);
-EntityUtil.addToEntityList(new Enemy(850, 300, 100, assetHandler, particleHandler, entityList), entityList);
-EntityUtil.addToEntityList(new Enemy(950, 300, 100, assetHandler, particleHandler, entityList), entityList);
+const game = new Game(canvas.width, canvas.height);
+await game.load();
 
 
 function gameLoop() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    uiHandler.update(mouseX, mouseY, click);
-
-    player.update(input, entityList);
-
-    inventory.forEach((weapon) => {
-        weapon.update(player);
-    });
-
-    Object.values(entityList).forEach(entity => {
-        entity.update(player, entityList);
-    });
-
-    camera.follow(player);
-
-
-
-
-    world.render(ctx, camera);
-    player.render(ctx, camera);
-
-    Object.values(entityList).forEach(entity => {
-        entity.render(ctx, camera);
-    });
-
-    particleHandler.update_and_render(ctx, camera)
-
-    uiHandler.render(ctx);
+    game.update(input);
+    game.render(ctx);
 
     requestAnimationFrame(gameLoop);
 }
@@ -148,18 +79,18 @@ canvas.addEventListener("mousemove", (event) => {
     const scaleX = canvas.width / rect.width;
     const scaleY = canvas.height / rect.height;
 
-    mouseX = Math.floor((event.clientX - rect.left) * scaleX);
-    mouseY = Math.floor((event.clientY - rect.top) * scaleY);
+    input.mouseX = Math.floor((event.clientX - rect.left) * scaleX);
+    input.mouseY = Math.floor((event.clientY - rect.top) * scaleY);
 });
 
 canvas.addEventListener("mousedown", (event) => {
     if (event.button === 0) {
-        click = true;
+        input.click = true;
     }
 });
 
 canvas.addEventListener("mouseup", (event) => {
     if (event.button === 0) {
-        click = false;
+        input.click = false;
     }
 });
