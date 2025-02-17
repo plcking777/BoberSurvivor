@@ -7,14 +7,14 @@ class Enemy extends Entity {
     SPEED = 0.5;
     ATTACK_DAMAGE = 1;
 
-    constructor(x, y, maxHP, assetHandler, particleHandler, entityList) {
+    constructor(x, y, maxHP, game) {
         super(x, y, 48, 48, true);
         this.maxHP = maxHP;
         this.hp = maxHP;
 
-        this.assetHandler = assetHandler;
-        this.particleHandler = particleHandler;
-        this.entityList = entityList;
+        this.assetHandler = game.assetHandler;
+        this.particleHandler = game.particleHandler;
+        this.entityList = game.entityList;
 
         this.vx = 0;
         this.vy = 0;

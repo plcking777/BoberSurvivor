@@ -23,7 +23,7 @@ class Game {
         
         this.particleHandler = new ParticleHandler();
         
-        this.player = new Player(500, 500, 100, this.assetHandler, this.particleHandler, this.entityList, this.stateHandler);
+        this.player = new Player(500, 500, 100, this);
         
         this.uiHandler = new UIHandler(width, height, this.player);
         this.uiHandler.setupInGameUI();
@@ -38,17 +38,17 @@ class Game {
         this.camera = new Camera(this.player.x, this.player.y, width, height);
 
         EntityUtil.addToEntityList(this.player, this.entityList);
-        EntityUtil.addToEntityList(new Enemy(100, 100, 1, this.assetHandler, this.particleHandler, this.entityList), this.entityList);
-        EntityUtil.addToEntityList(new Enemy(200, 100, 1, this.assetHandler, this.particleHandler, this.entityList), this.entityList);
-        EntityUtil.addToEntityList(new Enemy(200, 300, 1, this.assetHandler, this.particleHandler, this.entityList), this.entityList);
-        EntityUtil.addToEntityList(new Enemy(250, 300, 1, this.assetHandler, this.particleHandler, this.entityList), this.entityList);
-        EntityUtil.addToEntityList(new Enemy(350, 300, 1, this.assetHandler, this.particleHandler, this.entityList), this.entityList);
-        EntityUtil.addToEntityList(new Enemy(450, 300, 1, this.assetHandler, this.particleHandler, this.entityList), this.entityList);
-        EntityUtil.addToEntityList(new Enemy(550, 300, 1, this.assetHandler, this.particleHandler, this.entityList), this.entityList);
-        EntityUtil.addToEntityList(new Enemy(650, 300, 100, this.assetHandler, this.particleHandler, this.entityList), this.entityList);
-        EntityUtil.addToEntityList(new Enemy(750, 300, 100, this.assetHandler, this.particleHandler, this.entityList), this.entityList);
-        EntityUtil.addToEntityList(new Enemy(850, 300, 100, this.assetHandler, this.particleHandler, this.entityList), this.entityList);
-        EntityUtil.addToEntityList(new Enemy(950, 300, 100, this.assetHandler, this.particleHandler, this.entityList), this.entityList);
+        EntityUtil.addToEntityList(new Enemy(100, 100, 1, this), this.entityList);
+        EntityUtil.addToEntityList(new Enemy(200, 100, 1, this), this.entityList);
+        EntityUtil.addToEntityList(new Enemy(200, 300, 1, this), this.entityList);
+        EntityUtil.addToEntityList(new Enemy(250, 300, 1, this), this.entityList);
+        EntityUtil.addToEntityList(new Enemy(350, 300, 1, this), this.entityList);
+        EntityUtil.addToEntityList(new Enemy(450, 300, 1, this), this.entityList);
+        EntityUtil.addToEntityList(new Enemy(550, 300, 1, this), this.entityList);
+        EntityUtil.addToEntityList(new Enemy(650, 300, 100, this), this.entityList);
+        EntityUtil.addToEntityList(new Enemy(750, 300, 100, this), this.entityList);
+        EntityUtil.addToEntityList(new Enemy(850, 300, 100, this), this.entityList);
+        EntityUtil.addToEntityList(new Enemy(950, 300, 100, this), this.entityList);
 
     }
 

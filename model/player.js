@@ -10,7 +10,7 @@ class Player extends Entity {
     xpNextLevel = 2;
     level = 1;
 
-    constructor(x, y, maxHP, assetHandler, particleHandler, entityList, stateHandler) {
+    constructor(x, y, maxHP, game) {
         super(x, y, 64, 64, true);
 
         this.maxHP = maxHP;
@@ -18,10 +18,9 @@ class Player extends Entity {
 
         this.goingLeft = false;
 
-        this.assetHandler = assetHandler;
-        this.particleHandler = particleHandler;
-        this.entityList = entityList;
-        this.stateHandler = stateHandler;
+        this.assetHandler = game.assetHandler;
+        this.particleHandler = game.particleHandler;
+        this.entityList = game.entityList;
     }
 
 
@@ -133,7 +132,7 @@ class Player extends Entity {
     levelup() {
         this.xpNextLevel = Math.floor(this.xpNextLevel * 1.5);
         this.level++;
-        this.stateHandler.switchState(this.stateHandler.states.upgrade);
+        this.game.stateHandler.switchState(this.game.stateHandler.states.upgrade);
     }
 }
 
