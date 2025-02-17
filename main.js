@@ -6,7 +6,7 @@ const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
 
 
-const input = {
+let input = {
     left: false,
     right: false,
     up: false,

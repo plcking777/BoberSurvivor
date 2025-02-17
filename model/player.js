@@ -4,6 +4,9 @@ import { Pickup } from "./pickup/pickup.js";
 
 class Player extends Entity {
 
+    RUNNING_ANIMATION_FRAMES = 2;
+    RUNNING_ANIMATION_FRAME_DURATION = 30;
+
     SPEED = 1;
 
     xp = 0;
@@ -17,7 +20,10 @@ class Player extends Entity {
         this.hp = maxHP;
 
         this.goingLeft = false;
+        this.running = false;
+        this.frameCount = 0;
 
+        this.game = game;
         this.assetHandler = game.assetHandler;
         this.particleHandler = game.particleHandler;
         this.entityList = game.entityList;
@@ -25,6 +31,7 @@ class Player extends Entity {
 
 
     update(input) {
+        console.log('inp: ', input)
         let vx = 0;
         let vy = 0;
 
@@ -85,10 +92,18 @@ class Player extends Entity {
             }
         });
 
-        if (this.vx > 0) {
+        //console.log(input.down)
+
+        if (vx > 0) {
             this.goingLeft = false;
-        } else if (this.vx < 0) {
+        } else if (vx < 0) {
             this.goingLeft = true;
+        }
+
+        if (vx !== 0 || vy !== 0) {
+            this.running = true;
+        } else {
+            this.running = false;
         }
 
         this.x += vx;
@@ -99,14 +114,23 @@ class Player extends Entity {
     render(ctx, camera) {
         ctx.fillStyle = "blue";
         const relativePosition = camera.getRelativePosition(this);
-        ctx.fillRect(relativePosition.x, relativePosition.y, this.width, this.height);
+        //ctx.fillRect(relativePosition.x, relativePosition.y, this.width, this.height);
 
+        if (this.running) {
+            this.frameCount++;
+            if (this.frameCount >= this.RUNNING_ANIMATION_FRAMES * this.RUNNING_ANIMATION_FRAME_DURATION) {
+                this.frameCount = 0;
+            }
+        } else {
+            this.frameCount = 0;
+        }
+        const runningFrame = Math.min(Math.floor(this.frameCount / this.RUNNING_ANIMATION_FRAME_DURATION) + 1, this.RUNNING_ANIMATION_FRAMES);
         if (!this.goingLeft) {
-            ctx.drawImage(this.assetHandler.getImage('bober-f1'), relativePosition.x, relativePosition.y, this.width, this.height);
+            ctx.drawImage(this.assetHandler.getImage(`bober-f${runningFrame}`), relativePosition.x, relativePosition.y, this.width, this.height);
         } else {
             ctx.save();
             ctx.scale(-1, 1);
-            ctx.drawImage(this.assetHandler.getImage('bober-f1'), -relativePosition.x -this.width, relativePosition.y, this.width, this.height);
+            ctx.drawImage(this.assetHandler.getImage(`bober-f${runningFrame}`), -relativePosition.x -this.width, relativePosition.y, this.width, this.height);
             ctx.restore();
         }
     }

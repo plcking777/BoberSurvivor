@@ -56,14 +56,16 @@ class Game {
     update(input) {
         this.uiHandler.update(input.mouseX, input.mouseY, input.click);
 
-        this.player.update(input, this.entityList);
+        this.player.update(input);
     
         this.inventory.forEach((weapon) => {
             weapon.update(this.player);
         });
     
         Object.values(this.entityList).forEach(entity => {
-            entity.update(this.player, this.entityList);
+            if(entity !== this.player) {
+                entity.update(this.player, this.entityList);
+            }
         });
     
         this.camera.follow(this.player);
@@ -73,7 +75,6 @@ class Game {
         ctx.clearRect(0, 0, this.width, this.height);
 
         this.world.render(ctx, this.camera);
-        this.player.render(ctx, this.camera);
     
         Object.values(this.entityList).forEach(entity => {
             entity.render(ctx, this.camera);
