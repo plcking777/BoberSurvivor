@@ -16,7 +16,27 @@ class StateHandler {
 
 
     switchState(newState) {
+        
+        // Handle old state
+        switch (this.currentState) {
+            case this.states.game:
+                break;
+            case this.states.upgrade:
+                this.fromUpgrade();
+                break;
+            case this.states.pause:
+                break;
+            case this.states.dead:
+                break;
+            case this.states.menu:
+                break;
+            default:
+                throw new Error('Invalid state: ', newState);
+        }
+
         this.currentState = newState;
+
+        // Handle new state
         switch (newState) {
             case this.states.game:
                 break;
@@ -32,6 +52,10 @@ class StateHandler {
             default:
                 throw new Error('Invalid state: ', newState);
         }
+    }
+
+    fromUpgrade() {
+        this.game.uiHandler.destroyUpgradeUI();
     }
 
     toUpgrade() {

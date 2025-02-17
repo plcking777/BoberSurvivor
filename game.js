@@ -54,21 +54,33 @@ class Game {
 
 
     update(input) {
-        this.uiHandler.update(input.mouseX, input.mouseY, input.click);
 
-        this.player.update(input);
-    
-        this.inventory.forEach((weapon) => {
-            weapon.update(this.player);
-        });
-    
-        Object.values(this.entityList).forEach(entity => {
-            if(entity !== this.player) {
-                entity.update(this.player, this.entityList);
-            }
-        });
-    
-        this.camera.follow(this.player);
+        switch(this.stateHandler.currentState) {
+            case this.stateHandler.states.game:
+                this.uiHandler.update(input.mouseX, input.mouseY, input.click);
+
+                this.player.update(input);
+            
+                this.inventory.forEach((weapon) => {
+                    weapon.update(this.player);
+                });
+            
+                Object.values(this.entityList).forEach(entity => {
+                    if(entity !== this.player) {
+                        entity.update(this.player, this.entityList);
+                    }
+                });
+                this.camera.follow(this.player);
+                break;
+            
+            case this.stateHandler.states.upgrade:
+                this.uiHandler.update(input.mouseX, input.mouseY, input.click);
+                break;
+            default:
+        }
+
+
+
     }
 
     render(ctx) {
