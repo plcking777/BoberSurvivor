@@ -7,6 +7,7 @@ import { AssetHandler } from './assets.js';
 import { EntityUtil } from "./model/entity.js";
 import { UIHandler } from "./ui/ui-handler.js";
 import { ParticleHandler } from "./model/partical/particle-handler.js"
+import { StateHandler } from "./model/state/state-handler.js";
 
 const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
@@ -16,13 +17,13 @@ let mouseY = 0;
 let click = false;
 
 const assetHandler = new AssetHandler();
-
+const stateHandler = new StateHandler();
 
 let entityList = {};
 
 const particleHandler = new ParticleHandler();
 
-const player = new Player(500, 500, 100, assetHandler, particleHandler, entityList);
+const player = new Player(500, 500, 100, assetHandler, particleHandler, entityList, stateHandler);
 
 const uiHandler = new UIHandler(canvas.width, canvas.height, player);
 uiHandler.setupInGameUI();

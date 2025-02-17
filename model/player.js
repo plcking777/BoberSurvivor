@@ -10,7 +10,7 @@ class Player extends Entity {
     xpNextLevel = 2;
     level = 1;
 
-    constructor(x, y, maxHP, assetHandler, particleHandler, entityList, uiHandler) {
+    constructor(x, y, maxHP, assetHandler, particleHandler, entityList, stateHandler) {
         super(x, y, 64, 64, true);
 
         this.maxHP = maxHP;
@@ -22,6 +22,7 @@ class Player extends Entity {
         this.particleHandler = particleHandler;
         this.entityList = entityList;
         this.uiHandler = uiHandler;
+        this.stateHandler = stateHandler;
     }
 
 
@@ -98,8 +99,6 @@ class Player extends Entity {
     }
 
     render(ctx, camera) {
-        console.log(this.assetHandler);
-        console.log(this.assetHandler.getImage('bober-f1'));
         ctx.fillStyle = "blue";
         const relativePosition = camera.getRelativePosition(this);
         ctx.fillRect(relativePosition.x, relativePosition.y, this.width, this.height);
@@ -135,6 +134,7 @@ class Player extends Entity {
     levelup() {
         this.xpNextLevel = Math.floor(this.xpNextLevel * 1.5);
         this.level++;
+        this.stateHandler.switchState(this.stateHandler.states.upgrade);
     }
 }
 
