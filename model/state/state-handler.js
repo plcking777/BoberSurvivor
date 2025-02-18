@@ -59,7 +59,7 @@ class StateHandler {
     }
 
     toUpgrade() {
-        this.game.uiHandler.setupUpgradeUI();
+        this.game.uiHandler.setupUpgradeUI([this.game.upgradeHandler.upgrades[0]]);
     }
 }
 

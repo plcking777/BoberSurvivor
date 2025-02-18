@@ -3,9 +3,9 @@ import { UIElement } from "../ui-element.js";
 
 class UIItemUpgrade extends UIButton {
 
-    constructor(x, y, width, height, text, image) {
-        super(x, y, width, height, text);
-        this.image = this.image;
+    constructor(x, y, width, height, upgrade) {
+        super(x, y, width, height, '');
+        this.upgrade = upgrade;
     }
 
     update(mouseX, mouseY, click) {
@@ -30,10 +30,10 @@ class UIItemUpgrade extends UIButton {
     }
 
     execute() {
-        console.log('button exec');
+        this.upgrade.action();
     }
 
     
 }
 
-export { UIXPBar };
+export { UIItemUpgrade };

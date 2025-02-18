@@ -6,8 +6,9 @@ import { Bomb } from "./model/weapon/bomb.js";
 import { AssetHandler } from './assets.js';
 import { EntityUtil } from "./model/entity.js";
 import { UIHandler } from "./ui/ui-handler.js";
-import { ParticleHandler } from "./model/partical/particle-handler.js"
+import { ParticleHandler } from "./model/partical/particle-handler.js";
 import { StateHandler } from "./model/state/state-handler.js";
+import { UpgradeHandler } from "./model/upgrade/upgrade-handler.js";
 
 class Game {
 
@@ -18,6 +19,7 @@ class Game {
 
         this.assetHandler = new AssetHandler();
         this.stateHandler = new StateHandler(this);
+        this.upgradeHandler = new UpgradeHandler(this);
         
         this.entityList = {};
         
@@ -25,7 +27,7 @@ class Game {
         
         this.player = new Player(500, 500, 100, this);
         
-        this.uiHandler = new UIHandler(width, height, this.player);
+        this.uiHandler = new UIHandler(width, height, this);
         this.uiHandler.setupInGameUI();
 
         

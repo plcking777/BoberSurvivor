@@ -8,11 +8,13 @@ class BombEntity extends WeaponEntity {
     ANIMATION_TIME = 50;
 
     EXPLODE_TIMER = 200;
-    EXPLOSION_RANGE = 100;
-    EXPLOSION_DAMAGE = 5;
 
-    constructor(x, y, entityList, assetHandler, particleHandler) {
+    constructor(x, y, explosionRange, explosionDamage, entityList, assetHandler, particleHandler) {
         super(x, y, 20, 20, entityList);
+
+        this.explosionRange = explosionRange;
+        this.explosionDamage = explosionDamage;
+
         this.assetHandler = assetHandler;
         this.particleHandler = particleHandler;
         this.frameCount = 0;
@@ -37,8 +39,8 @@ class BombEntity extends WeaponEntity {
         Object.values(this.entityList).forEach(entity => {
             if (entity instanceof Enemy) {
                 const distance = Math.sqrt((entity.x - this.x)**2, (entity.y - this.y)**2);
-                if (distance < this.EXPLOSION_RANGE) {
-                    entity.damage(this.EXPLOSION_DAMAGE);
+                if (distance < this.explosionRange) {
+                    entity.damage(this.explosionDamage);
                 }
             }
         });
