@@ -27,12 +27,14 @@ class UIHandler {
 
     destroyUpgradeUI() {
         delete this.uiElements['ingame.upgrade-panel'];
-        // TODO
+        let index = 0;
+        while (this.uiElements[`ingame.upgrade-${index}`] != null) {
+            delete this.uiElements[`ingame.upgrade-${index++}`];
+        }
     }
 
 
     setupInGameUI() {
-        console.log(this.player);
         this.uiElements['ingame.xpbar'] = new UIXPBar(50, 10, this.screenWidth - 100, 35, this.player);
     }
 
