@@ -3,9 +3,14 @@ import { UIElement } from "../ui-element.js";
 
 class UIItemUpgrade extends UIButton {
 
-    constructor(x, y, width, height, upgrade) {
-        super(x, y, width, height, '');
+    constructor(x, y, width, height, upgrade, game) {
+        super(x, y, width, height, upgrade.description);
         this.upgrade = upgrade;
+        
+        this.assetHandler = game.assetHandler;
+
+        this.color = "black";
+        this.hoverColor = "white";
     }
 
     update(mouseX, mouseY, click) {
@@ -15,18 +20,31 @@ class UIItemUpgrade extends UIButton {
     render(ctx) {
         if (this.active) {
             ctx.fillStyle = this.activeColor;
+            ctx.strokeStyle = this.activeColor;
         } else if (this.hover) {
             ctx.fillStyle = this.hoverColor;
+            ctx.strokeStyle = this.hoverColor;
         } else {
             ctx.fillStyle = this.color;
+            ctx.strokeStyle = this.color;
         }
 
-        ctx.fillRect(this.x, this.y, this.width, this.height);
+        // image
+        ctx.drawImage(this.assetHandler.getImage(this.upgrade.image), this.x + 25, this.y + 25, 64, 64);
 
+
+        // description
         ctx.font = "30px Arial";
-        ctx.fillStyle = "white";
         ctx.textAlign = "center";
         ctx.fillText(this.text, this.x + this.width / 2, this.y + this.height / 2);
+
+
+        // border
+        ctx.beginPath();
+        ctx.lineWidth="5";
+        ctx.rect(this.x, this.y, this.width, this.height);  
+        ctx.stroke();
+        
     }
 
     execute() {

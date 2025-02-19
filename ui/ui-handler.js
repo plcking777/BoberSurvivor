@@ -11,6 +11,7 @@ class UIHandler {
         this.screenWidth = screenWidth;
         this.screenHeight = screenHeight;
 
+        this.game = game;
         this.player = game.player;
         this.assetHandler = game.assetHandler;
         this.stateHandler = game.stateHandler;
@@ -21,7 +22,7 @@ class UIHandler {
         this.uiElements['ingame.upgrade-panel'] = new UIPanel(50, 50, this.screenWidth - 100, this.screenHeight - 100);
 
         upgrades.forEach((upgrade, index) => {
-            this.uiElements[`ingame.upgrade-${index}`] = new UIItemUpgrade(this.screenWidth - 160, 60 + 100 * index, 50, 50, upgrade);
+            this.uiElements[`ingame.upgrade-${index}`] = new UIItemUpgrade(50 + 50, 60 + 150 * index, this.screenWidth - 200, 120, upgrade, this.game);
         });
     }
 
