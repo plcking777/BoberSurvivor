@@ -1,5 +1,6 @@
 import { Player } from "./model/player.js";
-import { Enemy } from "./model/enemy.js";
+import { Enemy } from "./model/enemy/enemy.js";
+import { EnemySpawner } from "./model/enemy/enemy-spawner.js";
 import { Camera } from "./model/camera.js";
 import { World } from "./model/world.js";
 import { Bomb } from "./model/weapon/bomb.js";
@@ -38,8 +39,8 @@ class Game {
 
         this.world = new World();
         this.camera = new Camera(this.player.x, this.player.y, width, height);
-
         EntityUtil.addToEntityList(this.player, this.entityList);
+        /*
         EntityUtil.addToEntityList(new Enemy(100, 100, 1, this), this.entityList);
         EntityUtil.addToEntityList(new Enemy(200, 100, 1, this), this.entityList);
         EntityUtil.addToEntityList(new Enemy(200, 300, 1, this), this.entityList);
@@ -51,7 +52,10 @@ class Game {
         EntityUtil.addToEntityList(new Enemy(750, 300, 100, this), this.entityList);
         EntityUtil.addToEntityList(new Enemy(850, 300, 100, this), this.entityList);
         EntityUtil.addToEntityList(new Enemy(950, 300, 100, this), this.entityList);
+        */
 
+        this.enemySpawner = new EnemySpawner(this);
+        this.enemySpawner.spawnEnemies(50);
     }
 
 

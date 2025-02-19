@@ -1,6 +1,6 @@
 import { WeaponEntity } from "./weapon-entity.js";
 import { EntityUtil } from './../../entity.js'
-import { Enemy } from "../../enemy.js";
+import { Enemy } from "../../enemy/enemy.js";
 
 class BombEntity extends WeaponEntity {
 

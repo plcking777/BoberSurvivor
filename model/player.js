@@ -1,4 +1,4 @@
-import { Enemy } from "./enemy.js";
+import { Enemy } from "./enemy/enemy.js";
 import { CollisionBox, Entity, EntityUtil } from "./entity.js";
 import { Pickup } from "./pickup/pickup.js";
 
