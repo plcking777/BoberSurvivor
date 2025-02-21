@@ -55,7 +55,6 @@ class Game {
         */
 
         this.enemySpawner = new EnemySpawner(this);
-        this.enemySpawner.spawnEnemies(50);
     }
 
 
@@ -66,7 +65,8 @@ class Game {
                 this.uiHandler.update(input.mouseX, input.mouseY, input.click);
 
                 this.player.update(input);
-            
+                this.enemySpawner.update();
+                
                 this.inventory.forEach((weapon) => {
                     weapon.update(this.player);
                 });
