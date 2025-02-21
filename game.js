@@ -38,7 +38,7 @@ class Game {
 
 
         this.world = new World();
-        this.camera = new Camera(this.player.x, this.player.y, width, height);
+        this.camera = new Camera(this.player.x, this.player.y, width, height, this);
         EntityUtil.addToEntityList(this.player, this.entityList);
         /*
         EntityUtil.addToEntityList(new Enemy(100, 100, 1, this), this.entityList);
