@@ -66,7 +66,7 @@ class Game {
 
                 this.player.update(input);
                 this.enemySpawner.update();
-                
+
                 this.inventory.forEach((weapon) => {
                     weapon.update(this.player);
                 });

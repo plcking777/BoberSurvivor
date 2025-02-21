@@ -1,5 +1,6 @@
 import { Enemy } from "./enemy.js";
 import { EntityUtil } from "../entity.js";
+import { Boss } from "./boss.js";
 
 class EnemySpawner {
     
@@ -8,16 +9,17 @@ class EnemySpawner {
         this.game = game;
         this.enemySpawnCount = 5;
         this.spawnFrameCounter = 0;
-        this.TriggerSpawnFrameCount = 60 * 5;
+        this.triggerSpawnFrameCount = 60 * 5;
+        this.bossSpawnChance = 0.5;
 
     }
 
     update() {
         this.spawnFrameCounter++;
-        if (this.spawnFrameCounter >= this.TriggerSpawnFrameCount) {
+        if (this.spawnFrameCounter >= this.triggerSpawnFrameCount) {
             this.spawnEnemies();
             this.spawnFrameCounter = 0;
-            this.TriggerSpawnFrameCount = Math.floor(1.2 * this.TriggerSpawnFrameCount);
+            this.triggerSpawnFrameCount = Math.floor(1.4 * this.TriggerSpawnFrameCount);
         }
     }
 
@@ -42,17 +44,20 @@ class EnemySpawner {
 
             const x = this.game.player.x + (((maxDistance - minDistance) * Math.random() + minDistance) * Math.cos(angle));
             const y = this.game.player.y + (((maxDistance - minDistance) * Math.random() + minDistance) * Math.sin(angle));
-            
-            EntityUtil.addToEntityList(new Enemy(x, y, 1, this.game), this.game.entityList);
+        
+            if (Math.random() <= this.bossSpawnChance) {
+                EntityUtil.addToEntityList(new Boss(x, y, 1000, this.game), this.game.entityList);
+            } else {
+                EntityUtil.addToEntityList(new Enemy(x, y, 1, this.game), this.game.entityList);
+            }
         }
 
         this.spawnIcrease();
     }
 
     spawnIcrease() {
-        this.enemySpawnCount *= 2;
+        this.enemySpawnCount *= 1.4;
     }
-
 
 }
 
