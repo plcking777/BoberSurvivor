@@ -14,7 +14,7 @@ class Player extends Entity {
     level = 1;
 
     constructor(x, y, maxHP, game) {
-        super(x, y, 64, 64, true);
+        super(x, y, 64, 64, true, 16, 0, 32, 64);
 
         this.maxHP = maxHP;
         this.hp = maxHP;
@@ -57,8 +57,8 @@ class Player extends Entity {
         }
 
 
-        let futureCollisionX = new CollisionBox(this.x + vx, this.y, this.width, this.height);
-        let futureCollisionY = new CollisionBox(this.x, this.y + vy, this.width, this.height);
+        let futureCollisionX = new CollisionBox(this.x + vx + this.offsetX, this.y + this.offsetY, this.collisionWidth, this.collisionHeight);
+        let futureCollisionY = new CollisionBox(this.x + this.offsetX, this.y + vy + this.offsetY, this.collisionWidth, this.collisionHeight);
 
         Object.values(this.entityList).forEach(entity => {
             if (this !== entity) {
@@ -67,9 +67,9 @@ class Player extends Entity {
                     if (futureCollisionX.collidesWith(entity.collisionBox)) {
                         this.damage(entity.ATTACK_DAMAGE);
                         if (vx > 0) {
-                            this.x = entity.x - this.width;
+                            this.x = entity.collisionBox.x - this.collisionBox.width - this.offsetX;
                         } else if (vx < 0) {
-                            this.x = entity.x + entity.width;
+                            this.x = entity.collisionBox.x + entity.collisionBox.width - this.offsetX;
                         }
                         vx = 0;
                     }
@@ -77,9 +77,9 @@ class Player extends Entity {
                     if (futureCollisionY.collidesWith(entity.collisionBox)) {
                         this.damage(entity.ATTACK_DAMAGE);
                         if (vy > 0) {
-                            this.y = entity.y - this.height;
+                            this.y = entity.collisionBox.y - this.collisionBox.height - this.offsetY;
                         } else if (vy < 0) {
-                            this.y = entity.y + entity.height;
+                            this.y = entity.collisionBox.y + entity.collisionBox.height - this.offsetY;
                         }
                         vy = 0;
                     }
@@ -110,9 +110,7 @@ class Player extends Entity {
     }
 
     render(ctx, camera) {
-        ctx.fillStyle = "blue";
         const relativePosition = camera.getRelativePosition(this);
-        //ctx.fillRect(relativePosition.x, relativePosition.y, this.width, this.height);
 
         if (this.running) {
             this.frameCount++;
@@ -131,6 +129,11 @@ class Player extends Entity {
             ctx.drawImage(this.assetHandler.getImage(`bober-f${runningFrame}`), -relativePosition.x -this.width, relativePosition.y, this.width, this.height);
             ctx.restore();
         }
+
+        ctx.fillStyle = "red";
+        const relcol = camera.getRelativeXYPosition(this.collisionBox.x, this.collisionBox.y);
+        ctx.fillRect(relcol.x, relcol.y, this.collisionBox.width, this.collisionBox.height);
+
     }
 
     damage(value) {

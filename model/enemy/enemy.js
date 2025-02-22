@@ -8,7 +8,7 @@ class Enemy extends Entity {
     ATTACK_DAMAGE = 1;
 
     constructor(x, y, maxHP, game) {
-        super(x, y, 48, 48, true);
+        super(x, y, 48, 48, true, 5, 5, 32, 32);
         this.maxHP = maxHP;
         this.hp = maxHP;
 
@@ -24,9 +24,6 @@ class Enemy extends Entity {
 
 
     update(player) {
-    
-        this.vx = 0;
-        this.vy = 0;
 
         const diffX = player.x - this.x;
         const diffY = player.y - this.y;
@@ -72,7 +69,6 @@ class Enemy extends Entity {
     }
 
     render(ctx, camera) {
-        ctx.fillStyle = "red";
         const relativePosition = camera.getRelativePosition(this);
         if (this.goingLeft) {
             ctx.drawImage(this.assetHandler.getImage('ghost-f1'), relativePosition.x, relativePosition.y, this.width, this.height);
@@ -82,6 +78,12 @@ class Enemy extends Entity {
             ctx.drawImage(this.assetHandler.getImage('ghost-f1'), -relativePosition.x -this.width, relativePosition.y, this.width, this.height);
             ctx.restore();
         }
+
+        ctx.fillStyle = "orange";
+
+        const relcol = camera.getRelativeXYPosition(this.collisionBox.x, this.collisionBox.y);
+        ctx.fillRect(relcol.x, relcol.y, this.collisionBox.width, this.collisionBox.height);
+
     }
 
     damage(value) {

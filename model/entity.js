@@ -2,18 +2,22 @@ let entityId = 0;
 
 
 class Entity {
-    constructor(x, y, width, height, collisionEnabled) {
+    constructor(x, y, width, height, collisionEnabled, offsetX = 0, offsetY = 0, collisionWidth = width, collisionHeight = height) {
         this.id = entityId++;
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
         this.collisionEnabled = collisionEnabled;
-        this.collisionBox = new CollisionBox(x, y, this.width, this.height);
+        this.collisionBox = new CollisionBox(x + offsetX, y + offsetY, collisionWidth, collisionHeight);
+        this.offsetX = offsetX;
+        this.offsetY = offsetY;
+        this.collisionWidth = collisionWidth;
+        this.collisionHeight = collisionHeight;
     }
 
     update() {
-        this.collisionBox.update(this.x, this.y, this.width, this.height);
+        this.collisionBox.update(this.x + this.offsetX, this.y + this.offsetY, this.collisionWidth, this.collisionHeight);
     }
 
 

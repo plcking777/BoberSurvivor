@@ -7,7 +7,7 @@ class EnemySpawner {
 
     constructor(game) {
         this.game = game;
-        this.enemySpawnCount = 5;
+        this.enemySpawnCount = 20;
         this.spawnFrameCounter = 0;
         this.triggerSpawnFrameCount = 60 * 5;
         this.bossSpawnChance = 0.5;
