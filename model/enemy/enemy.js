@@ -34,12 +34,18 @@ class Enemy extends Entity {
             this.vy = this.SPEED * (diffY / totDiff);
         }
 
-        let futureCollisionX = new CollisionBox(this.x + this.vx, this.y, this.width, this.height);
-        let futureCollisionY = new CollisionBox(this.x, this.y + this.vy, this.width, this.height);
+        let futureCollisionX = new CollisionBox(this.x + this.vx + this.offsetX, this.y + this.offsetY, this.collisionWidth, this.collisionHeight);
+        let futureCollisionY = new CollisionBox(this.x + this.offsetX, this.y + this.vy + this.offsetY, this.collisionWidth, this.collisionHeight);
 
         Object.values(this.entityList).forEach(entity => {
             if (this !== entity && entity.collisionEnabled) {
                 if (futureCollisionX.collidesWith(entity.collisionBox)) {
+
+                    if (this.vx > 0) {
+                        this.x = entity.collisionBox.x - this.collisionBox.width - this.offsetX;
+                    } else if (this.vx < 0) {
+                        this.x = entity.collisionBox.x + entity.collisionBox.width - this.offsetX;
+                    }
                     this.vx = 0;
 
                     if (entity instanceof Player) {
@@ -47,6 +53,12 @@ class Enemy extends Entity {
                     }
                 }
                 if (futureCollisionY.collidesWith(entity.collisionBox)) {
+
+                    if (this.vy > 0) {
+                        this.y = entity.collisionBox.y - this.collisionBox.height - this.offsetY;
+                    } else if (this.vy < 0) {
+                        this.y = entity.collisionBox.y + entity.collisionBox.height - this.offsetY;
+                    }
                     this.vy = 0;
 
                     if (entity instanceof Player) {
