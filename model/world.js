@@ -33,9 +33,6 @@ class World {
     }
 
     render(ctx, camera) {
-        ctx.fillStyle = "green";
-
-
         const cameraLeft = camera.x - camera.width / 2;
         const cameraRight = camera.x + camera.width / 2;
         const cameraTop = camera.y - camera.height / 2;
@@ -46,8 +43,7 @@ class World {
             for (let j = parseInt(cameraLeft / this.TILE_HEIGHT); j < parseInt(cameraRight / this.TILE_HEIGHT) + 1; j++) {
                 if (i >= 0 && i < this.tiles.length && j >= 0 && j < this.tiles[0].length) {
                     const relativePosition = camera.getRelativeXYPosition(j*this.TILE_HEIGHT, i*this.TILE_HEIGHT);
-                    //ctx.fillRect(relativePosition.x, relativePosition.y, this.TILE_HEIGHT, this.TILE_HEIGHT);
-                    ctx.drawImage(this.assetHandler.getImage(`grass-f${this.tiles[i][j]}`), relativePosition.x, relativePosition.y, this.TILE_HEIGHT, this.TILE_HEIGHT);
+                    ctx.drawImage(this.assetHandler.getImage(`grass-f${this.tiles[i][j]}`), relativePosition.x, relativePosition.y, this.TILE_HEIGHT + 1, this.TILE_HEIGHT + 1);
                 }
             }
         }   
