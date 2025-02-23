@@ -37,18 +37,26 @@ class Enemy extends Entity {
         let futureCollisionX = new CollisionBox(this.x + this.vx + this.offsetX, this.y + this.offsetY, this.collisionWidth, this.collisionHeight);
         let futureCollisionY = new CollisionBox(this.x + this.offsetX, this.y + this.vy + this.offsetY, this.collisionWidth, this.collisionHeight);
 
+        let snapX = null;
+        let snapY = null;
+
         Object.values(this.entityList).forEach(entity => {
             if (this !== entity && entity.collisionEnabled) {
                 if (futureCollisionX.collidesWith(entity.collisionBox)) {
 
+                    let newSnapX = null;
                     if (this.collisionBox.x + this.collisionBox.width <= entity.collisionBox.x && this.collisionBox.x + this.collisionBox.width + this.vx >= entity.collisionBox.x) {
-                        this.x = entity.collisionBox.x - this.collisionBox.width - this.offsetX;
+                        newSnapX = entity.collisionBox.x - this.collisionBox.width - this.offsetX;
                         //console.log(1);
                     } else if (this.collisionBox.x >= entity.collisionBox.x + entity.collisionBox.width && this.collisionBox.x + this.vx <= entity.collisionBox.x + entity.collisionBox.width) {
-                        this.x = entity.collisionBox.x + entity.collisionBox.width - this.offsetX;
+                        newSnapX = entity.collisionBox.x + entity.collisionBox.width - this.offsetX;
                         //console.log(2);
                     }
-                    this.vx = 0;
+
+                    if (snapX == null || (newSnapX != null && Math.abs(newSnapX - this.x) < Math.abs(snapX - this.x))) {
+                        snapX = newSnapX;
+                    }
+                    
 
                     if (entity instanceof Player) {
                         entity.damage(this.ATTACK_DAMAGE);
@@ -56,14 +64,19 @@ class Enemy extends Entity {
                 }
                 if (futureCollisionY.collidesWith(entity.collisionBox)) {
 
+                    let newSnapY = null;
                     if (this.collisionBox.y + this.collisionBox.height <= entity.collisionBox.y && this.collisionBox.y + this.collisionBox.height + this.vy >= entity.collisionBox.y) {
-                        this.y = entity.collisionBox.y - this.collisionBox.height - this.offsetY;
+                        newSnapY = entity.collisionBox.y - this.collisionBox.height - this.offsetY;
                         //console.log(3);
                     } else if (this.collisionBox.y >= entity.collisionBox.y + entity.collisionBox.height && this.collisionBox.y + this.vy <= entity.collisionBox.y + entity.collisionBox.height) {
-                        this.y = entity.collisionBox.y + entity.collisionBox.height - this.offsetY;
+                        newSnapY = entity.collisionBox.y + entity.collisionBox.height - this.offsetY;
                         //console.log(4);
                     }
-                    this.vy = 0;
+                    
+                    if (snapY == null || (newSnapY != null && Math.abs(newSnapY - this.y) < Math.abs(newSnapY - this.y))) {
+                        snapY = newSnapY;
+                    }
+                    
 
                     if (entity instanceof Player) {
                         entity.damage(this.ATTACK_DAMAGE);
@@ -78,9 +91,18 @@ class Enemy extends Entity {
             this.goingLeft = true;
         }
 
+        if (snapX == null) {
+            this.x += this.vx;
+        } else {
+            this.x = snapX;
+        }
 
-        this.x += this.vx;
-        this.y += this.vy;
+        if (snapY == null) {
+            this.y += this.vy;
+        } else {
+            this.y = snapY;
+        }
+        
         super.update();
     }
 
