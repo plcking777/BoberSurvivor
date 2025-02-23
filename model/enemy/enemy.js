@@ -41,10 +41,12 @@ class Enemy extends Entity {
             if (this !== entity && entity.collisionEnabled) {
                 if (futureCollisionX.collidesWith(entity.collisionBox)) {
 
-                    if (this.vx > 0) {
+                    if (this.collisionBox.x + this.collisionBox.width <= entity.collisionBox.x && this.collisionBox.x + this.collisionBox.width + this.vx >= entity.collisionBox.x) {
                         this.x = entity.collisionBox.x - this.collisionBox.width - this.offsetX;
-                    } else if (this.vx < 0) {
+                        //console.log(1);
+                    } else if (this.collisionBox.x >= entity.collisionBox.x + entity.collisionBox.width && this.collisionBox.x + this.vx <= entity.collisionBox.x + entity.collisionBox.width) {
                         this.x = entity.collisionBox.x + entity.collisionBox.width - this.offsetX;
+                        //console.log(2);
                     }
                     this.vx = 0;
 
@@ -54,10 +56,12 @@ class Enemy extends Entity {
                 }
                 if (futureCollisionY.collidesWith(entity.collisionBox)) {
 
-                    if (this.vy > 0) {
+                    if (this.collisionBox.y + this.collisionBox.height <= entity.collisionBox.y && this.collisionBox.y + this.collisionBox.height + this.vy >= entity.collisionBox.y) {
                         this.y = entity.collisionBox.y - this.collisionBox.height - this.offsetY;
-                    } else if (this.vy < 0) {
+                        //console.log(3);
+                    } else if (this.collisionBox.y >= entity.collisionBox.y + entity.collisionBox.height && this.collisionBox.y + this.vy <= entity.collisionBox.y + entity.collisionBox.height) {
                         this.y = entity.collisionBox.y + entity.collisionBox.height - this.offsetY;
+                        //console.log(4);
                     }
                     this.vy = 0;
 

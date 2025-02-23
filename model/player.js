@@ -66,9 +66,16 @@ class Player extends Entity {
                     
                     if (futureCollisionX.collidesWith(entity.collisionBox)) {
                         this.damage(entity.ATTACK_DAMAGE);
+                        /*
                         if (vx > 0) {
                             this.x = entity.collisionBox.x - this.collisionBox.width - this.offsetX;
                         } else if (vx < 0) {
+                            this.x = entity.collisionBox.x + entity.collisionBox.width - this.offsetX;
+                        }
+                        */
+                        if (this.collisionBox.x + this.collisionBox.width <= entity.collisionBox.x && this.collisionBox.x + this.collisionBox.width + vx >= entity.collisionBox.x) {
+                            this.x = entity.collisionBox.x - this.collisionBox.width - this.offsetX;
+                        } else if (this.collisionBox.x >= entity.collisionBox.x + entity.collisionBox.width && this.collisionBox.x + vx <= entity.collisionBox.x + entity.collisionBox.width) {
                             this.x = entity.collisionBox.x + entity.collisionBox.width - this.offsetX;
                         }
                         vx = 0;
@@ -76,9 +83,16 @@ class Player extends Entity {
                     
                     if (futureCollisionY.collidesWith(entity.collisionBox)) {
                         this.damage(entity.ATTACK_DAMAGE);
+                        /*
                         if (vy > 0) {
                             this.y = entity.collisionBox.y - this.collisionBox.height - this.offsetY;
                         } else if (vy < 0) {
+                            this.y = entity.collisionBox.y + entity.collisionBox.height - this.offsetY;
+                        }
+                        */
+                        if (this.collisionBox.y + this.collisionBox.height <= entity.collisionBox.y && this.collisionBox.y + this.collisionBox.height + vy >= entity.collisionBox.y) {
+                            this.y = entity.collisionBox.y - this.collisionBox.height - this.offsetY;
+                        } else if (this.collisionBox.y >= entity.collisionBox.y + entity.collisionBox.height && this.collisionBox.y + vy <= entity.collisionBox.y + entity.collisionBox.height) {
                             this.y = entity.collisionBox.y + entity.collisionBox.height - this.offsetY;
                         }
                         vy = 0;
