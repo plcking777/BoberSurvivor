@@ -32,6 +32,7 @@ class AssetHandler {
             'boss-f1': 'assets/boss-f1.png',
 
             'gem': 'assets/gem.png',
+            'chest': 'assets/chest.png',
 
             'bober-f1': 'assets/bober-f1.png',
             'bober-f2': 'assets/bober-f2.png',

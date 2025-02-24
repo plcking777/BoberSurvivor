@@ -99,7 +99,8 @@ class Player extends Entity {
                     }
                 } else if (entity instanceof Pickup) {
                     if (this.collisionBox.collidesWith(entity.collisionBox)) {
-                        this.pickup(entity);
+                        //this.pickup(entity);
+                        entity.pickup();
                     }
                 }
             }

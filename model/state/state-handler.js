@@ -3,6 +3,7 @@ class StateHandler {
     states = {
         game: 'GAME',
         upgrade: 'UPGRADE',
+        chestUpgrade: 'CHEST_UPGRADE',
         pause: 'PAUSE',
         dead: 'DEAD',
         menu: 'MENU',
@@ -24,6 +25,8 @@ class StateHandler {
             case this.states.upgrade:
                 this.fromUpgrade();
                 break;
+            case this.states.chestUpgrade:
+                break;
             case this.states.pause:
                 break;
             case this.states.dead:
@@ -42,6 +45,8 @@ class StateHandler {
                 break;
             case this.states.upgrade:
                 this.toUpgrade();
+                break;
+            case this.states.chestUpgrade:
                 break;
             case this.states.pause:
                 break;

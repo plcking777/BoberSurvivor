@@ -33,7 +33,7 @@ class Game {
 
         
         this.inventory = [
-            //new Bomb(360, this.entityList, this.assetHandler, this.particleHandler),
+            new Bomb(360, this.entityList, this.assetHandler, this.particleHandler),
         ];
 
 
@@ -81,6 +81,9 @@ class Game {
             
             case this.stateHandler.states.upgrade:
                 this.uiHandler.update(input.mouseX, input.mouseY, input.click);
+                break;
+            case this.stateHandler.states.chestUpgrade:
+                console.log('chest upgrade state');
                 break;
             default:
         }

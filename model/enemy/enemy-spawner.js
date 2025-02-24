@@ -10,7 +10,7 @@ class EnemySpawner {
         this.enemySpawnCount = 20;
         this.spawnFrameCounter = 0;
         this.triggerSpawnFrameCount = 60 * 5;
-        this.bossSpawnChance = 0.1;
+        this.bossSpawnChance = 1.0;
 
     }
 
@@ -46,7 +46,7 @@ class EnemySpawner {
             const y = this.game.player.y + (((maxDistance - minDistance) * Math.random() + minDistance) * Math.sin(angle));
         
             if (Math.random() <= this.bossSpawnChance) {
-                EntityUtil.addToEntityList(new Boss(x, y, 1000, this.game), this.game.entityList);
+                EntityUtil.addToEntityList(new Boss(x, y, 1, this.game), this.game.entityList);
             } else {
                 EntityUtil.addToEntityList(new Enemy(x, y, 1, this.game), this.game.entityList);
             }
