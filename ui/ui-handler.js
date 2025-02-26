@@ -2,6 +2,7 @@ import { UIPanel } from './elements/ui-panel.js';
 import { UIButton } from './elements/ui-button.js';
 import { UIXPBar } from './elements/game/ui-xpbar.js';
 import { UIItemUpgrade } from './elements/game/ui-item-upgrade.js';
+import { UIChestSpinner } from './elements/game/ui-chest-spinner.js';
 
 class UIHandler {
 
@@ -32,6 +33,16 @@ class UIHandler {
         while (this.uiElements[`ingame.upgrade-${index}`] != null) {
             delete this.uiElements[`ingame.upgrade-${index++}`];
         }
+    }
+
+    setupChestUpgradeUI() {
+        this.uiElements['ingame.chest-upgrade-panel'] = new UIPanel(50, 50, this.screenWidth - 100, this.screenHeight - 100);
+        this.uiElements['ingame.chest-upgrade-spinner'] = new UIChestSpinner(100, 100, this.game)
+    }
+
+    destroyChestUpgradeUI() {
+        delete this.uiElements['ingame.chest-upgrade-panel'];
+        delete this.uiElements['ingame.chest-upgrade-spinner'];
     }
 
 

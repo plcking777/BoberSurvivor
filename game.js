@@ -83,7 +83,7 @@ class Game {
                 this.uiHandler.update(input.mouseX, input.mouseY, input.click);
                 break;
             case this.stateHandler.states.chestUpgrade:
-                console.log('chest upgrade state');
+                this.uiHandler.update(input.mouseX, input.mouseY, input.click);
                 break;
             default:
         }
