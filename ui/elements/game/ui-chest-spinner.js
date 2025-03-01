@@ -14,14 +14,17 @@ class UIChestSpinner extends UIElement {
         this.spinIndex = 0;
         this.spinOffset = 0;
 
+        this.velocity = 10;
+
         this.weaponImages = ['bomb-f1', 'bomb-f1', 'bomb-f1', 'bomb-f1'];
         this.frameCount = 0;
      }
 
 
     update(mouseX, mouseY, click) {
+        this.velocity = Math.max(this.velocity * 0.99, 0.00);
         this.frameCount++;
-        this.spinOffset++;
+        this.spinOffset += this.velocity;
     }
 
     render(ctx) {
@@ -33,7 +36,6 @@ class UIChestSpinner extends UIElement {
         for (let i = 0; i < this.VISIBLE_SLOTS + 1; i++) {
             const xPos = this.x + this.spinOffset + 96*i - 96;
             const index = (this.spinIndex + i) % this.weaponImages.length;
-            //ctx.drawImage(this.assetHandler.getImage(this.weaponImages[index]), xPos, this.y, 64, 64);
             
             const cropX = Math.max(Math.min(this.x - xPos, 64), 0);
             const cropWidth = Math.max(Math.min(this.x + this.width - xPos, 64), 0);
