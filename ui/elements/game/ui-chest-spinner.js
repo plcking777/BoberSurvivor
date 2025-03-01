@@ -35,11 +35,12 @@ class UIChestSpinner extends UIElement {
             const index = (this.spinIndex + i) % this.weaponImages.length;
             //ctx.drawImage(this.assetHandler.getImage(this.weaponImages[index]), xPos, this.y, 64, 64);
             
-            const cropX = Math.max(Math.min(this.x + this.width - xPos, 64), 0);
+            const cropX = Math.max(Math.min(this.x - xPos, 64), 0);
+            const cropWidth = Math.max(Math.min(this.x + this.width - xPos, 64), 0);
             ctx.drawImage(
                 this.assetHandler.getImage(this.weaponImages[index]), 
-                0, 0, cropX, 64,
-                xPos, this.y, cropX, 64
+                cropX, 0, cropWidth, 64,
+                xPos + cropX, this.y, cropWidth, 64
               );
 
 
