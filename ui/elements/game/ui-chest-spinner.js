@@ -14,17 +14,23 @@ class UIChestSpinner extends UIElement {
         this.spinIndex = 0;
         this.spinOffset = 0;
 
-        this.velocity = 10;
+        this.velocity = 30;
+        this.spinningDone = false;
 
         this.weaponImages = ['bomb-f1', 'bomb-f1', 'bomb-f1', 'bomb-f1'];
-        this.frameCount = 0;
      }
 
 
     update(mouseX, mouseY, click) {
         this.velocity = Math.max(this.velocity * 0.99, 0.00);
-        this.frameCount++;
         this.spinOffset += this.velocity;
+
+
+        if (this.velocity <= 0.5 && !this.spinningDone) {
+            this.selectItem();
+            this.velocity = 0;
+            this.spinningDone = true;
+        }
     }
 
     render(ctx) {
@@ -52,7 +58,13 @@ class UIChestSpinner extends UIElement {
                 this.spinOffset = 0;
             }
         }
+
+        ctx.drawImage(this.assetHandler.getImage('select-square'), this.x + (this.width / 2 - 32), this.y, 64, 64);
         
+    }
+
+    selectItem() {
+        console.log('select item');
     }
 }
 
