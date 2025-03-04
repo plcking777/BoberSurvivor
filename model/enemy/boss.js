@@ -32,7 +32,7 @@ class Boss extends Enemy {
     }
 
     die() {
-        EntityUtil.addToEntityList(new ChestPickup(this.centerX, this.centerY, this.assetHandler, this.game.stateHandler), this.entityList);
+        EntityUtil.addToEntityList(new ChestPickup(this.centerX, this.centerY, this.game), this.entityList);
         EntityUtil.removeFromEntityList(this, this.entityList);
     }
 }

@@ -1,11 +1,13 @@
+import { EntityUtil } from "../entity.js";
 import { Pickup } from "./pickup.js";
 
 class ChestPickup extends Pickup {
 
-    constructor(x, y, assetHandler, stateHandler) {
+    constructor(x, y, game) {
         super(x, y, 32, 32, false);
-        this.assetHandler = assetHandler;
-        this.stateHandler = stateHandler;
+        this.game = game;
+        this.assetHandler = game.assetHandler;
+        this.stateHandler = game.stateHandler;
     }
 
     render(ctx, camera) {
@@ -14,6 +16,7 @@ class ChestPickup extends Pickup {
     }
 
     pickup() {
+        EntityUtil.removeFromEntityList(this, this.game.entityList);
         this.stateHandler.switchState(this.stateHandler.states.chestUpgrade);
     }
 

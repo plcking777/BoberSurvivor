@@ -84,6 +84,9 @@ class UIChestSpinner extends UIElement {
         }
 
         this.game.inventory.push(this.getItemFromImage(this.weaponImages[(this.spinIndex + index) % this.weaponImages.length]));
+        
+        this.game.stateHandler.switchState(this.game.stateHandler.states.game);
+        //this.game.uiHandler.destroyChestUpgradeUI();
     }
 
 
