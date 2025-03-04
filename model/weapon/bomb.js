@@ -3,15 +3,16 @@ import { BombEntity } from './entity/bomb-entity.js';
 import { EntityUtil } from './../entity.js'
 
 class Bomb extends Weapon {
+    static imageSrc = 'bomb-f1';
 
     explosionRange = 100;
     explosionDamage = 5;
 
 
-    constructor(timeout, entityList, assetHandler, particleHandler) {
-        super(timeout, entityList);
-        this.assetHandler = assetHandler;
-        this.particleHandler = particleHandler;
+    constructor(game) {
+        super(360, game.entityList);
+        this.assetHandler = game.assetHandler;
+        this.particleHandler = game.particleHandler;
     }
 
     update(player) {

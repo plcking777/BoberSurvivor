@@ -1,4 +1,5 @@
 class Weapon {
+    static imageSrc = 'no-image';
 
     constructor(timeout, entityList) {
         this.timeout = timeout;

@@ -1,3 +1,4 @@
+import { WeaponUtil } from "../../../model/weapon/weapon-util.js";
 import { UIElement } from "../ui-element.js";
 
 class UIChestSpinner extends UIElement {
@@ -22,11 +23,11 @@ class UIChestSpinner extends UIElement {
 
 
     update(mouseX, mouseY, click) {
-        this.velocity = Math.max(this.velocity * 0.99, 0.00);
+        this.velocity = Math.max(this.velocity * 0.995, 0.00);
         this.spinOffset += this.velocity;
 
 
-        if (this.velocity <= 0.5 && !this.spinningDone) {
+        if (this.velocity <= 0.05 && !this.spinningDone) {
             this.selectItem();
             this.velocity = 0;
             this.spinningDone = true;
@@ -60,11 +61,34 @@ class UIChestSpinner extends UIElement {
         }
 
         ctx.drawImage(this.assetHandler.getImage('select-square'), this.x + (this.width / 2 - 32), this.y, 64, 64);
-        
     }
 
     selectItem() {
-        console.log('select item');
+        let minX = Number.MAX_SAFE_INTEGER;
+        let index = undefined;
+
+        const spinnerCenter = this.x + this.width / 2; 
+        // Get closest item
+        for (let i = 0; i < this.VISIBLE_SLOTS + 1; i++) {
+            const centerX = this.x + this.spinOffset + 96*i - 48;
+            const diffX = Math.abs(spinnerCenter - centerX);
+
+            if (diffX < minX) {
+                minX = diffX;
+                index = i;
+            }
+        }
+
+        if (index == null) {
+            console.error('Failed to get item from spin');
+        }
+
+        this.game.inventory.push(this.getItemFromImage(this.weaponImages[(this.spinIndex + index) % this.weaponImages.length]));
+    }
+
+
+    getItemFromImage(item) {
+        return WeaponUtil.getWeaponFromImage(item)(this.game);
     }
 }
 
