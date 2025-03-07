@@ -33,7 +33,7 @@ class Game {
 
         
         this.inventory = [
-            new Bomb(this),
+            //new Bomb(this),
         ];
 
 
