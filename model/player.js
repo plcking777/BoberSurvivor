@@ -99,7 +99,6 @@ class Player extends Entity {
                     }
                 } else if (entity instanceof Pickup) {
                     if (this.collisionBox.collidesWith(entity.collisionBox)) {
-                        //this.pickup(entity);
                         entity.pickup();
                     }
                 }
@@ -158,15 +157,6 @@ class Player extends Entity {
             // dead
         }
         this.particleHandler.applyDamageParticles(this.centerX, this.centerY);
-    }
-
-    pickup(entity) {
-        this.xp += entity.value;
-        if (this.xp >= this.xpNextLevel) {
-           this.xp -= this.xpNextLevel;
-           this.levelup();
-        }
-        EntityUtil.removeFromEntityList(entity, this.entityList);
     }
 
     levelup() {

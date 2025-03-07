@@ -12,6 +12,7 @@ class Enemy extends Entity {
         this.maxHP = maxHP;
         this.hp = maxHP;
 
+        this.game = game;
         this.assetHandler = game.assetHandler;
         this.particleHandler = game.particleHandler;
         this.entityList = game.entityList;
@@ -112,7 +113,7 @@ class Enemy extends Entity {
     }
 
     die() {
-        EntityUtil.addToEntityList(new GemPickup(this.centerX, this.centerY, this.assetHandler), this.entityList);
+        EntityUtil.addToEntityList(new GemPickup(this.centerX, this.centerY, this.game), this.entityList);
         EntityUtil.removeFromEntityList(this, this.entityList);
     }
 }
