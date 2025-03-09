@@ -10,6 +10,7 @@ import { UIHandler } from "./ui/ui-handler.js";
 import { ParticleHandler } from "./model/partical/particle-handler.js";
 import { StateHandler } from "./model/state/state-handler.js";
 import { UpgradeHandler } from "./model/upgrade/upgrade-handler.js";
+import { Knife } from "./model/weapon/knife.js";
 
 class Game {
 
@@ -34,6 +35,7 @@ class Game {
         
         this.inventory = [
             new Bomb(this),
+            new Knife(this),
         ];
 
 

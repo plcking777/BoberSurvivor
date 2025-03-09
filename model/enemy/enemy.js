@@ -1,6 +1,7 @@
 import { Entity, CollisionBox, EntityUtil } from "../entity.js";
 import { GemPickup } from "../pickup/gem-pickup.js";
 import { Player } from "../player.js";
+import { KnifeEntity } from "../weapon/entity/knife-entity.js";
 
 class Enemy extends Entity {
 
@@ -39,37 +40,42 @@ class Enemy extends Entity {
         let futureCollisionY = new CollisionBox(this.x + this.offsetX, this.y + this.vy + this.offsetY, this.collisionWidth, this.collisionHeight);
 
         Object.values(this.entityList).forEach(entity => {
-            if (this !== entity && entity.collisionEnabled) {
-                if (futureCollisionX.collidesWith(entity.collisionBox)) {
+            if (this !== entity) {
+                if (entity instanceof KnifeEntity && this.collisionBox.collidesWith(entity.collisionBox)) {
+                    this.damage(entity.damage);
+                    entity.hit();
+                } else {
+                    if (entity.collisionEnabled && futureCollisionX.collidesWith(entity.collisionBox)) {
 
-                    if (this.collisionBox.x + this.collisionBox.width <= entity.collisionBox.x && this.collisionBox.x + this.collisionBox.width + this.vx >= entity.collisionBox.x) {
-                        this.x = entity.collisionBox.x - this.collisionBox.width - this.offsetX;
-                        //console.log(1);
-                    } else if (this.collisionBox.x >= entity.collisionBox.x + entity.collisionBox.width && this.collisionBox.x + this.vx <= entity.collisionBox.x + entity.collisionBox.width) {
-                        this.x = entity.collisionBox.x + entity.collisionBox.width - this.offsetX;
-                        //console.log(2);
+                        if (this.collisionBox.x + this.collisionBox.width <= entity.collisionBox.x && this.collisionBox.x + this.collisionBox.width + this.vx >= entity.collisionBox.x) {
+                            this.x = entity.collisionBox.x - this.collisionBox.width - this.offsetX;
+                            //console.log(1);
+                        } else if (this.collisionBox.x >= entity.collisionBox.x + entity.collisionBox.width && this.collisionBox.x + this.vx <= entity.collisionBox.x + entity.collisionBox.width) {
+                            this.x = entity.collisionBox.x + entity.collisionBox.width - this.offsetX;
+                            //console.log(2);
+                        }
+                        this.vx = 0;
+    
+                        if (entity instanceof Player) {
+                            entity.damage(this.ATTACK_DAMAGE);
+                        }
                     }
-                    this.vx = 0;
-
-                    if (entity instanceof Player) {
-                        entity.damage(this.ATTACK_DAMAGE);
+                    if (entity.collisionEnabled && futureCollisionY.collidesWith(entity.collisionBox)) {
+    
+                        if (this.collisionBox.y + this.collisionBox.height <= entity.collisionBox.y && this.collisionBox.y + this.collisionBox.height + this.vy >= entity.collisionBox.y) {
+                            this.y = entity.collisionBox.y - this.collisionBox.height - this.offsetY;
+                            //console.log(3);
+                        } else if (this.collisionBox.y >= entity.collisionBox.y + entity.collisionBox.height && this.collisionBox.y + this.vy <= entity.collisionBox.y + entity.collisionBox.height) {
+                            this.y = entity.collisionBox.y + entity.collisionBox.height - this.offsetY;
+                            //console.log(4);
+                        }
+                        this.vy = 0;
+    
+                        if (entity instanceof Player) {
+                            entity.damage(this.ATTACK_DAMAGE);
+                        }
                     }
-                }
-                if (futureCollisionY.collidesWith(entity.collisionBox)) {
-
-                    if (this.collisionBox.y + this.collisionBox.height <= entity.collisionBox.y && this.collisionBox.y + this.collisionBox.height + this.vy >= entity.collisionBox.y) {
-                        this.y = entity.collisionBox.y - this.collisionBox.height - this.offsetY;
-                        //console.log(3);
-                    } else if (this.collisionBox.y >= entity.collisionBox.y + entity.collisionBox.height && this.collisionBox.y + this.vy <= entity.collisionBox.y + entity.collisionBox.height) {
-                        this.y = entity.collisionBox.y + entity.collisionBox.height - this.offsetY;
-                        //console.log(4);
-                    }
-                    this.vy = 0;
-
-                    if (entity instanceof Player) {
-                        entity.damage(this.ATTACK_DAMAGE);
-                    }
-                }
+                } 
             }
         });  
         
