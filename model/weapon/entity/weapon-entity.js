@@ -8,7 +8,7 @@ class WeaponEntity extends Entity {
     }
 
     update() {
-        throw new Error("Method 'update()' must be implemented.");
+        super.update();
     }
 
     render(ctx, camera) {

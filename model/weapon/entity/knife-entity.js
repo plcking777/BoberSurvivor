@@ -10,7 +10,7 @@ class KnifeEntity extends WeaponEntity {
         this.assetHandler = game.assetHandler;
         this.particleHandler = game.particleHandler;
 
-        this.vx = 1;
+        this.vx = 3;
         this.vy = 0;
     }
 
@@ -24,6 +24,7 @@ class KnifeEntity extends WeaponEntity {
         if (relativePosition.x < this.width || relativePosition.x > this.camera.width || relativePosition.y < this.height || relativePosition.y > this.camera.height) {
             EntityUtil.removeFromEntityList(this, this.entityList);
         }
+        super.update();
     }
 
     render(ctx, camera) {
