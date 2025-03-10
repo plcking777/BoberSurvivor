@@ -38,7 +38,7 @@ class BombEntity extends WeaponEntity {
     explode() {
         Object.values(this.entityList).forEach(entity => {
             if (entity instanceof Enemy) {
-                const distance = Math.sqrt((entity.x - this.x)**2, (entity.y - this.y)**2);
+                const distance = Math.sqrt((entity.x - this.x)**2 + (entity.y - this.y)**2);
                 if (distance < this.explosionRange) {
                     entity.damage(this.explosionDamage);
                 }
