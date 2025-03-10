@@ -47,6 +47,14 @@ class Camera {
         const diffY = y - this.y;
         return {x: diffX + this.width / 2, y: diffY + this.height / 2};
     }
+
+    get centerX() {
+        return this.width / 2;
+    }
+    
+    get centerY() {
+        return this.height / 2;
+    }
 }
 
 export { Camera };
