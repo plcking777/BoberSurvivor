@@ -18,7 +18,7 @@ class UIChestSpinner extends UIElement {
         this.velocity = 30;
         this.spinningDone = false;
 
-        this.weaponImages = ['bomb-f1', 'bomb-f1', 'bomb-f1', 'bomb-f1'];
+        this.weaponImages = ['bomb-f1', 'throwing-knife', 'throwing-knife', 'throwing-knife', 'throwing-knife'];
      }
 
 
@@ -55,7 +55,7 @@ class UIChestSpinner extends UIElement {
 
 
             if (i >= this.VISIBLE_SLOTS-1 && xPos >= this.x + this.width) {
-                this.spinIndex += this.VISIBLE_SLOTS + 1;
+                this.spinIndex += this.weaponImages.length - 1;
                 this.spinOffset = 0;
             }
         }
