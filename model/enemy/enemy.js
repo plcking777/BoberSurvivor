@@ -26,8 +26,8 @@ class Enemy extends Entity {
 
     update(player) {
 
-        const diffX = player.x - this.x;
-        const diffY = player.y - this.y;
+        const diffX = player.centerX - this.centerX;
+        const diffY = player.centerY - this.centerY;
         const totDiff = Math.abs(diffX) + Math.abs(diffY);
 
         if (totDiff > 0.0) {
@@ -74,7 +74,7 @@ class Enemy extends Entity {
                         newY = entity.collisionBox.y - this.collisionBox.height - this.offsetY;
                     } else {
                         newY = entity.collisionBox.y + entity.collisionBox.height - this.offsetY;
-                     }
+                    }
                     this.vy = 0;
 
 
@@ -142,6 +142,14 @@ class Enemy extends Entity {
     die() {
         EntityUtil.addToEntityList(new GemPickup(this.centerX, this.centerY, this.game), this.entityList);
         EntityUtil.removeFromEntityList(this, this.entityList);
+    }
+
+    get centerX() {
+        return this.x + this.width / 2;
+    }
+
+    get centerY() {
+        return this.y + this.height / 2;
     }
 }
 

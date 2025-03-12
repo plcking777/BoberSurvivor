@@ -164,6 +164,15 @@ class Player extends Entity {
         this.level++;
         this.game.stateHandler.switchState(this.game.stateHandler.states.upgrade);
     }
+
+
+    get centerX() {
+        return this.x + this.width / 2;
+    }
+
+    get centerY() {
+        return this.y + this.height / 2;
+    }
 }
 
 export { Player };
