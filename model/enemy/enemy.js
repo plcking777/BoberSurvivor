@@ -38,18 +38,30 @@ class Enemy extends Entity {
         let futureCollisionX = new CollisionBox(this.x + this.vx + this.offsetX, this.y + this.offsetY, this.collisionWidth, this.collisionHeight);
         let futureCollisionY = new CollisionBox(this.x + this.offsetX, this.y + this.vy + this.offsetY, this.collisionWidth, this.collisionHeight);
 
+        let snapDiffX = Number.MAX_SAFE_INTEGER;
+        let snapX = undefined;
+
+        let snapDiffY = Number.MAX_SAFE_INTEGER;
+        let snapY = undefined;
+
+
         Object.values(this.entityList).forEach(entity => {
             if (this !== entity && entity.collisionEnabled) {
                 if (futureCollisionX.collidesWith(entity.collisionBox)) {
 
+                    let newX = undefined;
                     if (this.collisionBox.x + this.collisionBox.width <= entity.collisionBox.x && this.collisionBox.x + this.collisionBox.width + this.vx >= entity.collisionBox.x) {
-                        this.x = entity.collisionBox.x - this.collisionBox.width - this.offsetX;
-                        //console.log(1);
-                    } else if (this.collisionBox.x >= entity.collisionBox.x + entity.collisionBox.width && this.collisionBox.x + this.vx <= entity.collisionBox.x + entity.collisionBox.width) {
-                        this.x = entity.collisionBox.x + entity.collisionBox.width - this.offsetX;
-                        //console.log(2);
+                        newX = entity.collisionBox.x - this.collisionBox.width - this.offsetX;
+                    } else {
+                        newX = entity.collisionBox.x + entity.collisionBox.width - this.offsetX;
                     }
                     this.vx = 0;
+
+                    let newDiffX = Math.abs(this.x - newX);
+                    if (snapDiffX > newDiffX) {
+                        snapDiffX = newDiffX;
+                        snapX = newX;
+                    }
 
                     if (entity instanceof Player) {
                         entity.damage(this.ATTACK_DAMAGE);
@@ -57,22 +69,37 @@ class Enemy extends Entity {
                 }
                 if (futureCollisionY.collidesWith(entity.collisionBox)) {
 
+                    let newY = undefined;
                     if (this.collisionBox.y + this.collisionBox.height <= entity.collisionBox.y && this.collisionBox.y + this.collisionBox.height + this.vy >= entity.collisionBox.y) {
-                        this.y = entity.collisionBox.y - this.collisionBox.height - this.offsetY;
-                        //console.log(3);
-                    } else if (this.collisionBox.y >= entity.collisionBox.y + entity.collisionBox.height && this.collisionBox.y + this.vy <= entity.collisionBox.y + entity.collisionBox.height) {
-                        this.y = entity.collisionBox.y + entity.collisionBox.height - this.offsetY;
-                        //console.log(4);
-                    }
+                        newY = entity.collisionBox.y - this.collisionBox.height - this.offsetY;
+                    } else {
+                        newY = entity.collisionBox.y + entity.collisionBox.height - this.offsetY;
+                     }
                     this.vy = 0;
+
+
+                    let newDiffY = Math.abs(this.y - newY);
+                    if (snapDiffY > newDiffY) {
+                        snapDiffY = newDiffY;
+                        snapY = newY;
+                    }
 
                     if (entity instanceof Player) {
                         entity.damage(this.ATTACK_DAMAGE);
                     }
                 }
             }
-        });  
-        
+        });
+
+        if (snapX) {
+            this.x = snapX;
+        }      
+        if (snapY) {
+            this.y = snapY;
+        }
+
+
+
         if (this.vx > 0) {
             this.goingLeft = false;
         } else if (this.vx < 0) {
