@@ -143,11 +143,11 @@ class Player extends Entity {
             ctx.drawImage(this.assetHandler.getImage(`bober-f${runningFrame}`), -relativePosition.x -this.width, relativePosition.y, this.width, this.height);
             ctx.restore();
         }
-
+        /*
         ctx.fillStyle = "red";
         const relcol = camera.getRelativeXYPosition(this.collisionBox.x, this.collisionBox.y);
         ctx.fillRect(relcol.x, relcol.y, this.collisionBox.width, this.collisionBox.height);
-
+        */
     }
 
     damage(value) {

@@ -42,7 +42,7 @@ class Enemy extends Entity {
         let snapX = undefined;
 
 
-
+        // Horizontal collison (and general collision, make sure to NOT add the general collision to both horizontal & vertical)
         Object.values(this.entityList).forEach(entity => {
             if (this !== entity) {
                 if (entity instanceof KnifeEntity && this.collisionBox.collidesWith(entity.collisionBox)) {
@@ -51,21 +51,22 @@ class Enemy extends Entity {
                 } else {
                     if (entity.collisionEnabled && futureCollisionX.collidesWith(entity.collisionBox)) {
 
-                    let newX = undefined;
-                    if (this.vx > 0) {
-                        newX = entity.collisionBox.x - this.collisionBox.width - this.offsetX;
-                    } else if (this.vx < 0) {
-                        newX = entity.collisionBox.x + entity.collisionBox.width - this.offsetX;
-                    }
+                        let newX = undefined;
+                        if (this.vx > 0) {
+                            newX = entity.collisionBox.x - this.collisionBox.width - this.offsetX;
+                        } else if (this.vx < 0) {
+                            newX = entity.collisionBox.x + entity.collisionBox.width - this.offsetX;
+                        }
 
-                    let newDiffX = Math.abs(this.x - newX);
-                    if (snapDiffX > newDiffX) {
-                        snapDiffX = newDiffX;
-                        snapX = newX;
-                    }
+                        let newDiffX = Math.abs(this.x - newX);
+                        if (snapDiffX > newDiffX) {
+                            snapDiffX = newDiffX;
+                            snapX = newX;
+                        }
 
-                    if (entity instanceof Player) {
-                        entity.damage(this.ATTACK_DAMAGE);
+                        if (entity instanceof Player) {
+                            entity.damage(this.ATTACK_DAMAGE);
+                        }
                     }
                 }
             }
@@ -81,6 +82,8 @@ class Enemy extends Entity {
 
         let snapDiffY = Number.MAX_SAFE_INTEGER;
         let snapY = undefined;
+
+        // Vertical collision
         Object.values(this.entityList).forEach(entity => {
             if (this !== entity && entity.collisionEnabled) {
 
@@ -132,11 +135,12 @@ class Enemy extends Entity {
             ctx.restore();
         }
 
+        /*
         ctx.fillStyle = "orange";
 
         const relcol = camera.getRelativeXYPosition(this.collisionBox.x, this.collisionBox.y);
         ctx.fillRect(relcol.x, relcol.y, this.collisionBox.width, this.collisionBox.height);
-
+        */
     }
 
     damage(value) {
