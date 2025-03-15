@@ -29,6 +29,7 @@ class StateHandler {
                 this.fromChestUpgrade();
                 break;
             case this.states.pause:
+                this.fromPause();
                 break;
             case this.states.dead:
                 break;
@@ -51,6 +52,7 @@ class StateHandler {
                 this.toChestUpgrade();
                 break;
             case this.states.pause:
+                this.toPause();
                 break;
             case this.states.dead:
                 break;
@@ -75,6 +77,15 @@ class StateHandler {
 
     toChestUpgrade() {
         this.game.uiHandler.setupChestUpgradeUI();
+    }
+
+
+    fromPause() {
+        this.game.uiHandler.destroyPauseUI();
+    }
+
+    toPause() {
+        this.game.uiHandler.setupPauseUI();
     }
 }
 

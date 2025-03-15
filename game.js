@@ -41,26 +41,31 @@ class Game {
         this.world = new World(this);
         this.camera = new Camera(this.player.x, this.player.y, width, height, this);
         EntityUtil.addToEntityList(this.player, this.entityList);
-        /*
-        EntityUtil.addToEntityList(new Enemy(100, 100, 1, this), this.entityList);
-        EntityUtil.addToEntityList(new Enemy(200, 100, 1, this), this.entityList);
-        EntityUtil.addToEntityList(new Enemy(200, 300, 1, this), this.entityList);
-        EntityUtil.addToEntityList(new Enemy(250, 300, 1, this), this.entityList);
-        EntityUtil.addToEntityList(new Enemy(350, 300, 1, this), this.entityList);
-        EntityUtil.addToEntityList(new Enemy(450, 300, 1, this), this.entityList);
-        EntityUtil.addToEntityList(new Enemy(550, 300, 1, this), this.entityList);
-        EntityUtil.addToEntityList(new Enemy(650, 300, 100, this), this.entityList);
-        EntityUtil.addToEntityList(new Enemy(750, 300, 100, this), this.entityList);
-        EntityUtil.addToEntityList(new Enemy(850, 300, 100, this), this.entityList);
-        EntityUtil.addToEntityList(new Enemy(950, 300, 100, this), this.entityList);
-        */
+
 
         this.enemySpawner = new EnemySpawner(this);
+
+
+        this.stateBeforePause = undefined;
+
+        // inputs
+        this.escapePrevious = false;
     }
 
 
     update(input) {
 
+        // check for pause menu
+        if (!this.escapePrevious && input.escape) {
+            if (this.stateHandler.currentState === this.stateHandler.states.pause) {
+                this.stateHandler.switchState(this.stateBeforePause);
+            } else {
+                this.stateBeforePause = this.stateHandler.currentState;
+                this.stateHandler.switchState(this.stateHandler.states.pause);
+            }
+        }
+        this.escapePrevious = input.escape;
+        
         switch(this.stateHandler.currentState) {
             case this.stateHandler.states.game:
                 this.uiHandler.update(input.mouseX, input.mouseY, input.click);

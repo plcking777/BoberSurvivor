@@ -54,6 +54,14 @@ class UIHandler {
         delete this.uiElements['ingame.xpbar'];
     }
 
+    setupPauseUI() {
+        this.uiElements['ingame.pause-menu'] = new UIPanel(10, 10, this.screenWidth - 20, this.screenHeight - 20);
+    }
+
+    destroyPauseUI() {
+        delete this.uiElements['ingame.pause-menu'];
+    }
+
     update(mouseX, mouseY, click) {
         Object.values(this.uiElements).forEach(element => {
             element.update(mouseX, mouseY, click);
