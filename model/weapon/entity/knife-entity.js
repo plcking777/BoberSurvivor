@@ -10,9 +10,11 @@ class KnifeEntity extends WeaponEntity {
         this.assetHandler = game.assetHandler;
         this.particleHandler = game.particleHandler;
 
+        this.throwSpeed = 3.0;
+        
         this.angle = Math.random() * 180.0 * Math.PI;
-        this.vx = Math.cos(this.angle);
-        this.vy = Math.sin(this.angle);
+        this.vx = Math.cos(this.angle) * this.throwSpeed;
+        this.vy = Math.sin(this.angle) * this.throwSpeed;
 
     }
 
@@ -31,7 +33,13 @@ class KnifeEntity extends WeaponEntity {
 
     render(ctx, camera) {
         const relativePosition = camera.getRelativeXYPosition(this.x, this.y);
-        ctx.drawImage(this.assetHandler.getImage('throwing-knife'), relativePosition.x, relativePosition.y, 32, 32);
+        //ctx.drawImage(this.assetHandler.getImage('throwing-knife'), relativePosition.x, relativePosition.y, 32, 32);
+
+        ctx.save();
+        ctx.translate(relativePosition.x, relativePosition.y);
+        ctx.rotate(this.angle + 1.57);
+        ctx.drawImage(this.assetHandler.getImage('throwing-knife'), -32 / 2, -32 / 2, 32, 32);
+        ctx.restore();
     }
 
     // Collision & damage taking is handled inside the enemy class

@@ -34,7 +34,7 @@ class Game {
 
         
         this.inventory = [
-            new Bomb(this),
+            new Knife(this),
         ];
 
 
