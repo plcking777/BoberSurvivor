@@ -35,14 +35,11 @@ class Enemy extends Entity {
             this.vy = this.SPEED * (diffY / totDiff);
         }
 
-        let futureCollisionX = new CollisionBox(this.x + this.vx + this.offsetX, this.y + this.offsetY, this.collisionWidth, this.collisionHeight);
-        let futureCollisionY = new CollisionBox(this.x + this.offsetX, this.y + this.vy + this.offsetY, this.collisionWidth, this.collisionHeight);
+        let futureCollisionX = new CollisionBox(this.x + this.vx + this.offsetX, this.y + this.offsetY, this.collisionBox.width, this.collisionBox.height);
 
         let snapDiffX = Number.MAX_SAFE_INTEGER;
         let snapX = undefined;
 
-        let snapDiffY = Number.MAX_SAFE_INTEGER;
-        let snapY = undefined;
 
 
         Object.values(this.entityList).forEach(entity => {
@@ -50,12 +47,11 @@ class Enemy extends Entity {
                 if (futureCollisionX.collidesWith(entity.collisionBox)) {
 
                     let newX = undefined;
-                    if (this.collisionBox.x + this.collisionBox.width <= entity.collisionBox.x && this.collisionBox.x + this.collisionBox.width + this.vx >= entity.collisionBox.x) {
+                    if (this.vx > 0) {
                         newX = entity.collisionBox.x - this.collisionBox.width - this.offsetX;
-                    } else {
+                    } else if (this.vx < 0) {
                         newX = entity.collisionBox.x + entity.collisionBox.width - this.offsetX;
                     }
-                    this.vx = 0;
 
                     let newDiffX = Math.abs(this.x - newX);
                     if (snapDiffX > newDiffX) {
@@ -67,16 +63,30 @@ class Enemy extends Entity {
                         entity.damage(this.ATTACK_DAMAGE);
                     }
                 }
+            }
+        });
+
+        if (snapX) {
+            this.x = snapX;
+        } else {
+            this.x += this.vx;
+        }
+
+        let futureCollisionY = new CollisionBox(this.x + this.offsetX, this.y + this.vy + this.offsetY, this.collisionBox.width, this.collisionBox.height);
+
+        let snapDiffY = Number.MAX_SAFE_INTEGER;
+        let snapY = undefined;
+        Object.values(this.entityList).forEach(entity => {
+            if (this !== entity && entity.collisionEnabled) {
+
                 if (futureCollisionY.collidesWith(entity.collisionBox)) {
 
                     let newY = undefined;
-                    if (this.collisionBox.y + this.collisionBox.height <= entity.collisionBox.y && this.collisionBox.y + this.collisionBox.height + this.vy >= entity.collisionBox.y) {
+                    if (this.vy > 0) {
                         newY = entity.collisionBox.y - this.collisionBox.height - this.offsetY;
-                    } else {
+                    } else if (this.vy < 0) {
                         newY = entity.collisionBox.y + entity.collisionBox.height - this.offsetY;
                     }
-                    this.vy = 0;
-
 
                     let newDiffY = Math.abs(this.y - newY);
                     if (snapDiffY > newDiffY) {
@@ -91,13 +101,12 @@ class Enemy extends Entity {
             }
         });
 
-        if (snapX) {
-            this.x = snapX;
-        }      
         if (snapY) {
             this.y = snapY;
+        } else {
+            this.y += this.vy;
         }
-
+        super.update();
 
 
         if (this.vx > 0) {
@@ -105,11 +114,6 @@ class Enemy extends Entity {
         } else if (this.vx < 0) {
             this.goingLeft = true;
         }
-
-
-        this.x += this.vx;
-        this.y += this.vy;
-        super.update();
     }
 
     render(ctx, camera) {
