@@ -57,7 +57,7 @@ class Game {
         this.enemySpawner = new EnemySpawner(this);
 
         this.inventory = [
-            // new Knife(this),
+            new Knife(this),
             // new WoodLog(this),
         ];
     }

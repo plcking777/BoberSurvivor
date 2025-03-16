@@ -15,10 +15,14 @@ class UIChestSpinner extends UIElement {
         this.spinIndex = 0;
         this.spinOffset = 0;
 
-        this.velocity = 30;
+        const random = (min, max) => {
+            return Math.random() * (max - min) + min;
+        }
+
+        this.velocity = random(15, 30);
         this.spinningDone = false;
 
-        this.weaponImages = ['bomb-f1', 'throwing-knife', 'throwing-knife', 'throwing-knife', 'throwing-knife'];
+        this.weaponImages = ['bomb-f1', 'throwing-knife', 'log'];
      }
 
 
