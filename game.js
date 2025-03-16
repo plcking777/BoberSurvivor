@@ -11,6 +11,7 @@ import { ParticleHandler } from "./model/partical/particle-handler.js";
 import { StateHandler } from "./model/state/state-handler.js";
 import { UpgradeHandler } from "./model/upgrade/upgrade-handler.js";
 import { Knife } from "./model/weapon/knife.js";
+import { WoodLog } from "./model/weapon/woodlog.js";
 
 class Game {
 
@@ -33,9 +34,7 @@ class Game {
         this.uiHandler.setupInGameUI();
 
         
-        this.inventory = [
-            new Knife(this),
-        ];
+
 
 
         this.world = new World(this);
@@ -56,6 +55,11 @@ class Game {
         */
 
         this.enemySpawner = new EnemySpawner(this);
+
+        this.inventory = [
+            // new Knife(this),
+            new WoodLog(this),
+        ];
     }
 
 
