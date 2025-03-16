@@ -2,6 +2,7 @@ import { Entity, CollisionBox, EntityUtil } from "../entity.js";
 import { GemPickup } from "../pickup/gem-pickup.js";
 import { Player } from "../player.js";
 import { KnifeEntity } from "../weapon/entity/knife-entity.js";
+import { WoodLogEntity } from "../weapon/entity/woodlog-entity.js";
 
 class Enemy extends Entity {
 
@@ -45,7 +46,7 @@ class Enemy extends Entity {
         // Horizontal collison (and general collision, make sure to NOT add the general collision to both horizontal & vertical)
         Object.values(this.entityList).forEach(entity => {
             if (this !== entity) {
-                if (entity instanceof KnifeEntity && this.collisionBox.collidesWith(entity.collisionBox)) {
+                if ((entity instanceof KnifeEntity || entity instanceof WoodLogEntity) && this.collisionBox.collidesWith(entity.collisionBox)) {
                     this.damage(entity.damage);
                     entity.hit();
                 } else {
