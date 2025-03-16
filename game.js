@@ -58,7 +58,7 @@ class Game {
 
         this.inventory = [
             // new Knife(this),
-            new WoodLog(this),
+            // new WoodLog(this),
         ];
     }
 
