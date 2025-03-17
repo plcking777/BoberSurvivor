@@ -3,6 +3,7 @@ import { UIButton } from './elements/ui-button.js';
 import { UIXPBar } from './elements/game/ui-xpbar.js';
 import { UIItemUpgrade } from './elements/game/ui-item-upgrade.js';
 import { UIChestSpinner } from './elements/game/ui-chest-spinner.js';
+import { UILabel } from './elements/ui-label.js';
 
 class UIHandler {
 
@@ -62,10 +63,12 @@ class UIHandler {
 
     setupPauseUI() {
         this.uiElements['pause-menu.panel'] = new UIPanel(10, 10, this.screenWidth - 20, this.screenHeight - 20);
+        this.uiElements['pause-menu.title'] = new UILabel(this.screenWidth / 2, 100, 'Pause');
     }
 
     destroyPauseUI() {
         delete this.uiElements['pause-menu.panel'];
+        delete this.uiElements['pause-menu.title'];
     }
 
 
