@@ -26,9 +26,10 @@ class StateHandler {
                 this.fromUpgrade();
                 break;
             case this.states.chestUpgrade:
-                this.fromChestUpgrade();
+                this.fromChestUpgrade(newState);
                 break;
             case this.states.pause:
+                this.fromPause();
                 break;
             case this.states.dead:
                 break;
@@ -51,6 +52,7 @@ class StateHandler {
                 this.toChestUpgrade();
                 break;
             case this.states.pause:
+                this.toPause();
                 break;
             case this.states.dead:
                 break;
@@ -69,12 +71,27 @@ class StateHandler {
         this.game.uiHandler.setupUpgradeUI([this.game.upgradeHandler.upgrades[0], this.game.upgradeHandler.upgrades[1]]);
     }
 
-    fromChestUpgrade() {
-        this.game.uiHandler.destroyChestUpgradeUI();
+    fromChestUpgrade(newState) {
+        switch(newState) {
+            case this.states.dead:
+            case this.states.menu:
+            case this.states.upgrade:
+            case this.states.game:
+                this.game.uiHandler.destroyChestUpgradeUI();
+        }
     }
 
     toChestUpgrade() {
         this.game.uiHandler.setupChestUpgradeUI();
+    }
+
+
+    fromPause() {
+        this.game.uiHandler.destroyPauseUI();
+    }
+
+    toPause() {
+        this.game.uiHandler.setupPauseUI();
     }
 }
 

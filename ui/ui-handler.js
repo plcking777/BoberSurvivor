@@ -3,6 +3,8 @@ import { UIButton } from './elements/ui-button.js';
 import { UIXPBar } from './elements/game/ui-xpbar.js';
 import { UIItemUpgrade } from './elements/game/ui-item-upgrade.js';
 import { UIChestSpinner } from './elements/game/ui-chest-spinner.js';
+import { UILabel } from './elements/ui-label.js';
+import { UIInventory } from './elements/game/ui-inventory.js';
 
 class UIHandler {
 
@@ -20,7 +22,9 @@ class UIHandler {
 
 
     setupUpgradeUI(upgrades) {
-        this.uiElements['ingame.upgrade-panel'] = new UIPanel(50, 50, this.screenWidth - 100, this.screenHeight - 100);
+        if (this.uiElements['ingame.upgrade-panel'] == null) {
+            this.uiElements['ingame.upgrade-panel'] = new UIPanel(50, 50, this.screenWidth - 100, this.screenHeight - 100);
+        }
 
         upgrades.forEach((upgrade, index) => {
             this.uiElements[`ingame.upgrade-${index}`] = new UIItemUpgrade(50 + 50, 60 + 150 * index, this.screenWidth - 200, 120, upgrade, this.game);
@@ -36,8 +40,12 @@ class UIHandler {
     }
 
     setupChestUpgradeUI() {
-        this.uiElements['ingame.chest-upgrade-panel'] = new UIPanel(50, 50, this.screenWidth - 100, this.screenHeight - 100);
-        this.uiElements['ingame.chest-upgrade-spinner'] = new UIChestSpinner(100, 100, this.game)
+        if (this.uiElements['ingame.chest-upgrade-panel'] == null) {
+            this.uiElements['ingame.chest-upgrade-panel'] = new UIPanel(50, 50, this.screenWidth - 100, this.screenHeight - 100);
+        }
+        if (this.uiElements['ingame.chest-upgrade-spinner'] == null) {
+            this.uiElements['ingame.chest-upgrade-spinner'] = new UIChestSpinner(100, 100, this.game);
+        }
     }
 
     destroyChestUpgradeUI() {
@@ -53,6 +61,31 @@ class UIHandler {
     destroyInGameUI() {
         delete this.uiElements['ingame.xpbar'];
     }
+
+    setupPauseUI() {
+        this.uiElements['pause-menu.panel'] = new UIPanel(10, 10, this.screenWidth - 20, this.screenHeight - 20);
+        this.uiElements['pause-menu.title'] = new UILabel(this.screenWidth / 2, 100, 'Pause');
+        this.uiElements['pause-menu.inventory'] = new UIInventory(this.screenWidth / 2, 250, this.game);
+    }
+
+    destroyPauseUI() {
+        delete this.uiElements['pause-menu.panel'];
+        delete this.uiElements['pause-menu.title'];
+        delete this.uiElements['pause-menu.inventory']
+    }
+
+
+    destroyAllIngameUI() {
+        Object.keys(this.uiElements).forEach(key => {
+            if (key.startsWith('ingame.')) {
+                console.log('deleting ', key);
+                delete this.uiElements[key];
+            }
+        })
+    }
+
+
+
 
     update(mouseX, mouseY, click) {
         Object.values(this.uiElements).forEach(element => {

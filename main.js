@@ -51,6 +51,9 @@ document.addEventListener('keydown', (event) => {
         case "ArrowDown":
             input.down = true;
             break;
+        case "Escape":
+            input.escape = true;
+            break;
     }
 });
 
@@ -69,6 +72,9 @@ document.addEventListener('keyup', (event) => {
             break;
         case "ArrowDown":
             input.down = false;
+            break;
+        case "Escape":
+            input.escape = false;
             break;
     }
 });
