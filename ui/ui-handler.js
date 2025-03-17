@@ -4,6 +4,7 @@ import { UIXPBar } from './elements/game/ui-xpbar.js';
 import { UIItemUpgrade } from './elements/game/ui-item-upgrade.js';
 import { UIChestSpinner } from './elements/game/ui-chest-spinner.js';
 import { UILabel } from './elements/ui-label.js';
+import { UIInventory } from './elements/game/ui-inventory.js';
 
 class UIHandler {
 
@@ -43,7 +44,7 @@ class UIHandler {
             this.uiElements['ingame.chest-upgrade-panel'] = new UIPanel(50, 50, this.screenWidth - 100, this.screenHeight - 100);
         }
         if (this.uiElements['ingame.chest-upgrade-spinner'] == null) {
-            this.uiElements['ingame.chest-upgrade-spinner'] = new UIChestSpinner(100, 100, this.game)
+            this.uiElements['ingame.chest-upgrade-spinner'] = new UIChestSpinner(100, 100, this.game);
         }
     }
 
@@ -64,11 +65,13 @@ class UIHandler {
     setupPauseUI() {
         this.uiElements['pause-menu.panel'] = new UIPanel(10, 10, this.screenWidth - 20, this.screenHeight - 20);
         this.uiElements['pause-menu.title'] = new UILabel(this.screenWidth / 2, 100, 'Pause');
+        this.uiElements['pause-menu.inventory'] = new UIInventory(this.screenWidth / 2, 250, this.game);
     }
 
     destroyPauseUI() {
         delete this.uiElements['pause-menu.panel'];
         delete this.uiElements['pause-menu.title'];
+        delete this.uiElements['pause-menu.inventory']
     }
 
 
