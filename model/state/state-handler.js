@@ -32,6 +32,7 @@ class StateHandler {
                 this.fromPause();
                 break;
             case this.states.dead:
+                this.fromDead();
                 break;
             case this.states.menu:
                 break;
@@ -55,6 +56,7 @@ class StateHandler {
                 this.toPause();
                 break;
             case this.states.dead:
+                this.toDead();
                 break;
             case this.states.menu:
                 break;
@@ -92,6 +94,15 @@ class StateHandler {
 
     toPause() {
         this.game.uiHandler.setupPauseUI();
+    }
+
+
+    fromDead() {
+        this.game.uiHandler.destroyDeadUI();
+    }
+
+    toDead() {
+        this.game.uiHandler.setupDeadUI();
     }
 }
 

@@ -155,6 +155,7 @@ class Player extends Entity {
         this.hp -= value;
         if (this.hp <= 0) {
             // dead
+            this.game.stateHandler.switchState(this.game.stateHandler.states.dead);
         }
         this.particleHandler.applyDamageParticles(this.centerX, this.centerY);
     }

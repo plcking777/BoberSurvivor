@@ -78,6 +78,17 @@ class UIHandler {
     }
 
 
+    setupDeadUI() {
+        this.uiElements['dead-menu.panel'] = new UIPanel(0, 0, this.screenWidth, this.screenHeight);
+        this.uiElements['dead-menu.title'] = new UILabel(this.screenWidth / 2, 100, 'Game Over');
+    }
+
+    destroyDeadUI() {
+        delete this.uiElements['dead-menu.panel'];
+        delete this.uiElements['dead-menu.title'];
+    }
+
+
     destroyAllIngameUI() {
         Object.keys(this.uiElements).forEach(key => {
             if (key.startsWith('ingame.')) {
