@@ -5,6 +5,7 @@ import { UIItemUpgrade } from './elements/game/ui-item-upgrade.js';
 import { UIChestSpinner } from './elements/game/ui-chest-spinner.js';
 import { UILabel } from './elements/ui-label.js';
 import { UIInventory } from './elements/game/ui-inventory.js';
+import { UIHPBar } from './elements/game/ui-hpbar.js';
 
 class UIHandler {
 
@@ -56,10 +57,12 @@ class UIHandler {
 
     setupInGameUI() {
         this.uiElements['ingame.xpbar'] = new UIXPBar(50, 10, this.screenWidth - 100, 35, this.player);
+        this.uiElements['ingame.hpbar'] = new UIHPBar(50, 50, 200, 35, this.player);
     }
 
     destroyInGameUI() {
         delete this.uiElements['ingame.xpbar'];
+        delete this.uiElements['ingame.hpbar'];
     }
 
     setupPauseUI() {
