@@ -2,12 +2,13 @@ import { UIElement } from "../ui-element.js";
 
 class UIInventory extends UIElement {
 
-    constructor(x, y, game) {
+    constructor(x, y, game, zIndex = 0) {
         super(x, y);
         this.game = game;
         this.size = 64;
         this.inventoryRows = 2;
         this.inventoryCols = 5;
+        this.zIndex = zIndex;
     }
 
     render(ctx) {

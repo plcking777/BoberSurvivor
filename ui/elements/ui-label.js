@@ -1,9 +1,10 @@
 import { UIElement } from "./ui-element.js";
 
 class UILabel extends UIElement {
-    constructor(x, y, text) {
+    constructor(x, y, text, zIndex = 0) {
         super(x, y);
         this.text = text;
+        this.zIndex = zIndex;
     }
 
     update(mouseX, mouseY, click) {}

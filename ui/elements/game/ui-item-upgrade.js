@@ -3,7 +3,7 @@ import { UIElement } from "../ui-element.js";
 
 class UIItemUpgrade extends UIButton {
 
-    constructor(x, y, width, height, upgrade, game) {
+    constructor(x, y, width, height, upgrade, game, zIndex = 0) {
         super(x, y, width, height, upgrade.description);
         this.upgrade = upgrade;
         
@@ -11,6 +11,8 @@ class UIItemUpgrade extends UIButton {
 
         this.color = "black";
         this.hoverColor = "white";
+
+        this.zIndex = zIndex;
     }
 
     update(mouseX, mouseY, click) {

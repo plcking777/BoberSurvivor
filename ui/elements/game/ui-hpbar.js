@@ -5,11 +5,12 @@ class UIHPBar extends UIElement {
 
     BORDER_SIZE = 5;
 
-    constructor(x, y, width, height, player) {
+    constructor(x, y, width, height, player, zIndex) {
         super(x, y);
         this.width = width;
         this.height = height;
         this.player = player;
+        this.zIndex = zIndex;
     }
 
     update(mouseX, mouseY, click) { }

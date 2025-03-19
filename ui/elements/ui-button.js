@@ -1,7 +1,7 @@
 import { UIElement } from "./ui-element.js";
 
 class UIButton extends UIElement {
-    constructor(x, y, width, height, text) {
+    constructor(x, y, width, height, text, zIndex = 0) {
         super(x, y);
         this.width = width;
         this.height = height;
@@ -14,6 +14,8 @@ class UIButton extends UIElement {
         this.color = "red";
         this.hoverColor = "blue";
         this.activeColor = "purple";
+
+        this.zIndex = zIndex;
     }
 
     update(mouseX, mouseY, click) {
@@ -41,6 +43,7 @@ class UIButton extends UIElement {
     }
 
     render(ctx) {
+        console.log('here');
         if (this.active) {
             ctx.fillStyle = this.activeColor;
         } else if (this.hover) {

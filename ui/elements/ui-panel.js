@@ -2,10 +2,11 @@ import { UIElement } from "./ui-element.js";
 
 class UIPanel extends UIElement {
     
-    constructor(x, y, width, height) {
+    constructor(x, y, width, height, zIndex = 0) {
         super(x, y);
         this.width = width;
         this.height = height;
+        this.zIndex = zIndex;
     }
 
     update(mouseX, mouseY, click) {}

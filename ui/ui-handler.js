@@ -9,7 +9,7 @@ import { UIHPBar } from './elements/game/ui-hpbar.js';
 
 class UIHandler {
 
-    uiElements = {};
+    uiElements = new Map();
 
     constructor(screenWidth, screenHeight, game) {
         this.screenWidth = screenWidth;
@@ -23,69 +23,81 @@ class UIHandler {
 
 
     setupUpgradeUI(upgrades) {
-        if (this.uiElements['ingame.upgrade-panel'] == null) {
-            this.uiElements['ingame.upgrade-panel'] = new UIPanel(50, 50, this.screenWidth - 100, this.screenHeight - 100);
+        if (this.uiElements.get('ingame.upgrade-panel') == null) {
+            this.uiElements.set('ingame.upgrade-panel', new UIPanel(50, 50, this.screenWidth - 100, this.screenHeight - 100));
         }
 
         upgrades.forEach((upgrade, index) => {
-            this.uiElements[`ingame.upgrade-${index}`] = new UIItemUpgrade(50 + 50, 60 + 150 * index, this.screenWidth - 200, 120, upgrade, this.game);
+            this.uiElements.set(`ingame.upgrade-${index}`, new UIItemUpgrade(50 + 50, 60 + 150 * index, this.screenWidth - 200, 120, upgrade, this.game));
         });
+        this.sortMap();
     }
 
     destroyUpgradeUI() {
-        delete this.uiElements['ingame.upgrade-panel'];
+        this.uiElements.delete('ingame.upgrade-panel');
         let index = 0;
-        while (this.uiElements[`ingame.upgrade-${index}`] != null) {
-            delete this.uiElements[`ingame.upgrade-${index++}`];
+        while (this.uiElements.get(`ingame.upgrade-${index}`) != null) {
+            this.uiElements.delete(`ingame.upgrade-${index++}`);
         }
+        this.sortMap();
     }
 
     setupChestUpgradeUI() {
-        if (this.uiElements['ingame.chest-upgrade-panel'] == null) {
-            this.uiElements['ingame.chest-upgrade-panel'] = new UIPanel(50, 50, this.screenWidth - 100, this.screenHeight - 100);
+        if (this.uiElements.get('ingame.chest-upgrade-panel') == null) {
+            this.uiElements.set('ingame.chest-upgrade-panel', new UIPanel(50, 50, this.screenWidth - 100, this.screenHeight - 100));
         }
-        if (this.uiElements['ingame.chest-upgrade-spinner'] == null) {
-            this.uiElements['ingame.chest-upgrade-spinner'] = new UIChestSpinner(100, 100, this.game);
+        if (this.uiElements.get('ingame.chest-upgrade-spinner') == null) {
+            this.uiElements.set('ingame.chest-upgrade-spinner', new UIChestSpinner(100, 100, this.game));
         }
+        this.sortMap();
     }
 
     destroyChestUpgradeUI() {
-        delete this.uiElements['ingame.chest-upgrade-panel'];
-        delete this.uiElements['ingame.chest-upgrade-spinner'];
+        this.uiElements.delete('ingame.chest-upgrade-panel');
+        this.uiElements.delete('ingame.chest-upgrade-spinner');
+        this.sortMap();
     }
 
 
     setupInGameUI() {
-        this.uiElements['ingame.xpbar'] = new UIXPBar(50, 10, this.screenWidth - 100, 35, this.player);
-        this.uiElements['ingame.hpbar'] = new UIHPBar(50, 50, 200, 35, this.player);
+        this.uiElements.set('ingame.xpbar', new UIXPBar(50, 10, this.screenWidth - 100, 35, this.player));
+        this.uiElements.set('ingame.hpbar', new UIHPBar(50, 50, 200, 35, this.player));
+        this.sortMap();
     }
 
     destroyInGameUI() {
-        delete this.uiElements['ingame.xpbar'];
-        delete this.uiElements['ingame.hpbar'];
+        this.uiElements.delete('ingame.xpbar');
+        this.uiElements.delete('ingame.hpbar');
+        this.sortMap();
     }
 
     setupPauseUI() {
-        this.uiElements['pause-menu.panel'] = new UIPanel(10, 10, this.screenWidth - 20, this.screenHeight - 20);
-        this.uiElements['pause-menu.title'] = new UILabel(this.screenWidth / 2, 100, 'Pause');
-        this.uiElements['pause-menu.inventory'] = new UIInventory(this.screenWidth / 2, 250, this.game);
+        this.uiElements.set('pause-menu.panel', new UIPanel(10, 10, this.screenWidth - 20, this.screenHeight - 20));
+        this.uiElements.set('pause-menu.title', new UILabel(this.screenWidth / 2, 100, 'Pause'));
+        this.uiElements.set('pause-menu.inventory', new UIInventory(this.screenWidth / 2, 250, this.game));
+        this.sortMap();
     }
 
     destroyPauseUI() {
-        delete this.uiElements['pause-menu.panel'];
-        delete this.uiElements['pause-menu.title'];
-        delete this.uiElements['pause-menu.inventory']
+        this.uiElements.delete('pause-menu.panel', 99);
+        this.uiElements.delete('pause-menu.title', 99);
+        this.uiElements.delete('pause-menu.inventory', 99);
+        this.sortMap();
     }
 
 
     setupDeadUI() {
-        this.uiElements['dead-menu.panel'] = new UIPanel(0, 0, this.screenWidth, this.screenHeight);
-        this.uiElements['dead-menu.title'] = new UILabel(this.screenWidth / 2, 100, 'Game Over');
+        this.uiElements.set('dead-menu.panel', new UIPanel(0, 0, this.screenWidth, this.screenHeight, 100));
+        this.uiElements.set('dead-menu.title', new UILabel(this.screenWidth / 2, 100, 'Game Over', 100));
+        this.uiElements.set('dead-menu.restart-btn', new UIButton(this.screenWidth / 2, 600, 128, 48, 'Restart', 100));
+        this.sortMap();
     }
 
     destroyDeadUI() {
-        delete this.uiElements['dead-menu.panel'];
-        delete this.uiElements['dead-menu.title'];
+        this.uiElements.delete('dead-menu.panel');
+        this.uiElements.delete('dead-menu.title');
+        this.uiElements.delete('dead-menu.restart-btn');
+        this.sortMap();
     }
 
 
@@ -93,24 +105,29 @@ class UIHandler {
         Object.keys(this.uiElements).forEach(key => {
             if (key.startsWith('ingame.')) {
                 console.log('deleting ', key);
-                delete this.uiElements[key];
+                this.uiElements.delete(key);
             }
-        })
+        });
+        this.sortMap();
     }
 
 
+
+    sortMap() {
+        this.uiElements = new Map([...this.uiElements].sort((a, b) => a[1].zIndex - b[1].zIndex));
+    }
 
 
     update(mouseX, mouseY, click) {
-        Object.values(this.uiElements).forEach(element => {
-            element.update(mouseX, mouseY, click);
-        });
+        for (const [key, value] of this.uiElements) {
+            value.update(mouseX, mouseY, click);
+        }
     }
 
     render(ctx) {
-        Object.values(this.uiElements).forEach(element => {
-            element.render(ctx);
-        });
+        for (const [key, value] of this.uiElements) {
+            value.render(ctx);
+        }
     }
 }
 

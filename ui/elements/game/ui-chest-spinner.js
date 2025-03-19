@@ -5,7 +5,7 @@ class UIChestSpinner extends UIElement {
     
     VISIBLE_SLOTS = 3;
 
-    constructor(x, y, game) {
+    constructor(x, y, game, zIndex = 0) {
         super(x, y);
         this.width = this.VISIBLE_SLOTS * 96;
         this.height = 64;
@@ -23,6 +23,7 @@ class UIChestSpinner extends UIElement {
         this.spinningDone = false;
 
         this.weaponImages = ['bomb-f1', 'throwing-knife', 'log'];
+        this.zIndex = zIndex;
      }
 
 
