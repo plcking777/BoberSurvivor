@@ -19,26 +19,32 @@ class Game {
 
         this.width = width;
         this.height = height;
-
+        
         this.assetHandler = new AssetHandler();
         this.stateHandler = new StateHandler(this);
         this.upgradeHandler = new UpgradeHandler(this);
+        this.particleHandler = new ParticleHandler();
+        this.uiHandler = new UIHandler(this.width, this.height, this);
+
+        this.setup();
+    }
+
+
+    
+    setup() {
         
+
+
         this.entityList = {};
         
-        this.particleHandler = new ParticleHandler();
         
         this.player = new Player(500, 500, 100, this);
-        
-        this.uiHandler = new UIHandler(width, height, this);
+
+        this.stateHandler.switchState(this.stateHandler.states.game);
         this.uiHandler.setupInGameUI();
 
-        
-
-
-
         this.world = new World(this);
-        this.camera = new Camera(this.player.x, this.player.y, width, height, this);
+        this.camera = new Camera(this.player.x, this.player.y, this.width, this.height, this);
         EntityUtil.addToEntityList(this.player, this.entityList);
 
 
@@ -46,13 +52,11 @@ class Game {
 
         this.inventory = [
             new Knife(this),
-            // new WoodLog(this),
         ];
         this.stateBeforePause = undefined;
 
         // inputs
         this.escapePrevious = false;
-
     }
 
 

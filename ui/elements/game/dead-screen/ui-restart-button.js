@@ -2,9 +2,10 @@ import { UIButton } from "../../ui-button.js";
 
 class UIRestartButton extends UIButton {
 
-    constructor(x, y, width, height, text, zIndex = 0) {
+    constructor(x, y, width, height, text, game, zIndex = 0) {
         super(x, y, width, height, text, zIndex);
 
+        this.game = game;
         this.color = "black";
         this.hoverColor = "white";
     }
@@ -39,7 +40,7 @@ class UIRestartButton extends UIButton {
     }
 
     execute() {
-        // TODO restart the game
+        this.game.setup();
     }
 
     

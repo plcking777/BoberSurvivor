@@ -17,7 +17,6 @@ class UIHandler {
         this.screenHeight = screenHeight;
 
         this.game = game;
-        this.player = game.player;
         this.assetHandler = game.assetHandler;
         this.stateHandler = game.stateHandler;
     }
@@ -61,8 +60,8 @@ class UIHandler {
 
 
     setupInGameUI() {
-        this.uiElements.set('ingame.xpbar', new UIXPBar(50, 10, this.screenWidth - 100, 35, this.player));
-        this.uiElements.set('ingame.hpbar', new UIHPBar(50, 50, 200, 35, this.player));
+        this.uiElements.set('ingame.xpbar', new UIXPBar(50, 10, this.screenWidth - 100, 35, this.game));
+        this.uiElements.set('ingame.hpbar', new UIHPBar(50, 50, 200, 35, this.game));
         this.sortMap();
     }
 
@@ -90,7 +89,7 @@ class UIHandler {
     setupDeadUI() {
         this.uiElements.set('dead-menu.panel', new UIPanel(0, 0, this.screenWidth, this.screenHeight, 100));
         this.uiElements.set('dead-menu.title', new UILabel(this.screenWidth / 2, 100, 'Game Over', 100));
-        this.uiElements.set('dead-menu.restart-btn', new UIRestartButton(this.screenWidth / 2 - 75, 350, 150, 48, 'Restart', 101));
+        this.uiElements.set('dead-menu.restart-btn', new UIRestartButton(this.screenWidth / 2 - 75, 350, 150, 48, 'Restart', this.game, 101));
         this.sortMap();
     }
 

@@ -5,11 +5,11 @@ class UIHPBar extends UIElement {
 
     BORDER_SIZE = 5;
 
-    constructor(x, y, width, height, player, zIndex) {
+    constructor(x, y, width, height, game, zIndex) {
         super(x, y);
         this.width = width;
         this.height = height;
-        this.player = player;
+        this.game = game;
         this.zIndex = zIndex;
     }
 
@@ -26,7 +26,7 @@ class UIHPBar extends UIElement {
 
         // fill
         ctx.fillStyle = "red";
-        ctx.fillRect(this.x + this.BORDER_SIZE, this.y + this.BORDER_SIZE, Math.max(this.player.hp / this.player.maxHP, 0) * (this.width - 2*this.BORDER_SIZE), this.height - 2*this.BORDER_SIZE);
+        ctx.fillRect(this.x + this.BORDER_SIZE, this.y + this.BORDER_SIZE, Math.max(this.game.player.hp / this.game.player.maxHP, 0) * (this.width - 2*this.BORDER_SIZE), this.height - 2*this.BORDER_SIZE);
     }
 }
 
