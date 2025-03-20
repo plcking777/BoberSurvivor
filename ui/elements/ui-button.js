@@ -43,7 +43,6 @@ class UIButton extends UIElement {
     }
 
     render(ctx) {
-        console.log('here');
         if (this.active) {
             ctx.fillStyle = this.activeColor;
         } else if (this.hover) {

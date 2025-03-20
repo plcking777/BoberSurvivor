@@ -6,6 +6,7 @@ import { UIChestSpinner } from './elements/game/ui-chest-spinner.js';
 import { UILabel } from './elements/ui-label.js';
 import { UIInventory } from './elements/game/ui-inventory.js';
 import { UIHPBar } from './elements/game/ui-hpbar.js';
+import { UIRestartButton } from './elements/game/dead-screen/ui-restart-button.js';
 
 class UIHandler {
 
@@ -89,7 +90,7 @@ class UIHandler {
     setupDeadUI() {
         this.uiElements.set('dead-menu.panel', new UIPanel(0, 0, this.screenWidth, this.screenHeight, 100));
         this.uiElements.set('dead-menu.title', new UILabel(this.screenWidth / 2, 100, 'Game Over', 100));
-        this.uiElements.set('dead-menu.restart-btn', new UIButton(this.screenWidth / 2, 600, 128, 48, 'Restart', 100));
+        this.uiElements.set('dead-menu.restart-btn', new UIRestartButton(this.screenWidth / 2 - 75, 350, 150, 48, 'Restart', 101));
         this.sortMap();
     }
 

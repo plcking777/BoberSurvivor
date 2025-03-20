@@ -89,9 +89,8 @@ class Game {
                 break;
             
             case this.stateHandler.states.upgrade:
-                this.uiHandler.update(input.mouseX, input.mouseY, input.click);
-                break;
             case this.stateHandler.states.chestUpgrade:
+            case this.stateHandler.states.dead:
                 this.uiHandler.update(input.mouseX, input.mouseY, input.click);
                 break;
             default:
