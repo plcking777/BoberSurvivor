@@ -12,7 +12,7 @@ class UIInventory extends UIElement {
     }
 
     render(ctx) {
-        ctx.fillStyle = "black";
+        ctx.strokeStyle = "black";
         for (let row = 0; row < this.inventoryRows; row++) {
             for (let col = 0; col < this.inventoryCols; col++) {
 
