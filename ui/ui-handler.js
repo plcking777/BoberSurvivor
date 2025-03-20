@@ -89,6 +89,7 @@ class UIHandler {
     setupDeadUI() {
         this.uiElements.set('dead-menu.panel', new UIPanel(0, 0, this.screenWidth, this.screenHeight, 100));
         this.uiElements.set('dead-menu.title', new UILabel(this.screenWidth / 2, 100, 'Game Over', 100));
+        this.uiElements.set('dead-menu.score-label', new UILabel(this.screenWidth / 2, 200, 'Score: ' + (this.game.player.xp + (this.game.player.level - 1) * this.game.player.xpNextLevel) + 'xp', 100));
         this.uiElements.set('dead-menu.restart-btn', new UIRestartButton(this.screenWidth / 2 - 75, 350, 150, 48, 'Restart', this.game, 101));
         this.sortMap();
     }
@@ -96,6 +97,7 @@ class UIHandler {
     destroyDeadUI() {
         this.uiElements.delete('dead-menu.panel');
         this.uiElements.delete('dead-menu.title');
+        this.uiElements.delete('dead-menu.score-label');
         this.uiElements.delete('dead-menu.restart-btn');
         this.sortMap();
     }
