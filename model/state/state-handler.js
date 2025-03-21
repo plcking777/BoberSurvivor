@@ -17,22 +17,22 @@ class StateHandler {
 
 
     switchState(newState) {
-        
+        let canSwitchState = true;
         // Handle old state
         switch (this.currentState) {
             case this.states.game:
                 break;
             case this.states.upgrade:
-                this.fromUpgrade();
+                canSwitchState = this.fromUpgrade(newState);
                 break;
             case this.states.chestUpgrade:
-                this.fromChestUpgrade(newState);
+                canSwitchState = this.fromChestUpgrade(newState);
                 break;
             case this.states.pause:
-                this.fromPause();
+                canSwitchState = this.fromPause(newState);
                 break;
             case this.states.dead:
-                this.fromDead();
+                canSwitchState = this.fromDead(newState);
                 break;
             case this.states.menu:
                 break;
@@ -40,6 +40,9 @@ class StateHandler {
                 throw new Error('Invalid state: ', newState);
         }
 
+        if (!canSwitchState) {
+            return;
+        }
         this.currentState = newState;
 
         // Handle new state
@@ -65,8 +68,9 @@ class StateHandler {
         }
     }
 
-    fromUpgrade() {
+    fromUpgrade(newState) {
         this.game.uiHandler.destroyUpgradeUI();
+        return true;
     }
 
     toUpgrade() {
@@ -81,6 +85,7 @@ class StateHandler {
             case this.states.game:
                 this.game.uiHandler.destroyChestUpgradeUI();
         }
+        return true;
     }
 
     toChestUpgrade() {
@@ -88,8 +93,9 @@ class StateHandler {
     }
 
 
-    fromPause() {
+    fromPause(newState) {
         this.game.uiHandler.destroyPauseUI();
+        return true;
     }
 
     toPause() {
@@ -97,8 +103,16 @@ class StateHandler {
     }
 
 
-    fromDead() {
-        this.game.uiHandler.destroyDeadUI();
+    fromDead(newState) {
+        switch(newState) {
+            case this.states.chestUpgrade:
+            case this.states.pause:
+            case this.states.upgrade:
+                return false;
+            default:
+                this.game.uiHandler.destroyDeadUI();
+                return true;
+        }
     }
 
     toDead() {
