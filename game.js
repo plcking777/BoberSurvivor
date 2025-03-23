@@ -12,6 +12,7 @@ import { StateHandler } from "./model/state/state-handler.js";
 import { UpgradeHandler } from "./model/upgrade/upgrade-handler.js";
 import { Knife } from "./model/weapon/knife.js";
 import { WoodLog } from "./model/weapon/woodlog.js";
+import { Stick } from "./model/weapon/stick.js";
 
 class Game {
 
@@ -51,7 +52,8 @@ class Game {
         this.enemySpawner = new EnemySpawner(this);
 
         this.inventory = [
-            new Knife(this),
+            // new Knife(this),
+            new Stick(this),
         ];
         this.stateBeforePause = undefined;
 

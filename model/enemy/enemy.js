@@ -2,6 +2,7 @@ import { Entity, CollisionBox, EntityUtil } from "../entity.js";
 import { GemPickup } from "../pickup/gem-pickup.js";
 import { Player } from "../player.js";
 import { KnifeEntity } from "../weapon/entity/knife-entity.js";
+import { StickEntity } from "../weapon/entity/stick-entity.js";
 import { WoodLogEntity } from "../weapon/entity/woodlog-entity.js";
 
 class Enemy extends Entity {
@@ -46,29 +47,29 @@ class Enemy extends Entity {
         // Horizontal collison (and general collision, make sure to NOT add the general collision to both horizontal & vertical)
         Object.values(this.entityList).forEach(entity => {
             if (this !== entity) {
-                if ((entity instanceof KnifeEntity || entity instanceof WoodLogEntity) && this.collisionBox.collidesWith(entity.collisionBox)) {
-                    this.damage(entity.damage);
-                    entity.hit();
-                } else {
-                    if (entity.collisionEnabled && futureCollisionX.collidesWith(entity.collisionBox)) {
+                if (entity.collisionEnabled && futureCollisionX.collidesWith(entity.collisionBox)) {
 
-                        let newX = undefined;
-                        if (this.vx > 0) {
-                            newX = entity.collisionBox.x - this.collisionBox.width - this.offsetX;
-                        } else if (this.vx < 0) {
-                            newX = entity.collisionBox.x + entity.collisionBox.width - this.offsetX;
-                        }
-
-                        let newDiffX = Math.abs(this.x - newX);
-                        if (snapDiffX > newDiffX) {
-                            snapDiffX = newDiffX;
-                            snapX = newX;
-                        }
-
-                        if (entity instanceof Player) {
-                            entity.damage(this.ATTACK_DAMAGE);
-                        }
+                    if ((entity instanceof KnifeEntity || entity instanceof WoodLogEntity || entity instanceof StickEntity) && this.collisionBox.collidesWith(entity.collisionBox)) {
+                        this.damage(entity.damage);
+                        entity.hit(false);
                     }
+                    let newX = undefined;
+                    if (this.vx > 0) {
+                        newX = entity.collisionBox.x - this.collisionBox.width - this.offsetX;
+                    } else if (this.vx < 0) {
+                        newX = entity.collisionBox.x + entity.collisionBox.width - this.offsetX;
+                    }
+
+                    let newDiffX = Math.abs(this.x - newX);
+                    if (snapDiffX > newDiffX) {
+                        snapDiffX = newDiffX;
+                        snapX = newX;
+                    }
+
+                    if (entity instanceof Player) {
+                        entity.damage(this.ATTACK_DAMAGE);
+                    }
+                
                 }
             }
         });
@@ -90,6 +91,10 @@ class Enemy extends Entity {
 
                 if (futureCollisionY.collidesWith(entity.collisionBox)) {
 
+                    if ((entity instanceof KnifeEntity || entity instanceof WoodLogEntity || entity instanceof StickEntity) && this.collisionBox.collidesWith(entity.collisionBox)) {
+                        this.damage(entity.damage);
+                        entity.hit(true);
+                    }
                     let newY = undefined;
                     if (this.vy > 0) {
                         newY = entity.collisionBox.y - this.collisionBox.height - this.offsetY;
