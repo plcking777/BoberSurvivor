@@ -7,7 +7,7 @@ import { WoodLogEntity } from "../weapon/entity/woodlog-entity.js";
 
 class Enemy extends Entity {
 
-    SPEED = 0.5;
+    SPEED = 1;
     ATTACK_DAMAGE = 1;
 
     constructor(x, y, maxHP, game) {

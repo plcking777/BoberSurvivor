@@ -52,7 +52,7 @@ class ParticleHandler {
         for (var i = 0; i < this.DAMAGE_PARTICLE_COUNT; i++) {
 
             this.particles.push(
-                new DamageParticle(x, y, random(-0.7, 0.7), random(-0.7, 0.7), random(1, 100))
+                new DamageParticle(x, y, random(-1.4, 1.4), random(-1.4, 1.4), random(1, 100))
             );
         }
     }
@@ -61,14 +61,14 @@ class ParticleHandler {
         for (var i = 0; i < this.EXPLOSION_PARTICLE_COUNT; i++) {
 
             this.particles.push(
-                new ExplosionParticle(x, y, random(-5, 5), random(-5, 5), random(10, 45))
+                new ExplosionParticle(x, y, random(-10, 10), random(-10, 10), random(10, 45))
             );
         }
     }
 
     applyDamageNumbers(x, y, value) {
         this.particles.push(
-            new DamageNumbersParticle(x, y, random(-0.5, 0.5), random(-1, -3), 60, value)
+            new DamageNumbersParticle(x, y, random(-1, 1), random(-2, -6), 60, value)
         );
     }
 

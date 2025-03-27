@@ -10,7 +10,7 @@ class KnifeEntity extends WeaponEntity {
         this.assetHandler = game.assetHandler;
         this.particleHandler = game.particleHandler;
 
-        this.throwSpeed = 3.0;
+        this.throwSpeed = 6.0;
         
         this.angle = Math.random() * 180.0 * Math.PI;
         this.vx = Math.cos(this.angle) * this.throwSpeed;

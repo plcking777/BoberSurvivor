@@ -16,7 +16,7 @@ class WoodLogEntity extends WeaponEntity {
         this.pivotY = y;
         
         this.angle = Math.random() * 360.0;
-        this.speed = 1;
+        this.speed = 2;
         this.radius = 128;
     }
 

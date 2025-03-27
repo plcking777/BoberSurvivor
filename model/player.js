@@ -7,7 +7,7 @@ class Player extends Entity {
     RUNNING_ANIMATION_FRAMES = 2;
     RUNNING_ANIMATION_FRAME_DURATION = 30;
 
-    SPEED = 1;
+    SPEED = 2;
 
     xp = 0;
     xpNextLevel = 2;

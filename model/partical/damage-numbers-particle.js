@@ -14,7 +14,7 @@ class DamageNumbersParticle extends Particle {
         this.x += this.vx;
         this.y += this.vy;
 
-        this.vy += 0.1;
+        this.vy += 0.2;
 
         ctx.font = "20px Arial";
         ctx.fillStyle = "yellow";
