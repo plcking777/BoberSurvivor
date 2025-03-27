@@ -21,9 +21,22 @@ const game = new Game(canvas.width, canvas.height);
 await game.load();
 
 
+const TPS = 1000 / 60;
+let prevTime = performance.now();
+let accTime = 0;
+
 function gameLoop() {
 
-    game.update(input);
+    let now = performance.now();
+
+    let dt = now - prevTime;
+    accTime += dt;
+    prevTime = now;
+    while (accTime >= TPS) {
+        game.update(input);
+        accTime -= TPS;
+    }
+
     game.render(ctx);
 
     requestAnimationFrame(gameLoop);
