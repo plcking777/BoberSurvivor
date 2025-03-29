@@ -7,6 +7,7 @@ import { UILabel } from './elements/ui-label.js';
 import { UIInventory } from './elements/game/ui-inventory.js';
 import { UIHPBar } from './elements/game/ui-hpbar.js';
 import { UIRestartButton } from './elements/game/dead-screen/ui-restart-button.js';
+import { UIHeader } from './elements/game/ui-header.js';
 
 class UIHandler {
 
@@ -73,7 +74,7 @@ class UIHandler {
 
     setupPauseUI() {
         this.uiElements.set('pause-menu.panel', new UIPanel(10, 10, this.screenWidth - 20, this.screenHeight - 20));
-        this.uiElements.set('pause-menu.title', new UILabel(this.screenWidth / 2, 100, 'Pause'));
+        this.uiElements.set('pause-menu.title', new UIHeader(this.screenWidth / 2, 100, 'Pause'));
         this.uiElements.set('pause-menu.inventory', new UIInventory(this.screenWidth / 2, 250, this.game));
         this.sortMap();
     }
@@ -88,7 +89,7 @@ class UIHandler {
 
     setupDeadUI() {
         this.uiElements.set('dead-menu.panel', new UIPanel(0, 0, this.screenWidth, this.screenHeight, 100));
-        this.uiElements.set('dead-menu.title', new UILabel(this.screenWidth / 2, 100, 'Game Over', 100));
+        this.uiElements.set('dead-menu.title', new UIHeader(this.screenWidth / 2, 100, 'Game Over', 100));
         this.uiElements.set('dead-menu.score-label', new UILabel(this.screenWidth / 2, 200, 'Score: ' + (this.game.player.xp + (this.game.player.level - 1) * this.game.player.xpNextLevel) + 'xp', 100));
         this.uiElements.set('dead-menu.restart-btn', new UIRestartButton(this.screenWidth / 2 - 75, 350, 150, 48, 'Restart', this.game, 101));
         this.sortMap();
