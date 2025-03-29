@@ -52,8 +52,8 @@ class Game {
         this.enemySpawner = new EnemySpawner(this);
 
         this.inventory = [
-            // new Knife(this),
-            new Stick(this),
+            new Bomb(this),
+            // new Stick(this),
         ];
         this.stateBeforePause = undefined;
 

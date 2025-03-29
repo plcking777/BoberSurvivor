@@ -74,7 +74,7 @@ class StateHandler {
     }
 
     toUpgrade() {
-        this.game.uiHandler.setupUpgradeUI([this.game.upgradeHandler.upgrades[0], this.game.upgradeHandler.upgrades[1]]);
+        this.game.uiHandler.setupUpgradeUI([this.game.upgradeHandler.upgrades[0], this.game.upgradeHandler.upgrades[1], this.game.upgradeHandler.upgrades[2]]);
     }
 
     fromChestUpgrade(newState) {

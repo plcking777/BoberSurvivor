@@ -10,9 +10,8 @@ class Bomb extends Weapon {
 
 
     constructor(game) {
-        super(360, game.entityList);
-        this.assetHandler = game.assetHandler;
-        this.particleHandler = game.particleHandler;
+        super(120, game.entityList);
+        this.game = game;
     }
 
     update(player) {
@@ -25,7 +24,13 @@ class Bomb extends Weapon {
 
     activate(player) {
         super.activate(player);
-        const bomb = new BombEntity(player.centerX, player.centerY, this.explosionRange, this.explosionDamage, this.entityList, this.assetHandler, this.particleHandler);
+
+        const upgradables = {
+            explosionRange: this.explosionRange,
+            explosionDamage: this.explosionDamage,
+        }
+
+        const bomb = new BombEntity(player.centerX, player.centerY, upgradables, this.game);
         EntityUtil.addToEntityList(bomb, this.entityList);
     }
 }

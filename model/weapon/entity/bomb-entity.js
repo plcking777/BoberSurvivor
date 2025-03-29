@@ -9,14 +9,14 @@ class BombEntity extends WeaponEntity {
 
     EXPLODE_TIMER = 200;
 
-    constructor(x, y, explosionRange, explosionDamage, entityList, assetHandler, particleHandler) {
-        super(x, y, 20, 20, entityList);
+    constructor(x, y, upgradables, game) {
+        super(x, y, 20, 20, game.entityList);
 
-        this.explosionRange = explosionRange;
-        this.explosionDamage = explosionDamage;
+        this.explosionRange = upgradables.explosionRange;
+        this.explosionDamage = upgradables.explosionDamage;
 
-        this.assetHandler = assetHandler;
-        this.particleHandler = particleHandler;
+        this.assetHandler = game.assetHandler;
+        this.particleHandler = game.particleHandler;
         this.frameCount = 0;
     }
 

@@ -3,14 +3,15 @@ import { EntityUtil } from './../../entity.js'
 
 class KnifeEntity extends WeaponEntity {
 
-    constructor(x, y, game) {
+    constructor(x, y, game, upgradables) {
         super(x, y, 32, 32, game.entityList);
 
         this.camera = game.camera;
         this.assetHandler = game.assetHandler;
         this.particleHandler = game.particleHandler;
 
-        this.throwSpeed = 6.0;
+        this.damage = upgradables.damage;
+        this.throwSpeed = upgradables.throwSpeed;
         
         this.angle = Math.random() * 180.0 * Math.PI;
         this.vx = Math.cos(this.angle) * this.throwSpeed;
@@ -46,9 +47,6 @@ class KnifeEntity extends WeaponEntity {
     // (to avoid having to loop over all the entities again)
     hit() {
         EntityUtil.removeFromEntityList(this, this.entityList);
-    }
-    get damage () {
-        return 5;
     }
 }
 

@@ -36,7 +36,7 @@ class UIButton extends UIElement {
         }
 
         // on mouse button release
-        if (this.prevClick && !click) {
+        if (this.hover && this.prevClick && !click) {
             this.execute();
         }
         this.prevClick = click;

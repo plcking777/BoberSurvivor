@@ -1,12 +1,10 @@
 import { UIButton } from "../ui-button.js";
-import { UIElement } from "../ui-element.js";
 
 class UIItemUpgrade extends UIButton {
 
     constructor(x, y, width, height, upgrade, game, zIndex = 0) {
         super(x, y, width, height, upgrade.description);
         this.upgrade = upgrade;
-        
         this.assetHandler = game.assetHandler;
 
         this.color = "black";

@@ -1,5 +1,6 @@
 import { Bomb } from "../weapon/bomb.js";
 import { Upgrade } from "./upgrade.js";
+import { Knife } from "../weapon/knife.js";
 
 class UpgradeHandler {
 
@@ -12,18 +13,26 @@ class UpgradeHandler {
 
     initUpgrades() {
         this.upgrades = [
-            new Upgrade('bomb-f1', 'increase range with 500%', () => {
+            new Upgrade('bomb-f1', '150% range', () => {
                 const bomb = this.game.inventory.find(item => item instanceof Bomb);
                 if (bomb) {
-                    bomb.explosionRange *= 5.00;
+                    bomb.explosionRange *= 1.5;
                 }
                 this.game.stateHandler.switchState(this.game.stateHandler.states.game);
             }),
 
-            new Upgrade('bomb-f1', 'increase damage with 500%', () => {
+            new Upgrade('bomb-f1', '150% damage', () => {
                 const bomb = this.game.inventory.find(item => item instanceof Bomb);
                 if (bomb) {
-                    bomb.explosionDamage *= 5.00;
+                    bomb.explosionDamage *= 1.5;
+                }
+                this.game.stateHandler.switchState(this.game.stateHandler.states.game);
+            }),
+
+            new Upgrade('throwing-knife', '200% damage', () => {
+                const knife = this.game.inventory.find(item => item instanceof Knife);
+                if (knife) {
+                    knife.damage *= 2.00;
                 }
                 this.game.stateHandler.switchState(this.game.stateHandler.states.game);
             }),
