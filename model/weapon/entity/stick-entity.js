@@ -28,7 +28,7 @@ class StickEntity extends WeaponEntity {
 
         // destroy if out of camera view
         const relativePosition = this.camera.getRelativeXYPosition(this.x, this.y);
-        if (relativePosition.x < this.width || relativePosition.x > this.camera.width || relativePosition.y < this.height || relativePosition.y > this.camera.height) {
+        if (relativePosition.x + this.width < 0 || relativePosition.x > this.camera.width || relativePosition.y + this.height < 0 || relativePosition.y > this.camera.height) {
             EntityUtil.removeFromEntityList(this, this.entityList);
         }
         super.update();
