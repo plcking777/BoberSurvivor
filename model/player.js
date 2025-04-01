@@ -22,6 +22,7 @@ class Player extends Entity {
         this.goingLeft = false;
         this.running = false;
         this.frameCount = 0;
+        this.regenRate = 0.01;
 
         this.game = game;
         this.assetHandler = game.assetHandler;
@@ -121,6 +122,11 @@ class Player extends Entity {
         this.x += vx;
         this.y += vy;
         super.update();
+
+        // regen HP
+        if (this.hp < this.maxHP) {
+            this.hp = Math.min(this.hp + this.regenRate, this.maxHP);
+        }
     }
 
     render(ctx, camera) {
