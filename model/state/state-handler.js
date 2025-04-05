@@ -74,7 +74,16 @@ class StateHandler {
     }
 
     toUpgrade() {
-        this.game.uiHandler.setupUpgradeUI([this.game.upgradeHandler.upgrades[0], this.game.upgradeHandler.upgrades[1], this.game.upgradeHandler.upgrades[2]]);
+        const random = (min, max) => {
+            return Math.floor(Math.random() * (max - min) + min);
+        }
+        const upgradeCount = this.game.upgradeHandler.upgrades.length;
+
+        this.game.uiHandler.setupUpgradeUI([
+                this.game.upgradeHandler.upgrades[random(0, upgradeCount - 1)],
+                this.game.upgradeHandler.upgrades[random(0, upgradeCount - 1)],
+                this.game.upgradeHandler.upgrades[random(0, upgradeCount - 1)]
+            ]);
     }
 
     fromChestUpgrade(newState) {

@@ -22,13 +22,13 @@ class UIChestSpinner extends UIElement {
         this.velocity = random(15, 30);
         this.spinningDone = false;
 
-        this.weaponImages = ['bomb-f1', 'throwing-knife', 'log'];
+        this.weaponImages = ['bomb-f1', 'throwing-knife', 'log', 'stick'];
         this.zIndex = zIndex;
      }
 
 
     update(mouseX, mouseY, click) {
-        this.velocity = Math.max(this.velocity * 0.995, 0.00);
+        this.velocity = Math.max(this.velocity * 0.99, 0.00);
         this.spinOffset += this.velocity;
 
         for (let i = 0; i < this.VISIBLE_SLOTS + 1; i++) {
