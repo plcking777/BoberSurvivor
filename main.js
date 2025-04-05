@@ -20,7 +20,7 @@ let input = {
 const game = new Game(canvas.width, canvas.height);
 await game.load();
 
-
+const MAX_UPDATES = 10;
 const TPS = 1000 / 60;
 let prevTime = performance.now();
 let accTime = 0;
@@ -32,11 +32,13 @@ function gameLoop() {
     let dt = now - prevTime;
     accTime += dt;
     prevTime = now;
-    while (accTime >= TPS) {
+    let updateCount = 0;
+    while (accTime >= TPS && updateCount < MAX_UPDATES) {
         game.update(input);
         accTime -= TPS;
+        // prevent infinite loop when game "freezes"
+        updateCount++;
     }
-
     game.render(ctx);
 
     requestAnimationFrame(gameLoop);
