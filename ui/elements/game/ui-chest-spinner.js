@@ -35,7 +35,7 @@ class UIChestSpinner extends UIElement {
             const xPos = this.x + this.spinOffset + 96*i - 96;
             if (i >= this.VISIBLE_SLOTS-1 && xPos >= this.x + this.width) {
                 this.spinIndex += this.weaponImages.length - 1;
-                this.spinOffset = 0;
+                this.spinOffset = xPos - (this.x + this.width);
             }
         }
         document.querySelector('#dbg').innerHTML = this.spinOffset;
