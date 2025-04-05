@@ -10,7 +10,7 @@ class EnemySpawner {
         this.enemySpawnCount = 5;
         this.spawnFrameCounter = 0;
         this.triggerSpawnFrameCount = 60 * 2;
-        this.bossSpawnChance = 0.05;
+        this.bossSpawnChance = 1.00;
 
     }
 

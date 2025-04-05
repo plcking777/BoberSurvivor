@@ -5,9 +5,9 @@ import { Enemy } from "../../enemy/enemy.js";
 class BombEntity extends WeaponEntity {
 
     ANIMATION_FRAMES = 4;
-    ANIMATION_TIME = 50;
+    ANIMATION_TIME = 25;
 
-    EXPLODE_TIMER = 200;
+    EXPLODE_TIMER = 100;
 
     constructor(x, y, upgradables, game) {
         super(x, y, 20, 20, game.entityList);

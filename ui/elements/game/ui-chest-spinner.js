@@ -31,6 +31,15 @@ class UIChestSpinner extends UIElement {
         this.velocity = Math.max(this.velocity * 0.995, 0.00);
         this.spinOffset += this.velocity;
 
+        for (let i = 0; i < this.VISIBLE_SLOTS + 1; i++) {
+            const xPos = this.x + this.spinOffset + 96*i - 96;
+            if (i >= this.VISIBLE_SLOTS-1 && xPos >= this.x + this.width) {
+                this.spinIndex += this.weaponImages.length - 1;
+                this.spinOffset = 0;
+            }
+        }
+        document.querySelector('#dbg').innerHTML = this.spinOffset;
+
 
         if (this.velocity <= 0.05 && !this.spinningDone) {
             this.selectItem();
@@ -56,13 +65,6 @@ class UIChestSpinner extends UIElement {
                 cropX, 0, cropWidth, 64,
                 xPos + cropX, this.y, cropWidth, 64
               );
-
-
-
-            if (i >= this.VISIBLE_SLOTS-1 && xPos >= this.x + this.width) {
-                this.spinIndex += this.weaponImages.length - 1;
-                this.spinOffset = 0;
-            }
         }
 
         ctx.drawImage(this.assetHandler.getImage('select-square'), this.x + (this.width / 2 - 32), this.y, 64, 64);

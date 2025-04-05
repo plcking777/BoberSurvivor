@@ -61,7 +61,7 @@ class ParticleHandler {
         for (var i = 0; i < this.EXPLOSION_PARTICLE_COUNT; i++) {
 
             this.particles.push(
-                new ExplosionParticle(x, y, random(-10, 10), random(-10, 10), random(10, 45))
+                new ExplosionParticle(x, y, random(-7, 7), random(-7, 7), random(5, 20))
             );
         }
     }

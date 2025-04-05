@@ -47,10 +47,11 @@ class UIHandler {
         if (this.uiElements.get('ingame.chest-upgrade-panel') == null) {
             this.uiElements.set('ingame.chest-upgrade-panel', new UIPanel(50, 50, this.screenWidth - 100, this.screenHeight - 100));
         }
-        this.uiElements.set('ingame.chest-upgrade-header', new UIHeader(this.screenWidth / 2, 100, 'Loot Crate'));
+        this.uiElements.set('ingame.chest-upgrade-header', new UIHeader(this.screenWidth / 2, 120, 'Loot Crate'));
 
         if (this.uiElements.get('ingame.chest-upgrade-spinner') == null) {
-            this.uiElements.set('ingame.chest-upgrade-spinner', new UIChestSpinner(this.screenWidth / 2, 300, this.game));
+            let width = 3 * 96;
+            this.uiElements.set('ingame.chest-upgrade-spinner', new UIChestSpinner(this.screenWidth / 2 - width / 2, 250, this.game));
         }
         this.sortMap();
     }
