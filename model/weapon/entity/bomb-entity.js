@@ -1,6 +1,7 @@
 import { WeaponEntity } from "./weapon-entity.js";
 import { EntityUtil } from './../../entity.js'
 import { Enemy } from "../../enemy/enemy.js";
+import { Bomb } from "../bomb.js";
 
 class BombEntity extends WeaponEntity {
 
@@ -9,11 +10,8 @@ class BombEntity extends WeaponEntity {
 
     EXPLODE_TIMER = 100;
 
-    constructor(x, y, upgradables, game) {
+    constructor(x, y, game) {
         super(x, y, 20, 20, game.entityList);
-
-        this.explosionRange = upgradables.explosionRange;
-        this.explosionDamage = upgradables.explosionDamage;
 
         this.assetHandler = game.assetHandler;
         this.particleHandler = game.particleHandler;
@@ -39,8 +37,8 @@ class BombEntity extends WeaponEntity {
         Object.values(this.entityList).forEach(entity => {
             if (entity instanceof Enemy) {
                 const distance = Math.sqrt((entity.x - this.x)**2 + (entity.y - this.y)**2);
-                if (distance < this.explosionRange) {
-                    entity.damage(this.explosionDamage);
+                if (distance < Bomb.upgradables.explosionRange) {
+                    entity.damage(Bomb.upgradables.explosionDamage);
                 }
             }
         });

@@ -5,12 +5,16 @@ import { KnifeEntity } from './entity/knife-entity.js';
 class Knife extends Weapon {
     static imageSrc = 'throwing-knife';
 
-    constructor(game) {
-        super(1, game.entityList);
-        this.game = game;
+    static upgradables = {
+        timeout: 120,
+        damage: 1,
+        throwSpeed: 6,
+    }
 
-        this.damage = 5;
-        this.throwSpeed = 6.0;
+
+    constructor(game) {
+        super(Knife.upgradables.timeout, game.entityList);
+        this.game = game;
     }
 
     update(player) {
@@ -23,14 +27,7 @@ class Knife extends Weapon {
 
     activate(player) {
         super.activate(player);
-
-        const upgradables = {
-            damage: this.damage,
-            throwSpeed: this.throwSpeed,
-        }
-
-
-        const knife = new KnifeEntity(player.centerX, player.centerY, this.game, upgradables);
+        const knife = new KnifeEntity(player.centerX, player.centerY, this.game);
         EntityUtil.addToEntityList(knife, this.entityList);
     }
 }

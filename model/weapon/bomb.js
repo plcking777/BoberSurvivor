@@ -5,12 +5,15 @@ import { EntityUtil } from './../entity.js'
 class Bomb extends Weapon {
     static imageSrc = 'bomb-f1';
 
-    explosionRange = 100;
-    explosionDamage = 5;
-
+    static upgradables = {
+        timeout: 120,
+        damage: 1,
+        explosionRange: 100,
+        explosionDamage: 5,
+    }
 
     constructor(game) {
-        super(120, game.entityList);
+        super(Bomb.upgradables.timeout, game.entityList);
         this.game = game;
     }
 
@@ -24,13 +27,7 @@ class Bomb extends Weapon {
 
     activate(player) {
         super.activate(player);
-
-        const upgradables = {
-            explosionRange: this.explosionRange,
-            explosionDamage: this.explosionDamage,
-        }
-
-        const bomb = new BombEntity(player.centerX, player.centerY, upgradables, this.game);
+        const bomb = new BombEntity(player.centerX, player.centerY, this.game);
         EntityUtil.addToEntityList(bomb, this.entityList);
     }
 }

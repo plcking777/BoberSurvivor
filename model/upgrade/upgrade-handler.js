@@ -15,50 +15,42 @@ class UpgradeHandler {
     initUpgrades() {
         this.upgrades = [
             new Upgrade('bomb-f1', '150% range', () => {
-                const bomb = this.game.inventory.find(item => item instanceof Bomb);
-                if (bomb) {
-                    bomb.explosionRange *= 1.5;
-                }
+                Bomb.upgradables.explosionRange *= 2.00;
                 this.game.stateHandler.switchState(this.game.stateHandler.states.game);
             }),
 
             new Upgrade('bomb-f1', '150% damage', () => {
-                const bomb = this.game.inventory.find(item => item instanceof Bomb);
-                if (bomb) {
-                    bomb.explosionDamage *= 1.5;
-                }
+                Bomb.upgradables.damage *= 2.00;
                 this.game.stateHandler.switchState(this.game.stateHandler.states.game);
             }),
 
             new Upgrade('bomb-f1', '200% attack speed', () => {
-                const bomb = this.game.inventory.find(item => item instanceof Bomb);
-                if (bomb) {
-                    bomb.timeout *= 0.5;
-                }
+                Bomb.upgradables.timeout *= 0.5;
+                this.game.inventory.forEach(weapon => {
+                    if (weapon instanceof Bomb) {
+                        weapon.timeout = Bomb.upgradables.timeout;
+                    }
+                });
                 this.game.stateHandler.switchState(this.game.stateHandler.states.game);
             }),
 
             new Upgrade('throwing-knife', '200% damage', () => {
-                const knife = this.game.inventory.find(item => item instanceof Knife);
-                if (knife) {
-                    knife.damage *= 2.00;
-                }
+                Knife.upgradables.damage *= 2.00;
                 this.game.stateHandler.switchState(this.game.stateHandler.states.game);
             }),
 
             new Upgrade('throwing-knife', '200% speed', () => {
-                const knife = this.game.inventory.find(item => item instanceof Knife);
-                if (knife) {
-                    knife.damage *= 2.00; // TODO
-                }
+                Knife.upgradables.throwSpeed *= 2.00;
                 this.game.stateHandler.switchState(this.game.stateHandler.states.game);
             }),
 
             new Upgrade('throwing-knife', '200% attack speed', () => {
-                const knife = this.game.inventory.find(item => item instanceof Knife);
-                if (knife) {
-                    knife.timeout *= 0.5;
-                }
+                Knife.upgradables.timeout *= 0.5;
+                this.game.inventory.forEach(weapon => {
+                    if (weapon instanceof Knife) {
+                        weapon.timeout = Knife.upgradables.timeout;
+                    }
+                });
                 this.game.stateHandler.switchState(this.game.stateHandler.states.game);
             }),
 
@@ -67,24 +59,23 @@ class UpgradeHandler {
                 this.game.stateHandler.switchState(this.game.stateHandler.states.game);
             }),
 
-            new Upgrade('stick', '200% damage', () => { // TODO
+            new Upgrade('stick', '200% damage', () => {
                 Stick.upgradables.damage *= 2.00;
                 this.game.stateHandler.switchState(this.game.stateHandler.states.game);
             }),
 
-            new Upgrade('stick', '200% speed', () => { // TODO
-                const stick = this.game.inventory.find(item => item instanceof Stick);
-                if (stick) {
-                    stick.damage *= 2.00;
-                }
+            new Upgrade('stick', '200% speed', () => {
+                Stick.upgradables.throwSpeed *= 2.00;
                 this.game.stateHandler.switchState(this.game.stateHandler.states.game);
             }),
 
-            new Upgrade('stick', '200% attack speed', () => { // TODO
-                const stick = this.game.inventory.find(item => item instanceof Stick);
-                if (stick) {
-                    stick.timeout *= 0.5;
-                }
+            new Upgrade('stick', '200% attack speed', () => {
+                Stick.upgradables.timeout *= 0.5;
+                this.game.inventory.forEach(weapon => {
+                    if (weapon instanceof Stick) {
+                        weapon.timeout = Stick.upgradables.timeout;
+                    }
+                });
                 this.game.stateHandler.switchState(this.game.stateHandler.states.game);
             }),
         ];

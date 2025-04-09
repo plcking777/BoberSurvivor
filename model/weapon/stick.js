@@ -6,13 +6,14 @@ class Stick extends Weapon {
     static imageSrc = 'stick';
 
     static upgradables = {
+        timeout: 120,
         damage: 1,
         maxHitCount: 3,
         throwSpeed: 6,
     }
 
     constructor(game) {
-        super(120, game.entityList);
+        super(Stick.upgradables.timeout, game.entityList);
         this.game = game;
     }
 
