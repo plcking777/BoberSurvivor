@@ -62,19 +62,13 @@ class UpgradeHandler {
                 this.game.stateHandler.switchState(this.game.stateHandler.states.game);
             }),
 
-            new Upgrade('stick', '2x bounces', () => { // TODO
-                const stick = this.game.inventory.find(item => item instanceof Stick);
-                if (stick) {
-                    stick.damage *= 2.00;
-                }
+            new Upgrade('stick', '2x bounces', () => {
+                Stick.upgradables.maxHitCount *= 2.00;
                 this.game.stateHandler.switchState(this.game.stateHandler.states.game);
             }),
 
             new Upgrade('stick', '200% damage', () => { // TODO
-                const stick = this.game.inventory.find(item => item instanceof Stick);
-                if (stick) {
-                    stick.damage *= 2.00;
-                }
+                Stick.upgradables.damage *= 2.00;
                 this.game.stateHandler.switchState(this.game.stateHandler.states.game);
             }),
 

@@ -39,6 +39,9 @@ function gameLoop() {
         // prevent infinite loop when game "freezes"
         updateCount++;
     }
+    if (updateCount >= MAX_UPDATES) {
+        accTime = 0;
+    }
     game.render(ctx);
 
     requestAnimationFrame(gameLoop);

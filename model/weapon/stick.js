@@ -5,6 +5,12 @@ import { StickEntity } from './entity/stick-entity.js';
 class Stick extends Weapon {
     static imageSrc = 'stick';
 
+    static upgradables = {
+        damage: 1,
+        maxHitCount: 3,
+        throwSpeed: 6,
+    }
+
     constructor(game) {
         super(120, game.entityList);
         this.game = game;

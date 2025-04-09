@@ -1,5 +1,6 @@
 import { WeaponEntity } from "./weapon-entity.js";
 import { EntityUtil } from './../../entity.js'
+import { Stick } from "../stick.js";
 
 class StickEntity extends WeaponEntity {
 
@@ -7,17 +8,14 @@ class StickEntity extends WeaponEntity {
         super(x, y, 32, 32, game.entityList);
 
         this.hitCount = 0;
-        this.maxHitCount = 3;
 
         this.camera = game.camera;
         this.assetHandler = game.assetHandler;
         this.particleHandler = game.particleHandler;
-
-        this.throwSpeed = 6.0;
         
         this.angle = Math.random() * 180.0 * Math.PI;
-        this.vx = Math.cos(this.angle) * this.throwSpeed;
-        this.vy = Math.sin(this.angle) * this.throwSpeed;
+        this.vx = Math.cos(this.angle) * Stick.upgradables.throwSpeed;
+        this.vy = Math.sin(this.angle) * Stick.upgradables.throwSpeed;
 
     }
 
@@ -53,12 +51,12 @@ class StickEntity extends WeaponEntity {
             this.vy *= -1;
         }
         this.hitCount++;
-        if (this.hitCount >= this.maxHitCount) {
+        if (this.hitCount >= Stick.upgradables.maxHitCount) {
             EntityUtil.removeFromEntityList(this, this.entityList);
         }
     }
     get damage () {
-        return 5;
+        return Stick.upgradables.damage;
     }
 }
 
