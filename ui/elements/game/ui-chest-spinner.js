@@ -28,7 +28,7 @@ class UIChestSpinner extends UIElement {
 
 
     update(mouseX, mouseY, click) {
-        this.velocity = Math.max(this.velocity * 0.99, 0.00);
+        this.velocity = Math.max(this.velocity * 0.98, 0.00);
         this.spinOffset += this.velocity;
 
         for (let i = 0; i < this.VISIBLE_SLOTS + 1; i++) {
@@ -38,7 +38,6 @@ class UIChestSpinner extends UIElement {
                 this.spinOffset = xPos - (this.x + this.width);
             }
         }
-        document.querySelector('#dbg').innerHTML = this.spinOffset;
 
 
         if (this.velocity <= 0.05 && !this.spinningDone) {

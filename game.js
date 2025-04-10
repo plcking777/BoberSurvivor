@@ -16,6 +16,7 @@ import { Stick } from "./model/weapon/stick.js";
 
 class Game {
 
+    MAX_INVENTORY_ITEMS = 10;
     constructor(width, height) {
 
         this.width = width;

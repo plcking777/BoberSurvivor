@@ -1,5 +1,6 @@
 import { EntityUtil } from "../entity.js";
 import { ChestPickup } from "../pickup/chest-pickup.js";
+import { GemPickup } from "../pickup/gem-pickup.js";
 import { Enemy } from "./enemy.js";
 
 class Boss extends Enemy {
@@ -32,7 +33,11 @@ class Boss extends Enemy {
     }
 
     die() {
-        EntityUtil.addToEntityList(new ChestPickup(this.centerX, this.centerY, this.game), this.entityList);
+        if (this.game.inventory.length >= this.game.MAX_INVENTORY_ITEMS) {
+            EntityUtil.addToEntityList(new GemPickup(this.centerX, this.centerY, this.game), this.entityList);
+        } else {
+            EntityUtil.addToEntityList(new ChestPickup(this.centerX, this.centerY, this.game), this.entityList);
+        }
         EntityUtil.removeFromEntityList(this, this.entityList);
     }
 }
