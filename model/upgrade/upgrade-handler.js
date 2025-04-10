@@ -2,6 +2,7 @@ import { Bomb } from "../weapon/bomb.js";
 import { Upgrade } from "./upgrade.js";
 import { Knife } from "../weapon/knife.js";
 import { Stick } from "../weapon/stick.js";
+import { WoodLog } from "../weapon/woodlog.js";
 
 class UpgradeHandler {
 
@@ -76,6 +77,16 @@ class UpgradeHandler {
                         weapon.timeout = Stick.upgradables.timeout;
                     }
                 });
+                this.game.stateHandler.switchState(this.game.stateHandler.states.game);
+            }),
+
+            new Upgrade('log', '200% damage', () => {
+                WoodLog.upgradables.damage *= 2.00;
+                this.game.stateHandler.switchState(this.game.stateHandler.states.game);
+            }),
+
+            new Upgrade('log', '200% speed', () => {
+                WoodLog.upgradables.speed *= 2.00;
                 this.game.stateHandler.switchState(this.game.stateHandler.states.game);
             }),
         ];

@@ -5,6 +5,10 @@ import { WoodLogEntity } from './entity/woodlog-entity.js';
 class WoodLog extends Weapon {
     static imageSrc = 'log';
 
+    static upgradables = {
+        speed: 1,
+        damage: 1,
+    };
     constructor(game) {
         super(0, game.entityList);
         this.game = game;

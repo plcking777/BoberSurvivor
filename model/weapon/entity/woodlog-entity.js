@@ -1,5 +1,6 @@
 import { WeaponEntity } from "./weapon-entity.js";
 import { EntityUtil } from './../../entity.js'
+import { WoodLog } from "../woodlog.js";
 
 class WoodLogEntity extends WeaponEntity {
 
@@ -16,7 +17,6 @@ class WoodLogEntity extends WeaponEntity {
         this.pivotY = y;
         
         this.angle = Math.random() * 360.0;
-        this.speed = 2;
         this.radius = 128;
     }
 
@@ -26,7 +26,7 @@ class WoodLogEntity extends WeaponEntity {
         this.pivotX = this.player.centerX;
         this.pivotY = this.player.centerY;
         
-        this.angle += this.speed;
+        this.angle += WoodLog.upgradables.speed;
         if (this.angle > 360.0) {
             this.angle -= 360.0;
         }
@@ -46,7 +46,7 @@ class WoodLogEntity extends WeaponEntity {
         //EntityUtil.removeFromEntityList(this, this.entityList);
     }
     get damage () {
-        return 5;
+        return WoodLog.upgradables.damage;
     }
 }
 
