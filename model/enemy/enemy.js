@@ -52,20 +52,20 @@ class Enemy extends Entity {
                     if ((entity instanceof KnifeEntity || entity instanceof WoodLogEntity || entity instanceof StickEntity) && this.collisionBox.collidesWith(entity.collisionBox)) {
                         this.damage(entity.damage);
                         entity.hit(false);
+                    } else {
+                        let newX = undefined;
+                        if (this.vx > 0) {
+                            newX = entity.collisionBox.x - this.collisionBox.width - this.offsetX;
+                        } else if (this.vx < 0) {
+                            newX = entity.collisionBox.x + entity.collisionBox.width - this.offsetX;
+                        }
+    
+                        let newDiffX = Math.abs(this.x - newX);
+                        if (snapDiffX > newDiffX) {
+                            snapDiffX = newDiffX;
+                            snapX = newX;
+                        }
                     }
-                    let newX = undefined;
-                    if (this.vx > 0) {
-                        newX = entity.collisionBox.x - this.collisionBox.width - this.offsetX;
-                    } else if (this.vx < 0) {
-                        newX = entity.collisionBox.x + entity.collisionBox.width - this.offsetX;
-                    }
-
-                    let newDiffX = Math.abs(this.x - newX);
-                    if (snapDiffX > newDiffX) {
-                        snapDiffX = newDiffX;
-                        snapX = newX;
-                    }
-
                     if (entity instanceof Player) {
                         entity.damage(this.ATTACK_DAMAGE);
                     }
@@ -94,20 +94,21 @@ class Enemy extends Entity {
                     if ((entity instanceof KnifeEntity || entity instanceof WoodLogEntity || entity instanceof StickEntity) && this.collisionBox.collidesWith(entity.collisionBox)) {
                         this.damage(entity.damage);
                         entity.hit(true);
+                    } else {
+                        let newY = undefined;
+                        if (this.vy > 0) {
+                            newY = entity.collisionBox.y - this.collisionBox.height - this.offsetY;
+                        } else if (this.vy < 0) {
+                            newY = entity.collisionBox.y + entity.collisionBox.height - this.offsetY;
+                        }
+    
+                        let newDiffY = Math.abs(this.y - newY);
+                        if (snapDiffY > newDiffY) {
+                            snapDiffY = newDiffY;
+                            snapY = newY;
+                        }
+    
                     }
-                    let newY = undefined;
-                    if (this.vy > 0) {
-                        newY = entity.collisionBox.y - this.collisionBox.height - this.offsetY;
-                    } else if (this.vy < 0) {
-                        newY = entity.collisionBox.y + entity.collisionBox.height - this.offsetY;
-                    }
-
-                    let newDiffY = Math.abs(this.y - newY);
-                    if (snapDiffY > newDiffY) {
-                        snapDiffY = newDiffY;
-                        snapY = newY;
-                    }
-
                     if (entity instanceof Player) {
                         entity.damage(this.ATTACK_DAMAGE);
                     }

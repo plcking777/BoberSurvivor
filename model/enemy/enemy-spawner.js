@@ -11,7 +11,7 @@ class EnemySpawner {
         this.spawnFrameCounter = 0;
         this.triggerSpawnFrameCount = 60 * 2;
         this.bossSpawnChance = 0.1;
-
+        this.enemeyHealthBase = 3; 
     }
 
     update() {
@@ -20,6 +20,7 @@ class EnemySpawner {
             this.spawnEnemies();
             this.spawnFrameCounter = 0;
             this.triggerSpawnFrameCount = Math.floor(1.4 * this.triggerSpawnFrameCount);
+            this.enemeyHealthBase += 3;
         }
     }
 
@@ -46,9 +47,9 @@ class EnemySpawner {
             const y = this.game.player.y + (((maxDistance - minDistance) * Math.random() + minDistance) * Math.sin(angle));
         
             if (Math.random() <= this.bossSpawnChance) {
-                EntityUtil.addToEntityList(new Boss(x, y, 1, this.game), this.game.entityList);
+                EntityUtil.addToEntityList(new Boss(x, y, this.enemeyHealthBase * 1.5, this.game), this.game.entityList);
             } else {
-                EntityUtil.addToEntityList(new Enemy(x, y, 1, this.game), this.game.entityList);
+                EntityUtil.addToEntityList(new Enemy(x, y, this.enemeyHealthBase, this.game), this.game.entityList);
             }
         }
 
