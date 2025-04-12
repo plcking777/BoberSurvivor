@@ -7,7 +7,6 @@ class Bomb extends Weapon {
 
     static upgradables = {
         timeout: 120,
-        damage: 1,
         explosionRange: 100,
         explosionDamage: 5,
     }

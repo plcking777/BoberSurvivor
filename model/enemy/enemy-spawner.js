@@ -7,9 +7,9 @@ class EnemySpawner {
 
     constructor(game) {
         this.game = game;
-        this.enemySpawnCount = 5;
-        this.spawnFrameCounter = 0;
-        this.triggerSpawnFrameCount = 60 * 2;
+        this.enemySpawnCount = 5; 
+        this.spawnFrameCounter = Number.POSITIVE_INFINITY;// to instantly spawn enemies
+        this.triggerSpawnFrameCount = 60 * 10;
         this.bossSpawnChance = 0.1;
         this.enemeyHealthBase = 3; 
     }
@@ -19,7 +19,7 @@ class EnemySpawner {
         if (this.spawnFrameCounter >= this.triggerSpawnFrameCount) {
             this.spawnEnemies();
             this.spawnFrameCounter = 0;
-            this.triggerSpawnFrameCount = Math.floor(1.4 * this.triggerSpawnFrameCount);
+            //this.triggerSpawnFrameCount = Math.floor(1.4 * this.triggerSpawnFrameCount);
             this.enemeyHealthBase += 3;
         }
     }
@@ -57,7 +57,7 @@ class EnemySpawner {
     }
 
     spawnIcrease() {
-        this.enemySpawnCount *= 1.4;
+        this.enemySpawnCount += 5;
     }
 
 }

@@ -6,7 +6,7 @@ class DamageNumbersParticle extends Particle {
         super(x, y, lifetime);
         this.vx = vx;
         this.vy = vy;
-        this.value = value;
+        this.value = Math.floor(value);
     }
 
     update_and_render(ctx, camera) {

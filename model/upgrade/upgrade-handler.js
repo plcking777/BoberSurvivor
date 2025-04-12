@@ -16,12 +16,12 @@ class UpgradeHandler {
     initUpgrades() {
         this.upgrades = [
             new Upgrade('bomb-f1', '150% range', () => {
-                Bomb.upgradables.explosionRange *= 2.00;
+                Bomb.upgradables.explosionRange *= 1.50;
                 this.game.stateHandler.switchState(this.game.stateHandler.states.game);
             }),
 
             new Upgrade('bomb-f1', '150% damage', () => {
-                Bomb.upgradables.damage *= 2.00;
+                Bomb.upgradables.explosionDamage *= 1.50;
                 this.game.stateHandler.switchState(this.game.stateHandler.states.game);
             }),
 
