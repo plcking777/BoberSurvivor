@@ -3,15 +3,17 @@ import { EntityUtil } from "../entity.js";
 import { Boss } from "./boss.js";
 
 class EnemySpawner {
+
+    MAX_SPAWN_COUNT = 100;
     
 
     constructor(game) {
         this.game = game;
-        this.enemySpawnCount = 5; 
+        this.enemySpawnCount = 3; 
         this.spawnFrameCounter = Number.POSITIVE_INFINITY;// to instantly spawn enemies
         this.triggerSpawnFrameCount = 60 * 10;
-        this.bossSpawnChance = 0.1;
-        this.enemeyHealthBase = 3; 
+        this.bossSpawnChance = 0.05;
+        this.enemeyHealthBase = 7; 
     }
 
     update() {
@@ -20,7 +22,7 @@ class EnemySpawner {
             this.spawnEnemies();
             this.spawnFrameCounter = 0;
             //this.triggerSpawnFrameCount = Math.floor(1.4 * this.triggerSpawnFrameCount);
-            this.enemeyHealthBase += 3;
+            this.enemeyHealthBase += 7;
         }
     }
 
@@ -43,8 +45,8 @@ class EnemySpawner {
 
             const angle = random(0, 360);
 
-            const x = this.game.player.x + (((maxDistance - minDistance) * Math.random() + minDistance) * Math.cos(angle));
-            const y = this.game.player.y + (((maxDistance - minDistance) * Math.random() + minDistance) * Math.sin(angle));
+            const x = this.game.camera.x + (((maxDistance - minDistance) * Math.random() + minDistance) * Math.cos(angle));
+            const y = this.game.camera.y + (((maxDistance - minDistance) * Math.random() + minDistance) * Math.sin(angle));
         
             if (Math.random() <= this.bossSpawnChance) {
                 EntityUtil.addToEntityList(new Boss(x, y, this.enemeyHealthBase * 1.5, this.game), this.game.entityList);
@@ -58,6 +60,10 @@ class EnemySpawner {
 
     spawnIcrease() {
         this.enemySpawnCount += 5;
+        if (this.enemySpawnCount > this.MAX_SPAWN_COUNT) {
+            this.enemySpawnCount = this.MAX_SPAWN_COUNT;
+            this.enemeyHealthBase += 50;
+        }
     }
 
 }

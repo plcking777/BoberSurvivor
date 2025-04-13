@@ -80,9 +80,9 @@ class StateHandler {
         const upgradeCount = this.game.upgradeHandler.upgrades.length;
 
         this.game.uiHandler.setupUpgradeUI([
-                this.game.upgradeHandler.upgrades[random(0, upgradeCount - 1)],
-                this.game.upgradeHandler.upgrades[random(0, upgradeCount - 1)],
-                this.game.upgradeHandler.upgrades[random(0, upgradeCount - 1)]
+                this.game.upgradeHandler.upgrades[random(0, upgradeCount)],
+                this.game.upgradeHandler.upgrades[random(0, upgradeCount)],
+                this.game.upgradeHandler.upgrades[random(0, upgradeCount)]
             ]);
     }
 

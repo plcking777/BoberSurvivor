@@ -12,9 +12,10 @@ const random = (min, max) => {
 class ParticleHandler {
 
     DAMAGE_PARTICLE_COUNT = 1;
-    EXPLOSION_PARTICLE_COUNT = 100;
+    EXPLOSION_PARTICLE_COUNT = 50;
 
-
+    // If reached limit the lifetime of explosion particles.
+    MAX_PARTICLE_COUNT = 500;
 
     constructor() {
         this.particles = [];
@@ -58,10 +59,11 @@ class ParticleHandler {
     }
 
     applyExplosionParticles(x, y) {
+        const maxLifeTime = (this.particles.length < this.MAX_PARTICLE_COUNT) ? 20 : 10;
         for (var i = 0; i < this.EXPLOSION_PARTICLE_COUNT; i++) {
 
             this.particles.push(
-                new ExplosionParticle(x, y, random(-7, 7), random(-7, 7), random(5, 20))
+                new ExplosionParticle(x, y, random(-7, 7), random(-7, 7), random(5, maxLifeTime))
             );
         }
     }

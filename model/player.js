@@ -167,7 +167,7 @@ class Player extends Entity {
     }
 
     levelup() {
-        this.xpNextLevel = Math.floor(this.xpNextLevel * 1.5);
+        this.xpNextLevel = this.xpNextLevel * 1.25;
         this.level++;
         this.game.stateHandler.switchState(this.game.stateHandler.states.upgrade);
     }

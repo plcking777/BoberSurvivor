@@ -6,8 +6,8 @@ class Knife extends Weapon {
     static imageSrc = 'throwing-knife';
 
     static upgradables = {
-        timeout: 120,
-        damage: 1,
+        timeout: 40,
+        damage: 5,
         throwSpeed: 6,
     }
 
