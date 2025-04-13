@@ -5,10 +5,16 @@ import { KnifeEntity } from './entity/knife-entity.js';
 class Knife extends Weapon {
     static imageSrc = 'throwing-knife';
 
-    static upgradables = {
+    static defaultUpgradables = {
         timeout: 40,
         damage: 5,
         throwSpeed: 6,
+    }
+
+    static upgradables = {
+        timeout: Knife.defaultUpgradables.timeout,
+        damage: Knife.defaultUpgradables.damage,
+        throwSpeed: Knife.defaultUpgradables.throwSpeed,
     }
 
 
@@ -29,6 +35,12 @@ class Knife extends Weapon {
         super.activate(player);
         const knife = new KnifeEntity(player.centerX, player.centerY, this.game);
         EntityUtil.addToEntityList(knife, this.entityList);
+    }
+
+    static initDefaultUpgradables() {
+        Object.keys(Knife.defaultUpgradables).forEach(key => {
+            Knife.upgradables[key] = Knife.defaultUpgradables[key];
+        });
     }
 }
 

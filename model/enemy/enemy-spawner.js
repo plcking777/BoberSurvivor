@@ -13,7 +13,7 @@ class EnemySpawner {
         this.spawnFrameCounter = Number.POSITIVE_INFINITY;// to instantly spawn enemies
         this.triggerSpawnFrameCount = 60 * 10;
         this.bossSpawnChance = 0.05;
-        this.enemeyHealthBase = 7; 
+        this.enemeyHealthBase = 5; 
     }
 
     update() {
@@ -22,7 +22,7 @@ class EnemySpawner {
             this.spawnEnemies();
             this.spawnFrameCounter = 0;
             //this.triggerSpawnFrameCount = Math.floor(1.4 * this.triggerSpawnFrameCount);
-            this.enemeyHealthBase += 7;
+            this.enemeyHealthBase = Math.min(this.enemeyHealthBase * 1.4, 20);
         }
     }
 
@@ -59,7 +59,7 @@ class EnemySpawner {
     }
 
     spawnIcrease() {
-        this.enemySpawnCount += 5;
+        this.enemySpawnCount *= 1.4;
         if (this.enemySpawnCount > this.MAX_SPAWN_COUNT) {
             this.enemySpawnCount = this.MAX_SPAWN_COUNT;
             this.enemeyHealthBase += 50;

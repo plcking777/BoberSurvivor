@@ -5,10 +5,16 @@ import { EntityUtil } from './../entity.js'
 class Bomb extends Weapon {
     static imageSrc = 'bomb-f1';
 
-    static upgradables = {
+    static defaultUpgradables = {
         timeout: 120,
         explosionRange: 100,
         explosionDamage: 5,
+    }
+
+    static upgradables = {
+        timeout: Bomb.defaultUpgradables.timeout,
+        explosionRange: Bomb.defaultUpgradables.explosionRange,
+        explosionDamage: Bomb.defaultUpgradables.explosionDamage,
     }
 
     constructor(game) {
@@ -28,6 +34,12 @@ class Bomb extends Weapon {
         super.activate(player);
         const bomb = new BombEntity(player.centerX, player.centerY, this.game);
         EntityUtil.addToEntityList(bomb, this.entityList);
+    }
+
+    static initDefaultUpgradables() {
+        Object.keys(Bomb.defaultUpgradables).forEach(key => {
+            Bomb.upgradables[key] = Bomb.defaultUpgradables[key];
+        });
     }
 }
 

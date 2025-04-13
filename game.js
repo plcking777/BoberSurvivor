@@ -35,8 +35,6 @@ class Game {
     
     setup() {
         
-
-
         this.entityList = {};
         
         
@@ -51,6 +49,14 @@ class Game {
 
 
         this.enemySpawner = new EnemySpawner(this);
+
+        
+        // reset default upgrades
+        Bomb.initDefaultUpgradables();
+        Knife.initDefaultUpgradables();
+        Stick.initDefaultUpgradables();
+        WoodLog.initDefaultUpgradables();
+
 
         this.inventory = [
             new Bomb(this),

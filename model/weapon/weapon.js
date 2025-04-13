@@ -1,5 +1,6 @@
 class Weapon {
     static imageSrc = 'no-image';
+    static upgradables = {};
 
     constructor(timeout, entityList) {
         this.timeout = timeout;
@@ -20,6 +21,10 @@ class Weapon {
 
     activate(player) {
         this.frameCount = 0;
+    }
+
+    static initDefaultUpgradables() {
+        throw new Error("Method 'initDefaultUpgradables()' must be implemented.");
     }
 }
 

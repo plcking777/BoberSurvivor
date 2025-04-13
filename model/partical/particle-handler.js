@@ -15,7 +15,7 @@ class ParticleHandler {
     EXPLOSION_PARTICLE_COUNT = 50;
 
     // If reached limit the lifetime of explosion particles.
-    MAX_PARTICLE_COUNT = 500;
+    MAX_PARTICLE_COUNT = 250;
 
     constructor() {
         this.particles = [];
