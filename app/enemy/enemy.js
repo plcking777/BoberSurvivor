@@ -49,7 +49,7 @@ class Enemy extends Entity {
             if (this !== entity) {
                 if (entity.collisionEnabled && futureCollisionX.collidesWith(entity.collisionBox)) {
 
-                    if ((entity instanceof KnifeEntity || entity instanceof WoodLogEntity || entity instanceof StickEntity) && this.collisionBox.collidesWith(entity.collisionBox)) {
+                    if (!(entity instanceof StickEntity) && (entity instanceof KnifeEntity || entity instanceof WoodLogEntity) && this.collisionBox.collidesWith(entity.collisionBox)) {
                         this.damage(entity.damage);
                         entity.hit(false);
                     } else {

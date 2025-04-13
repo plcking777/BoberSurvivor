@@ -2,8 +2,8 @@ import { Entity } from '../../entity.js';
 
 class WeaponEntity extends Entity {
 
-    constructor(x, y, width, height, entityList) {
-        super(x, y, width, height, true);
+    constructor(x, y, width, height, entityList, collisionEnabled = true) {
+        super(x, y, width, height, collisionEnabled);
         this.entityList = entityList;
     }
 

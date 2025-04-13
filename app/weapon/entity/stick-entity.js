@@ -1,11 +1,12 @@
 import { WeaponEntity } from "./weapon-entity.js";
-import { EntityUtil } from '../../entity.js'
+import { CollisionBox, EntityUtil } from '../../entity.js'
 import { Stick } from "../stick.js";
+import { Enemy } from "../../enemy/enemy.js";
 
 class StickEntity extends WeaponEntity {
 
     constructor(x, y, game) {
-        super(x, y, 32, 32, game.entityList);
+        super(x, y, 32, 32, game.entityList, false);
 
         this.hitCount = 0;
 
@@ -20,16 +21,33 @@ class StickEntity extends WeaponEntity {
     }
 
     update() {
-
+        
+        let futureCollisionX = new CollisionBox(this.x + this.vx + this.offsetX, this.y + this.offsetY, this.collisionBox.width, this.collisionBox.height);
+        Object.values(this.entityList).forEach(entity => {
+            if (entity instanceof Enemy && futureCollisionX.collidesWith(entity.collisionBox)) {
+                this.hit(false);
+                entity.damage(Stick.upgradables.damage);
+            }
+        });
         this.x += this.vx;
+        super.update();
+        let futureCollisionY = new CollisionBox(this.x + this.offsetX, this.y + this.offsetY + this.vy, this.collisionBox.width, this.collisionBox.height);
+
+        Object.values(this.entityList).forEach(entity => {
+            if (entity instanceof Enemy && futureCollisionY.collidesWith(entity.collisionBox)) {
+                this.hit(true);
+                entity.damage(Stick.upgradables.damage);
+            }
+        });
+
         this.y += this.vy;
+        super.update();
 
         // destroy if out of camera view
         const relativePosition = this.camera.getRelativeXYPosition(this.x, this.y);
         if (relativePosition.x + this.width < 0 || relativePosition.x > this.camera.width || relativePosition.y + this.height < 0 || relativePosition.y > this.camera.height) {
             EntityUtil.removeFromEntityList(this, this.entityList);
         }
-        super.update();
     }
 
     render(ctx, camera) {
@@ -42,8 +60,6 @@ class StickEntity extends WeaponEntity {
         ctx.restore();
     }
 
-    // Collision & damage taking is handled inside the enemy class
-    // (to avoid having to loop over all the entities again)
     hit(yCollision) {
         if (!yCollision) {
             this.vx *= -1;
