@@ -1,5 +1,5 @@
 import { WeaponEntity } from "./weapon-entity.js";
-import { EntityUtil } from './../../entity.js'
+import { EntityUtil } from '../../entity.js'
 import { WoodLog } from "../woodlog.js";
 
 class WoodLogEntity extends WeaponEntity {

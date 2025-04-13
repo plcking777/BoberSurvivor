@@ -1,5 +1,5 @@
 import { WeaponEntity } from "./weapon-entity.js";
-import { EntityUtil } from './../../entity.js'
+import { EntityUtil } from '../../entity.js'
 import { Stick } from "../stick.js";
 
 class StickEntity extends WeaponEntity {

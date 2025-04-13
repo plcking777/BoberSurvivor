@@ -1,12 +1,12 @@
 import { Weapon } from './weapon.js';
-import { EntityUtil } from './../entity.js'
+import { EntityUtil } from '../entity.js'
 import { StickEntity } from './entity/stick-entity.js';
 
 class Stick extends Weapon {
     static imageSrc = 'stick';
 
     static defaultUpgradables = {
-        timeout: 120,
+        timeout: 80,
         damage: 3,
         maxHitCount: 3,
         throwSpeed: 6,

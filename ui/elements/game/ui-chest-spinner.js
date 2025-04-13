@@ -1,4 +1,4 @@
-import { WeaponUtil } from "../../../model/weapon/weapon-util.js";
+import { WeaponUtil } from "../../../app/weapon/weapon-util.js";
 import { UIElement } from "../ui-element.js";
 
 class UIChestSpinner extends UIElement {
@@ -19,7 +19,7 @@ class UIChestSpinner extends UIElement {
             return Math.random() * (max - min) + min;
         }
 
-        this.velocity = random(15, 30);
+        this.velocity = random(15, 60);
         this.spinningDone = false;
 
         this.weaponImages = ['bomb-f1', 'throwing-knife', 'log', 'stick'];

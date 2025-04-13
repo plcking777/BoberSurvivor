@@ -1,18 +1,18 @@
-import { Player } from "./model/player.js";
-import { Enemy } from "./model/enemy/enemy.js";
-import { EnemySpawner } from "./model/enemy/enemy-spawner.js";
-import { Camera } from "./model/camera.js";
-import { World } from "./model/world.js";
-import { Bomb } from "./model/weapon/bomb.js";
+import { Player } from "./app/player.js";
+import { Enemy } from "./app/enemy/enemy.js";
+import { EnemySpawner } from "./app/enemy/enemy-spawner.js";
+import { Camera } from "./app/camera.js";
+import { World } from "./app/world.js";
+import { Bomb } from "./app/weapon/bomb.js";
 import { AssetHandler } from './assets.js';
-import { EntityUtil } from "./model/entity.js";
+import { EntityUtil } from "./app/entity.js";
 import { UIHandler } from "./ui/ui-handler.js";
-import { ParticleHandler } from "./model/partical/particle-handler.js";
-import { StateHandler } from "./model/state/state-handler.js";
-import { UpgradeHandler } from "./model/upgrade/upgrade-handler.js";
-import { Knife } from "./model/weapon/knife.js";
-import { WoodLog } from "./model/weapon/woodlog.js";
-import { Stick } from "./model/weapon/stick.js";
+import { ParticleHandler } from "./app/partical/particle-handler.js";
+import { StateHandler } from "./app/state/state-handler.js";
+import { UpgradeHandler } from "./app/upgrade/upgrade-handler.js";
+import { Knife } from "./app/weapon/knife.js";
+import { WoodLog } from "./app/weapon/woodlog.js";
+import { Stick } from "./app/weapon/stick.js";
 
 class Game {
 
