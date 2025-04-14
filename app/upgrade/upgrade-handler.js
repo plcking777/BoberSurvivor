@@ -25,8 +25,8 @@ class UpgradeHandler {
                 this.game.stateHandler.switchState(this.game.stateHandler.states.game);
             }),
 
-            new Upgrade('bomb-f1', '200% attack speed', () => {
-                Bomb.upgradables.timeout *= 0.5;
+            new Upgrade('bomb-f1', '150% attack speed', () => {
+                Bomb.upgradables.timeout *= (1 / 1.5);
                 this.game.inventory.forEach(weapon => {
                     if (weapon instanceof Bomb) {
                         weapon.timeout = Bomb.upgradables.timeout;

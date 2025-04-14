@@ -22,7 +22,6 @@ class EnemySpawner {
             this.spawnEnemies();
             this.spawnFrameCounter = 0;
             //this.triggerSpawnFrameCount = Math.floor(1.4 * this.triggerSpawnFrameCount);
-            this.enemeyHealthBase = Math.min(this.enemeyHealthBase * 1.4, 20);
         }
     }
 
