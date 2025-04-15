@@ -30,7 +30,7 @@ class UIItemUpgrade extends UIButton {
         }
 
         // image
-        ctx.drawImage(this.assetHandler.getImage(this.upgrade.image), this.x + 25, this.y + 25, 64, 64);
+        ctx.drawImage(this.assetHandler.getImage(this.upgrade.image), Math.round(this.x + 25), Math.round(this.y + 25), 64, 64);
 
 
         // description

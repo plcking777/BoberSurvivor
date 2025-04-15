@@ -12,7 +12,7 @@ class ChestPickup extends Pickup {
 
     render(ctx, camera) {
         const relativePosition = camera.getRelativePosition(this);
-        ctx.drawImage(this.assetHandler.getImage('chest'), relativePosition.x, relativePosition.y, this.width, this.height);
+        ctx.drawImage(this.assetHandler.getImage('chest'), Math.round(relativePosition.x), Math.round(relativePosition.y), this.width, this.height);
     }
 
     pickup() {

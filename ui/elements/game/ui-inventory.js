@@ -28,11 +28,11 @@ class UIInventory extends UIElement {
                     image = this.game.assetHandler.getImage(weapon.constructor.imageSrc);
                 }
                 if (image != null) {
-                    ctx.drawImage(image, this.x + col * this.size - (this.size * this.inventoryCols / 2), this.y + row * this.size - (this.size * this.inventoryRows / 2), 64, 64);
+                    ctx.drawImage(image, Math.round(this.x + col * this.size - (this.size * this.inventoryCols / 2)), Math.round(this.y + row * this.size - (this.size * this.inventoryRows / 2)), 64, 64);
                 }
                 ctx.beginPath();
                 ctx.lineWidth="5";
-                ctx.rect(this.x + col * this.size - (this.size * this.inventoryCols / 2), this.y + row * this.size - (this.size * this.inventoryRows / 2), this.size, this.size);  
+                ctx.rect(Math.round(this.x + col * this.size - (this.size * this.inventoryCols / 2)), Math.round(this.y + row * this.size - (this.size * this.inventoryRows / 2)), this.size, this.size);  
                 ctx.stroke();        
             }
         }

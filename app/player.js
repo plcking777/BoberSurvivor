@@ -142,11 +142,11 @@ class Player extends Entity {
         }
         const runningFrame = Math.min(Math.floor(this.frameCount / this.RUNNING_ANIMATION_FRAME_DURATION) + 1, this.RUNNING_ANIMATION_FRAMES);
         if (!this.goingLeft) {
-            ctx.drawImage(this.assetHandler.getImage(`bober-f${runningFrame}`), relativePosition.x, relativePosition.y, this.width, this.height);
+            ctx.drawImage(this.assetHandler.getImage(`bober-f${runningFrame}`), Math.round(relativePosition.x), Math.round(relativePosition.y), this.width, this.height);
         } else {
             ctx.save();
             ctx.scale(-1, 1);
-            ctx.drawImage(this.assetHandler.getImage(`bober-f${runningFrame}`), -relativePosition.x -this.width, relativePosition.y, this.width, this.height);
+            ctx.drawImage(this.assetHandler.getImage(`bober-f${runningFrame}`), Math.round(-relativePosition.x -this.width), Math.round(relativePosition.y), this.width, this.height);
             ctx.restore();
         }
         /*

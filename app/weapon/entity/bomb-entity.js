@@ -29,7 +29,7 @@ class BombEntity extends WeaponEntity {
     render(ctx, camera) {
         const relativePosition = camera.getRelativeXYPosition(this.x, this.y);
         const animationFrame = Math.max(parseInt(((this.frameCount - (this.EXPLODE_TIMER - this.ANIMATION_TIME)) / this.ANIMATION_TIME * this.ANIMATION_FRAMES) + 1), 1);
-        ctx.drawImage(this.assetHandler.getImage(`bomb-f${animationFrame}`), relativePosition.x - 16, relativePosition.y - 16, 32, 32);
+        ctx.drawImage(this.assetHandler.getImage(`bomb-f${animationFrame}`), Math.round(relativePosition.x - 16), Math.round(relativePosition.y - 16), 32, 32);
     }
 
 

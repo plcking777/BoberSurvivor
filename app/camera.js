@@ -13,8 +13,8 @@ class Camera {
     }
 
     follow(entity) {
-        this.x = entity.x + entity.width / 2;
-        this.y = entity.y + entity.height / 2;
+        this.x = Math.fround(entity.x + entity.width / 2);
+        this.y = Math.fround(entity.y + entity.height / 2);
 
         const left = this.x - (this.width / 2);
         const top = this.y - (this.height / 2);

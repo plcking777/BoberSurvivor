@@ -43,7 +43,7 @@ class World {
             for (let j = parseInt(cameraLeft / this.TILE_HEIGHT); j < parseInt(cameraRight / this.TILE_HEIGHT) + 1; j++) {
                 if (i >= 0 && i < this.tiles.length && j >= 0 && j < this.tiles[0].length) {
                     const relativePosition = camera.getRelativeXYPosition(j*this.TILE_HEIGHT, i*this.TILE_HEIGHT);
-                    ctx.drawImage(this.assetHandler.getImage(`grass-f${this.tiles[i][j]}`), relativePosition.x, relativePosition.y, this.TILE_HEIGHT + 1, this.TILE_HEIGHT + 1);
+                    ctx.drawImage(this.assetHandler.getImage(`grass-f${this.tiles[i][j]}`), Math.round(relativePosition.x), Math.round(relativePosition.y), this.TILE_HEIGHT + 1, this.TILE_HEIGHT + 1);
                 }
             }
         }   

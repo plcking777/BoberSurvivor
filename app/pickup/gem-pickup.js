@@ -11,7 +11,7 @@ class GemPickup extends Pickup {
 
     render(ctx, camera) {
         const relativePosition = camera.getRelativePosition(this);
-        ctx.drawImage(this.assetHandler.getImage('gem'), relativePosition.x, relativePosition.y, this.width, this.height);
+        ctx.drawImage(this.assetHandler.getImage('gem'), Math.round(relativePosition.x), Math.round(relativePosition.y), this.width, this.height);
     }
 
     pickup() {
