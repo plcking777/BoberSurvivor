@@ -4,6 +4,21 @@ import { Game } from "./game.js";
 
 const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
+ctx.imageSmoothingEnabled = false;
+
+const scaleCanvas = () => {
+    const scale = Math.floor(Math.min(
+        window.innerWidth / 400,
+        window.innerHeight / 300
+    ));
+
+
+    console.log(scale);
+
+    canvas.style.width = `${400 * scale}px`;
+    canvas.style.height = `${300 * scale}px`;
+};
+scaleCanvas();
 
 
 let input = {
@@ -117,4 +132,8 @@ canvas.addEventListener("mouseup", (event) => {
     if (event.button === 0) {
         input.click = false;
     }
+});
+
+window.addEventListener("resize", () => {
+    scaleCanvas();
 });
