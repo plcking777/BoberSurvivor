@@ -9,11 +9,11 @@ class EnemySpawner {
 
     constructor(game) {
         this.game = game;
-        this.enemySpawnCount = 3; 
+        this.enemySpawnCount = 4; 
         this.spawnFrameCounter = Number.POSITIVE_INFINITY;// to instantly spawn enemies
         this.triggerSpawnFrameCount = 60 * 12;
         this.bossSpawnChance = 0.05;
-        this.enemeyHealthBase = 4;
+        this.enemeyHealthBase = 5;
     }
 
     update() {

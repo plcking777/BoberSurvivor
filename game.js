@@ -60,7 +60,6 @@ class Game {
 
         this.inventory = [
             new Bomb(this),
-            new WoodLog(this),
         ];
         this.stateBeforePause = undefined;
 
